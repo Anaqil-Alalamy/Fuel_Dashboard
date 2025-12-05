@@ -324,33 +324,43 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
       {/* Top Bar */}
       <header className="sticky top-0 z-50 bg-gradient-to-r from-white to-blue-50 border-b border-blue-200 shadow-lg backdrop-blur-sm bg-opacity-90">
-        <div className="px-4 md:px-6 py-2 md:py-3">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            {/* Logo */}
-            <div className="flex items-center">
+        {/* First row: Logo, Title, Date/Time */}
+        <div className="px-4 md:px-6 py-2 md:py-3 border-b border-blue-200">
+          <div className="flex items-center justify-between gap-4">
+            {/* Logo and Title */}
+            <div className="flex items-center gap-3">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2Fbd65b3cd7a86452e803a3d7dc7a3d048%2F5e321b77d52a4d30b523674ca83ee1d4?format=webp&width=800"
                 alt="GSM Fueling Logo"
-                className="h-12 md:h-14 w-auto"
+                className="h-10 md:h-12 w-auto"
               />
+              <div className="hidden md:flex items-center gap-2">
+                <Fuel className="text-blue-600" size={22} />
+                <h1 className="text-xl font-bold text-gray-900">Fuel Dashboard</h1>
+              </div>
             </div>
 
-            {/* Date/Time and Title */}
-            <div className="flex items-center gap-4 flex-1">
+            {/* Date/Time and Stats */}
+            <div className="flex items-center gap-2 md:gap-4">
               <div className="flex items-center gap-2 text-sm text-gray-700 font-medium">
                 <Calendar size={16} className="text-blue-600" />
-                <span>{currentDateTime}</span>
+                <span className="hidden sm:inline">{currentDateTime}</span>
               </div>
-              <div className="hidden md:flex items-center gap-2 ml-4 pl-4 border-l border-blue-200">
+              <div className="hidden md:flex items-center gap-2 pl-4 border-l border-blue-200">
                 <Zap size={16} className="text-orange-500" />
                 <span className="text-xs text-gray-600">
                   {onSchedulePercentage}% On Schedule
                 </span>
               </div>
             </div>
+          </div>
+        </div>
 
+        {/* Second row: Search Bar, Refresh, Download (right-aligned) */}
+        <div className="px-4 md:px-6 py-2 md:py-3">
+          <div className="flex items-center justify-end gap-3">
             {/* Search Bar */}
-            <div className="flex-1 md:flex-none md:w-72 relative">
+            <div className="flex-1 md:flex-none md:w-64 relative">
               <div className="relative group">
                 <Search
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors"
@@ -360,12 +370,12 @@ export default function Dashboard() {
                   placeholder="Search sites..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 h-10 text-sm border-blue-200 bg-white text-gray-900 placeholder-gray-500 focus:border-blue-600 focus:ring-blue-600 focus:ring-opacity-20"
+                  className="pl-10 h-9 text-sm border-blue-200 bg-white text-gray-900 placeholder-gray-500 focus:border-blue-600 focus:ring-blue-600 focus:ring-opacity-20"
                 />
 
                 {/* Search Results Popup */}
                 {showSearchPopup && filteredSites.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-blue-300 rounded-lg shadow-xl z-50 max-h-96 overflow-y-auto">
+                  <div className="absolute top-full right-0 mt-2 bg-white border border-blue-300 rounded-lg shadow-xl z-50 max-h-96 overflow-y-auto w-80">
                     <div className="p-3">
                       <p className="text-xs font-bold text-gray-600 mb-2">
                         Found {filteredSites.length} site{filteredSites.length !== 1 ? "s" : ""}
@@ -408,7 +418,7 @@ export default function Dashboard() {
 
                 {/* No Results Message */}
                 {showSearchPopup && filteredSites.length === 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-yellow-300 rounded-lg shadow-xl z-50 p-3">
+                  <div className="absolute top-full right-0 mt-2 bg-white border border-yellow-300 rounded-lg shadow-xl z-50 p-3 w-80">
                     <p className="text-sm text-gray-600 text-center">
                       No sites found matching "{searchTerm}"
                     </p>
