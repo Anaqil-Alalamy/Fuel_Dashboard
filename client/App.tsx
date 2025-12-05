@@ -11,8 +11,10 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+declare const __GITHUB_PAGES__: boolean;
+
 const App = () => {
-  const basename = import.meta.env.GITHUB_PAGES ? "/Fuel_Dashboard/" : "/";
+  const basename = __GITHUB_PAGES__ ? "/Fuel_Dashboard/" : "/";
 
   return (
     <QueryClientProvider client={queryClient}>
