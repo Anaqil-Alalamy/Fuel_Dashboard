@@ -328,26 +328,26 @@ export default function Dashboard() {
 
         {/* Schedules Tabs */}
         <Tabs defaultValue="today" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-6 bg-white border border-gray-200 h-auto p-1 rounded-lg">
-            <TabsTrigger value="today" className="flex items-center gap-2">
-              <Clock size={16} />
-              <span className="hidden sm:inline">Today</span>
-              <span className="inline sm:hidden">({todaySites.length})</span>
+          <TabsList className="grid w-full grid-cols-4 mb-6 bg-white border border-gray-200 h-auto p-1 rounded-lg text-xs md:text-sm">
+            <TabsTrigger value="today" className="flex items-center gap-1 md:gap-2 px-1 md:px-2">
+              <Clock size={14} className="md:w-4 md:h-4" />
+              <span className="hidden md:inline text-xs">Today</span>
+              <span className="inline md:hidden text-xs">{todaySites.length}</span>
             </TabsTrigger>
-            <TabsTrigger value="tomorrow" className="flex items-center gap-2">
-              <TrendingUp size={16} />
-              <span className="hidden sm:inline">Tomorrow</span>
-              <span className="inline sm:hidden">({tomorrowSites.length})</span>
+            <TabsTrigger value="tomorrow" className="flex items-center gap-1 md:gap-2 px-1 md:px-2">
+              <TrendingUp size={14} className="md:w-4 md:h-4" />
+              <span className="hidden md:inline text-xs">Tomorrow</span>
+              <span className="inline md:hidden text-xs">{tomorrowSites.length}</span>
             </TabsTrigger>
-            <TabsTrigger value="coming" className="flex items-center gap-2">
-              <CheckCircle2 size={16} />
-              <span className="hidden sm:inline">Coming (3d)</span>
-              <span className="inline sm:hidden">({comingSites.length})</span>
+            <TabsTrigger value="coming" className="flex items-center gap-1 md:gap-2 px-1 md:px-2">
+              <CheckCircle2 size={14} className="md:w-4 md:h-4" />
+              <span className="hidden md:inline text-xs">Coming</span>
+              <span className="inline md:hidden text-xs">{comingSites.length}</span>
             </TabsTrigger>
-            <TabsTrigger value="overdue" className="flex items-center gap-2">
-              <AlertTriangle size={16} />
-              <span className="hidden sm:inline">Overdue</span>
-              <span className="inline sm:hidden">({overdueSites.length})</span>
+            <TabsTrigger value="overdue" className="flex items-center gap-1 md:gap-2 px-1 md:px-2">
+              <AlertTriangle size={14} className="md:w-4 md:h-4" />
+              <span className="hidden md:inline text-xs">Overdue</span>
+              <span className="inline md:hidden text-xs">{overdueSites.length}</span>
             </TabsTrigger>
           </TabsList>
 
