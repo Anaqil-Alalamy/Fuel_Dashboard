@@ -44,18 +44,19 @@ const parseDateDDMMYYYY = (dateStr: string): Date | null => {
   const month = parseInt(parts[1], 10);
   const year = parseInt(parts[2], 10);
   if (isNaN(day) || isNaN(month) || isNaN(year)) return null;
-  return new Date(year, month - 1, day);
+  return new Date(Date.UTC(year, month - 1, day));
 };
 
 const getDateWithoutTime = (date: Date): Date => {
   const d = new Date(date);
-  d.setHours(0, 0, 0, 0);
+  d.setUTCHours(0, 0, 0, 0);
   return d;
 };
 
 const getDaysDifference = (date: Date, baseDate: Date = new Date()): number => {
   const d1 = getDateWithoutTime(date);
-  const d2 = getDateWithoutTime(baseDate);
+  const utcDate = new Date(Date.UTC(baseDate.getUTCFullYear(), baseDate.getUTCMonth(), baseDate.getUTCDate()));
+  const d2 = getDateWithoutTime(utcDate);
   return Math.floor((d1.getTime() - d2.getTime()) / (1000 * 60 * 60 * 24));
 };
 
