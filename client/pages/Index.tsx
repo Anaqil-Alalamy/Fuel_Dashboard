@@ -62,10 +62,10 @@ const getDaysDifference = (date: Date, baseDate: Date = new Date()): number => {
 
 const determineStatus = (
   scheduledDate: Date,
-): "due" | "today" | "tomorrow" | "incoming" | "coming" => {
+): "overdue" | "today" | "tomorrow" | "incoming" | "coming" => {
   const daysDiff = getDaysDifference(scheduledDate);
 
-  if (daysDiff < 0) return "due";
+  if (daysDiff < 0) return "overdue";
   if (daysDiff === 0) return "today";
   if (daysDiff === 1) return "tomorrow";
   if (daysDiff >= 2 && daysDiff <= 4) return "incoming";
