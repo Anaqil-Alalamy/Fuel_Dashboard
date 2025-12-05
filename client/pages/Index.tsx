@@ -250,9 +250,9 @@ const KPICard = ({
         </div>
       </div>
       {trend !== undefined && (
-        <div className="flex items-center gap-1 text-green-600 text-xs font-semibold">
-          <ArrowUpRight size={14} />
-          <span>{trend}% from yesterday</span>
+        <div className="flex items-center gap-0.5 text-green-600 text-xs font-semibold">
+          <ArrowUpRight size={12} />
+          <span className="text-[10px]">{trend}% from yesterday</span>
         </div>
       )}
     </div>
