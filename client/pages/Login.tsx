@@ -44,8 +44,6 @@ export default function Login() {
         backgroundAttachment: "fixed",
       }}
     >
-      {/* Overlay for readability */}
-      <div className="absolute inset-0 bg-blue-300/75 z-0"></div>
 
       <div className="w-full max-w-md relative z-10 flex flex-col items-center">
         {/* Title Outside Card */}
