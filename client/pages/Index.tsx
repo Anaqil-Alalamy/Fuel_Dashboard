@@ -29,6 +29,7 @@ interface FuelingSchedule {
   lastUpdated: string;
   latitude: number;
   longitude: number;
+  nextFuelingDate: string;
 }
 
 const SHEET_URL =
