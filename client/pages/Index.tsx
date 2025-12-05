@@ -479,10 +479,24 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Second row: Search Bar, Refresh, Download (right-aligned) */}
+        {/* Second row: LDN Sites Card (left), Search Bar, Refresh, Download (right) */}
         <div className="px-4 md:px-6 py-2 md:py-3">
-          <div className="flex items-center justify-end gap-3">
-            {/* Search Bar */}
+          <div className="flex items-center justify-between gap-3">
+            {/* LDN Sites Card - Left */}
+            <Button
+              onClick={() => openModal("vvvip")}
+              variant="outline"
+              size="sm"
+              className="gap-2 border-blue-300 bg-blue-50 text-gray-700 hover:bg-blue-100 hover:text-gray-900 whitespace-nowrap"
+            >
+              <span>🏢</span>
+              <span className="hidden sm:inline">LDN Sites ({vvvipSites.length})</span>
+              <span className="sm:hidden">LDN</span>
+            </Button>
+
+            {/* Right-aligned controls */}
+            <div className="flex items-center gap-3">
+              {/* Search Bar */}
             <div className="flex-1 md:flex-none md:w-64 relative">
               <div className="relative group">
                 <Search
@@ -585,6 +599,7 @@ export default function Dashboard() {
               </Button>
             </div>
           </div>
+        </div>
         </div>
       </header>
 
