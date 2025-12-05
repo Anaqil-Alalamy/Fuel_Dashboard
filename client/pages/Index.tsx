@@ -13,6 +13,8 @@ import {
   AlertTriangle,
   Search,
   Calendar,
+  ArrowUpRight,
+  Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -118,72 +120,29 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
   }
 };
 
-const getStatusBorderColor = (status: string): string => {
-  switch (status) {
-    case "overdue":
-      return "border-t-4 border-t-red-500";
-    case "today":
-      return "border-t-4 border-t-orange-500";
-    case "coming":
-      return "border-t-4 border-t-yellow-500";
-    default:
-      return "border-t-4 border-t-gray-300";
-  }
-};
-
-const getStatusBadgeColor = (status: string): string => {
-  switch (status) {
-    case "today":
-      return "bg-orange-100 text-orange-700";
-    case "tomorrow":
-      return "bg-blue-100 text-blue-700";
-    case "coming":
-      return "bg-yellow-100 text-yellow-700";
-    case "overdue":
-      return "bg-red-100 text-red-700";
-    default:
-      return "bg-gray-100 text-gray-700";
-  }
-};
-
-const getStatusIcon = (status: string) => {
-  switch (status) {
-    case "today":
-      return "🟠";
-    case "tomorrow":
-      return "🔵";
-    case "coming":
-      return "🟡";
-    case "overdue":
-      return "🔴";
-    default:
-      return "⚫";
-  }
-};
-
 const StatusPanel = ({
   title,
   borderColor,
   sites,
   icon,
+  gradient,
 }: {
   title: string;
   borderColor: string;
   sites: FuelingSchedule[];
   icon: string;
+  gradient: string;
 }) => {
   return (
-    <div
-      className={cn(
-        "bg-white rounded-lg shadow-sm overflow-hidden flex flex-col",
-        borderColor,
-      )}
-    >
-      <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
-        <h3 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
-          <span>{icon}</span>
+    <div className={cn(
+      "bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl overflow-hidden flex flex-col border border-slate-700",
+      borderColor,
+    )}>
+      <div className={cn("px-4 py-3 bg-gradient-to-r", gradient)}>
+        <h3 className="text-sm font-bold text-white flex items-center gap-2">
+          <span className="text-lg">{icon}</span>
           {title}
-          <span className="ml-auto text-xs bg-gray-200 text-gray-700 rounded-full px-2 py-0.5">
+          <span className="ml-auto text-xs bg-white/20 text-white rounded-full px-2 py-0.5 font-semibold">
             {sites.length}
           </span>
         </h3>
@@ -191,31 +150,24 @@ const StatusPanel = ({
 
       {sites.length === 0 ? (
         <div className="flex items-center justify-center py-8">
-          <p className="text-sm text-gray-500">No sites</p>
+          <p className="text-sm text-slate-400">No sites</p>
         </div>
       ) : (
         <div className="overflow-y-auto flex-1">
           <table className="w-full text-xs">
-            <thead className="sticky top-0 bg-gray-50 border-b border-gray-200">
+            <thead className="sticky top-0 bg-slate-700 border-b border-slate-600">
               <tr>
-                <th className="text-left px-3 py-2 font-semibold text-gray-700">
-                  Site Name
-                </th>
-                <th className="text-left px-3 py-2 font-semibold text-gray-700">
-                  Date
-                </th>
+                <th className="text-left px-3 py-2 font-bold text-white">Site Name</th>
+                <th className="text-left px-3 py-2 font-bold text-white">Date</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-slate-700">
               {sites.map((site) => (
-                <tr
-                  key={site.id}
-                  className="hover:bg-gray-50 transition-colors"
-                >
-                  <td className="px-3 py-2 text-gray-900 font-medium truncate max-w-[150px]">
+                <tr key={site.id} className="hover:bg-slate-700 transition-colors">
+                  <td className="px-3 py-2 text-slate-200 font-medium truncate max-w-[150px]">
                     {site.siteName}
                   </td>
-                  <td className="px-3 py-2 text-gray-600 whitespace-nowrap">
+                  <td className="px-3 py-2 text-slate-300 whitespace-nowrap">
                     {new Date(site.scheduledDate).toLocaleDateString("en-GB", {
                       day: "2-digit",
                       month: "short",
@@ -236,19 +188,42 @@ const KPICard = ({
   value,
   icon: Icon,
   color,
+  gradient,
+  trend,
 }: {
   title: string;
   value: number;
   icon: React.ComponentType<{ size: number; className?: string }>;
   color: string;
+  gradient: string;
+  trend?: number;
 }) => (
-  <div className="bg-white rounded-[14px] border border-[#E0E4E8] shadow-sm p-4">
-    <div className="flex items-start justify-between mb-3">
-      <h3 className="text-xs text-gray-600 font-medium">{title}</h3>
-      <Icon size={18} className={color} />
+  <div className={cn(
+    "relative rounded-2xl overflow-hidden shadow-xl border border-slate-700",
+    "bg-gradient-to-br",
+    gradient,
+  )}>
+    <div className="absolute inset-0 opacity-20"></div>
+    <div className="relative p-6">
+      <div className="flex items-start justify-between mb-4">
+        <div>
+          <p className="text-slate-300 text-sm font-medium mb-1">{title}</p>
+          <h3 className="text-4xl font-bold text-white">{value}</h3>
+        </div>
+        <div className={cn(
+          "p-3 rounded-xl",
+          color,
+        )}>
+          <Icon size={24} className="text-white" />
+        </div>
+      </div>
+      {trend !== undefined && (
+        <div className="flex items-center gap-1 text-green-400 text-xs font-semibold">
+          <ArrowUpRight size={14} />
+          <span>{trend}% from yesterday</span>
+        </div>
+      )}
     </div>
-    <div className="text-2xl font-bold text-gray-900">{value}</div>
-    <p className="text-xs text-gray-500 mt-1">Active</p>
   </div>
 );
 
@@ -302,32 +277,42 @@ export default function Dashboard() {
     minute: "2-digit",
   });
 
+  const onSchedulePercentage = sites.length > 0 
+    ? Math.round((sites.filter(s => s.status !== "overdue").length / sites.length) * 100) 
+    : 0;
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
       {/* Top Bar */}
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
-        <div className="px-4 md:px-6 py-3 md:py-4">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <header className="sticky top-0 z-50 bg-gradient-to-r from-slate-900 to-slate-800 border-b border-slate-700 shadow-2xl backdrop-blur-sm bg-opacity-80">
+        <div className="px-4 md:px-6 py-4 md:py-5">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             {/* Date/Time and Title */}
             <div className="flex items-center gap-4 flex-1">
-              <div className="flex items-center gap-2 text-sm text-gray-700">
-                <Calendar size={16} className="text-gray-500" />
-                <span className="font-medium">{currentDateTime}</span>
+              <div className="flex items-center gap-2 text-sm text-slate-300 font-medium">
+                <Calendar size={16} className="text-cyan-400" />
+                <span>{currentDateTime}</span>
+              </div>
+              <div className="hidden md:flex items-center gap-2 ml-4 pl-4 border-l border-slate-700">
+                <Zap size={16} className="text-yellow-400" />
+                <span className="text-xs text-slate-400">
+                  {onSchedulePercentage}% On Schedule
+                </span>
               </div>
             </div>
 
             {/* Search Bar */}
-            <div className="flex-1 md:flex-none md:w-64">
-              <div className="relative">
+            <div className="flex-1 md:flex-none md:w-72">
+              <div className="relative group">
                 <Search
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-cyan-400 transition-colors"
                   size={16}
                 />
                 <Input
                   placeholder="Search sites..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 h-9 text-sm border-gray-200"
+                  className="pl-10 h-10 text-sm border-slate-600 bg-slate-800 text-white placeholder-slate-500 focus:border-cyan-400 focus:ring-cyan-400 focus:ring-opacity-20"
                 />
               </div>
             </div>
@@ -339,16 +324,20 @@ export default function Dashboard() {
                 size="sm"
                 onClick={handleRefresh}
                 disabled={refreshing}
-                className="gap-2"
+                className="gap-2 border-slate-600 bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white"
               >
                 <RefreshCw
                   size={16}
-                  className={refreshing ? "animate-spin" : ""}
+                  className={refreshing ? "animate-spin text-cyan-400" : "text-cyan-400"}
                 />
                 <span className="hidden sm:inline">Refresh</span>
               </Button>
-              <Button variant="outline" size="sm" className="gap-2">
-                <Download size={16} />
+              <Button
+                variant="outline"
+                size="sm"
+                className="gap-2 border-slate-600 bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white"
+              >
+                <Download size={16} className="text-cyan-400" />
                 <span className="hidden sm:inline">Download</span>
               </Button>
             </div>
@@ -359,35 +348,49 @@ export default function Dashboard() {
       {/* Main Content */}
       <main className="px-4 md:px-6 py-6">
         <div className="max-w-7xl mx-auto">
+          {/* Header Section */}
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-2">
+              <Fuel className="text-cyan-400" size={28} />
+              <h1 className="text-3xl md:text-4xl font-bold text-white">
+                Fuel Dashboard
+              </h1>
+            </div>
+            <p className="text-slate-400 text-sm">
+              Real-time monitoring of {sites.length} GSM fueling sites
+            </p>
+          </div>
+
           {/* KPI Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             <KPICard
               title="Total Sites"
               value={sites.length}
               icon={MapPin}
-              color="text-blue-600"
+              color="bg-cyan-500"
+              gradient="from-cyan-600 to-cyan-900"
+              trend={12}
             />
             <KPICard
               title="Overdue"
               value={sites.filter((s) => s.status === "overdue").length}
               icon={AlertCircle}
-              color="text-red-600"
+              color="bg-red-500"
+              gradient="from-red-600 to-red-900"
             />
             <KPICard
               title="Today"
               value={sites.filter((s) => s.status === "today").length}
               icon={Clock}
-              color="text-orange-600"
+              color="bg-orange-500"
+              gradient="from-orange-600 to-orange-900"
             />
             <KPICard
               title="Coming (3D)"
-              value={
-                sites.filter(
-                  (s) => s.status === "coming" || s.status === "tomorrow",
-                ).length
-              }
+              value={sites.filter((s) => s.status === "coming" || s.status === "tomorrow").length}
               icon={TrendingUp}
-              color="text-green-600"
+              color="bg-green-500"
+              gradient="from-green-600 to-green-900"
             />
           </div>
 
@@ -398,68 +401,79 @@ export default function Dashboard() {
               {/* Overdue Panel */}
               <StatusPanel
                 title="Overdue"
-                borderColor="border-t-red-500"
+                borderColor="border-t-2 border-t-red-500"
                 sites={overdueSites}
                 icon="🔴"
+                gradient="from-red-600 to-red-700"
               />
 
               {/* Today Panel */}
               <StatusPanel
                 title="Today"
-                borderColor="border-t-orange-500"
+                borderColor="border-t-2 border-t-orange-500"
                 sites={todaySites}
                 icon="🟠"
+                gradient="from-orange-600 to-orange-700"
               />
 
               {/* Coming Panel */}
               <StatusPanel
                 title="Coming (3D)"
-                borderColor="border-t-yellow-500"
+                borderColor="border-t-2 border-t-yellow-500"
                 sites={comingSites}
                 icon="🟡"
+                gradient="from-yellow-600 to-yellow-700"
               />
             </div>
 
             {/* Right Column - Map Container (Sticky) */}
-            <div className="sticky top-[120px] h-fit flex flex-col gap-4">
+            <div className="sticky top-[140px] h-fit flex flex-col gap-4">
               {/* Map Container with Double Borders */}
-              <div className="border-[3px] border-blue-900 rounded-lg shadow-lg p-0.5 overflow-hidden flex-1">
-                <div className="border-2 border-red-500 rounded-md h-full bg-gradient-to-br from-gray-100 to-gray-200 flex flex-col items-center justify-center min-h-[400px] md:min-h-[600px]">
-                  <div className="text-center px-6">
-                    <MapPin className="mx-auto text-gray-400 mb-4" size={56} />
-                    <p className="text-gray-700 font-semibold text-lg mb-2">
-                      Interactive Site Map
-                    </p>
-                    <p className="text-gray-600 text-sm mb-4">
-                      Showing {sites.length} fueling sites
-                    </p>
-                    <p className="text-gray-500 text-xs mb-6">
+              <div className="border-4 border-cyan-500 rounded-2xl shadow-2xl p-1 overflow-hidden flex-1">
+                <div className="border-2 border-red-500 rounded-xl h-full bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 flex flex-col items-center justify-center min-h-[400px] md:min-h-[600px]">
+                  <div className="text-center px-6 space-y-4">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-full">
+                      <MapPin className="text-white" size={32} />
+                    </div>
+                    <div>
+                      <p className="text-white font-bold text-xl">
+                        Interactive Site Map
+                      </p>
+                      <p className="text-slate-400 text-sm mt-1">
+                        Showing {sites.length} fueling sites
+                      </p>
+                    </div>
+                    <p className="text-slate-500 text-xs">
                       Map visualization powered by Leaflet
                     </p>
 
                     {/* Legend */}
-                    <div className="bg-white border border-gray-300 rounded-lg p-3 text-left inline-block shadow-sm">
-                      <p className="text-xs font-semibold text-gray-700 mb-3">
+                    <div className="bg-gradient-to-br from-slate-700 to-slate-800 border border-slate-600 rounded-xl p-4 text-left shadow-xl mt-6 w-full max-w-xs">
+                      <p className="text-xs font-bold text-white mb-4 flex items-center gap-2">
+                        <Zap size={14} className="text-yellow-400" />
                         Status Legend
                       </p>
                       <div className="space-y-2 text-xs">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-3 p-2 bg-slate-600 rounded-lg">
                           <span className="text-lg">🔴</span>
-                          <span className="text-gray-700">
-                            Overdue ({overdueSites.length})
-                          </span>
+                          <div>
+                            <p className="text-white font-semibold">Overdue</p>
+                            <p className="text-slate-400">{overdueSites.length} sites</p>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-3 p-2 bg-slate-600 rounded-lg">
                           <span className="text-lg">🟠</span>
-                          <span className="text-gray-700">
-                            Today ({todaySites.length})
-                          </span>
+                          <div>
+                            <p className="text-white font-semibold">Today</p>
+                            <p className="text-slate-400">{todaySites.length} sites</p>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-3 p-2 bg-slate-600 rounded-lg">
                           <span className="text-lg">🟡</span>
-                          <span className="text-gray-700">
-                            Coming ({comingSites.length})
-                          </span>
+                          <div>
+                            <p className="text-white font-semibold">Coming</p>
+                            <p className="text-slate-400">{comingSites.length} sites</p>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -468,9 +482,9 @@ export default function Dashboard() {
               </div>
 
               {/* Info Footer */}
-              <div className="text-xs text-gray-600 text-center py-2">
-                <p>Last updated: {lastUpdateTime.toLocaleTimeString()}</p>
-                <p>Auto-refreshes every 2 minutes</p>
+              <div className="text-xs text-slate-400 text-center py-2 px-4 bg-gradient-to-r from-slate-800 to-slate-900 rounded-lg border border-slate-700">
+                <p className="font-medium">Last updated: {lastUpdateTime.toLocaleTimeString()}</p>
+                <p className="text-slate-500">Auto-refreshes every 2 minutes</p>
               </div>
             </div>
           </div>
