@@ -557,6 +557,17 @@ export default function Dashboard() {
                 maxHeight="max-h-96"
               />
 
+              {/* Tomorrow Panel */}
+              <StatusPanel
+                title="Tomorrow"
+                borderColor="border-t-2 border-t-blue-400"
+                sites={tomorrowSites}
+                icon="🔵"
+                gradient="from-blue-100 to-blue-200"
+                expanded={expandedPanels.tomorrow}
+                onToggle={() => togglePanel("tomorrow")}
+              />
+
               {/* Coming Panel */}
               <StatusPanel
                 title="Coming (3D)"
