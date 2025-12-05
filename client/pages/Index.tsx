@@ -551,6 +551,8 @@ export default function Dashboard() {
       setLastUpdateTime(new Date());
     };
     loadData();
+    // Force close any modal on page load
+    closeModal();
   }, []);
 
   useEffect(() => {
