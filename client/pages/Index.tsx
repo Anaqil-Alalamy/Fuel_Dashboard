@@ -112,6 +112,16 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
       const status = determineStatus(parsedDate);
       const scheduledDateISO = parsedDate.toISOString().split("T")[0];
 
+      // Column N (index 13) is NextfuelingPlan
+      const nextFuelingStr = values[13] || "";
+      let nextFuelingDate = nextFuelingStr;
+      if (nextFuelingStr) {
+        const nextFuelingParsed = parseDateDDMMYYYY(nextFuelingStr);
+        if (nextFuelingParsed) {
+          nextFuelingDate = nextFuelingParsed.toISOString().split("T")[0];
+        }
+      }
+
       sites.push({
         id: `${siteName.replace(/\s+/g, "_")}_${i}`,
         siteName,
@@ -122,6 +132,7 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
         lastUpdated: new Date().toISOString(),
         latitude,
         longitude,
+        nextFuelingDate,
       });
     }
 
