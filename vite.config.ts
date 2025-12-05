@@ -9,8 +9,8 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     fs: {
-      allow: [".", "./node_modules"],
-      deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**"],
+      allow: ["."],
+      deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
     },
   },
   build: {
