@@ -980,8 +980,8 @@ export default function Dashboard() {
 
       {/* VVVIP Sites Modal */}
       {modalState.open && modalState.type === "vvvip" && (
-        <div className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] flex flex-col">
+        <div className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center p-4" onClick={closeModal}>
+          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
             {/* Header */}
             <div className="px-6 py-4 bg-gradient-to-r from-blue-100 to-blue-200 flex items-center gap-3 justify-between">
               <div className="flex items-center gap-3">
