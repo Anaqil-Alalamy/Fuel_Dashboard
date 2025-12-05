@@ -351,7 +351,7 @@ export default function Dashboard() {
             </div>
 
             {/* Search Bar */}
-            <div className="flex-1 md:flex-none md:w-72">
+            <div className="flex-1 md:flex-none md:w-72 relative">
               <div className="relative group">
                 <Search
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors"
@@ -363,6 +363,58 @@ export default function Dashboard() {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10 h-10 text-sm border-blue-200 bg-white text-gray-900 placeholder-gray-500 focus:border-blue-600 focus:ring-blue-600 focus:ring-opacity-20"
                 />
+
+                {/* Search Results Popup */}
+                {showSearchPopup && searchResults.length > 0 && (
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-blue-300 rounded-lg shadow-xl z-50 max-h-96 overflow-y-auto">
+                    <div className="p-3">
+                      <p className="text-xs font-bold text-gray-600 mb-2">
+                        Found {searchResults.length} site{searchResults.length !== 1 ? "s" : ""}
+                      </p>
+                      <div className="space-y-2">
+                        {searchResults.map((site) => (
+                          <div
+                            key={site.id}
+                            className="p-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200 hover:border-blue-400 transition-colors"
+                          >
+                            <p className="font-bold text-gray-900 text-sm">{site.siteName}</p>
+                            <div className="mt-2 space-y-1 text-xs">
+                              <p className="text-gray-700">
+                                <span className="font-semibold">Next Fueling:</span>{" "}
+                                {site.nextFuelingDate
+                                  ? new Date(site.nextFuelingDate).toLocaleDateString("en-GB", {
+                                      day: "2-digit",
+                                      month: "short",
+                                      year: "numeric",
+                                    })
+                                  : "Not set"}
+                              </p>
+                              <p className="text-gray-600">
+                                <span className="font-semibold">Status:</span>{" "}
+                                {site.status === "overdue"
+                                  ? "🔴 Overdue"
+                                  : site.status === "today"
+                                    ? "🟠 Today"
+                                    : site.status === "coming"
+                                      ? "🟡 Coming"
+                                      : "🟢 Tomorrow"}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* No Results Message */}
+                {showSearchPopup && searchResults.length === 0 && searchTerm.trim() && (
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-yellow-300 rounded-lg shadow-xl z-50 p-3">
+                    <p className="text-sm text-gray-600 text-center">
+                      No sites found matching "{searchTerm}"
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
 
