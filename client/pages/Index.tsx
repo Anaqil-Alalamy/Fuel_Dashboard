@@ -462,13 +462,6 @@ export default function Dashboard() {
       {/* Main Content */}
       <main className="px-4 md:px-6 py-4">
         <div className="max-w-7xl mx-auto">
-          {/* Subtitle */}
-          <div className="mb-6">
-            <p className="text-gray-600 text-sm">
-              Real-time monitoring of {sites.length} GSM fueling sites
-            </p>
-          </div>
-
           {/* KPI Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 mb-4">
             <KPICard
