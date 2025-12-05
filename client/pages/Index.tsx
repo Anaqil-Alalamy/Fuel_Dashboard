@@ -251,20 +251,13 @@ const PerformanceChart = ({ sites }: { sites: FuelingSchedule[] }) => {
 
   return (
     <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 mb-3">
-      <div className="flex items-center justify-between mb-2">
-        <h3 className="text-sm font-bold text-gray-900">Overall Performance</h3>
-        <div className="text-right">
-          <div className="text-2xl font-bold text-blue-600">{performancePercentage}%</div>
-          <div className="text-xs text-gray-500">Performance</div>
-        </div>
-      </div>
-      <div className="flex items-center justify-center" style={{ height: "120px" }}>
+      <div className="flex items-center justify-center" style={{ height: "140px", position: "relative" }}>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
               data={data}
               cx="50%"
-              cy="50%"
+              cy="45%"
               innerRadius={40}
               outerRadius={60}
               paddingAngle={2}
@@ -277,6 +270,21 @@ const PerformanceChart = ({ sites }: { sites: FuelingSchedule[] }) => {
             <Tooltip formatter={(value) => `${value} sites`} />
           </PieChart>
         </ResponsiveContainer>
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            textAlign: "center",
+            pointerEvents: "none",
+          }}
+        >
+          <div className="text-2xl font-bold text-blue-600">{performancePercentage}%</div>
+        </div>
+      </div>
+      <div className="text-center mt-2">
+        <p className="text-sm font-bold text-gray-900">Overall Performance</p>
       </div>
     </div>
   );
