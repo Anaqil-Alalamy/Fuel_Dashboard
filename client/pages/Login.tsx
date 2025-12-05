@@ -41,16 +41,16 @@ export default function Login() {
         <img
           src="https://images.pexels.com/photos/94844/pexels-photo-94844.jpeg"
           alt="GSM Tower"
-          className="absolute left-0 top-0 h-full object-cover opacity-5 transform -scale-x-100 scale-110"
+          className="absolute left-0 top-0 h-full object-cover opacity-25 transform -scale-x-100 scale-110"
         />
         {/* Fuel Truck - Right side */}
         <img
           src="https://images.pexels.com/photos/27946843/pexels-photo-27946843.jpeg"
           alt="Fuel Truck"
-          className="absolute right-0 bottom-0 h-full object-cover opacity-5 transform scale-110"
+          className="absolute right-0 bottom-0 h-full object-cover opacity-25 transform scale-110"
         />
-        {/* Gradient overlay to enhance depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white/70"></div>
+        {/* Gradient overlay to enhance depth and readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/40 to-white/60"></div>
       </div>
 
       <div className="w-full max-w-md relative z-10">
