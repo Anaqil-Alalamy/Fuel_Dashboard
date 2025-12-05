@@ -966,7 +966,7 @@ export default function Dashboard() {
           onClose={closeModal}
         />
       )}
-      {modalState.open && modalState.type === "today" && (
+      {modalState?.open === true && modalState?.type === "today" && (
         <DetailModal
           title="Today"
           sites={todaySites}
@@ -975,7 +975,7 @@ export default function Dashboard() {
           onClose={closeModal}
         />
       )}
-      {modalState.open && modalState.type === "tomorrow" && (
+      {modalState?.open === true && modalState?.type === "tomorrow" && (
         <DetailModal
           title="Tomorrow"
           sites={tomorrowSites}
@@ -984,7 +984,7 @@ export default function Dashboard() {
           onClose={closeModal}
         />
       )}
-      {modalState.open && modalState.type === "incoming" && (
+      {modalState?.open === true && modalState?.type === "incoming" && (
         <DetailModal
           title="Incoming (2-4D)"
           sites={incomingSites}
@@ -993,7 +993,7 @@ export default function Dashboard() {
           onClose={closeModal}
         />
       )}
-      {modalState.open && modalState.type === "coming" && (
+      {modalState?.open === true && modalState?.type === "coming" && (
         <DetailModal
           title="Coming"
           sites={comingSites}
@@ -1004,7 +1004,7 @@ export default function Dashboard() {
       )}
 
       {/* VVVIP Sites Modal */}
-      {modalState.open && modalState.type === "vvvip" && (
+      {modalState?.open === true && modalState?.type === "vvvip" && (
         <div
           className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center p-4"
           onClick={closeModal}
