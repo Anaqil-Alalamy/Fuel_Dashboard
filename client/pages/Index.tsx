@@ -278,6 +278,7 @@ const KPICard = ({
   color,
   gradient,
   trend,
+  borderColor,
 }: {
   title: string;
   value: number;
@@ -285,12 +286,14 @@ const KPICard = ({
   color: string;
   gradient: string;
   trend?: number;
+  borderColor?: string;
 }) => (
   <div
     className={cn(
-      "relative rounded-lg overflow-hidden shadow border border-gray-200",
+      "relative rounded-lg overflow-hidden shadow border-2",
       "bg-gradient-to-br",
       gradient,
+      borderColor || "border-gray-200",
     )}
   >
     <div className="absolute inset-0 opacity-10"></div>
