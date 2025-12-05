@@ -523,14 +523,14 @@ export default function Dashboard() {
       {/* Top Bar */}
       <header className="sticky top-0 z-50 bg-gradient-to-r from-white to-blue-50 border-b border-blue-200 shadow-lg backdrop-blur-sm bg-opacity-90">
         {/* First row: Logo (left), Title (center), Date/Time (right) */}
-        <div className="px-4 md:px-6 py-6 md:py-8 border-b border-blue-200">
+        <div className="px-4 md:px-6 py-3 md:py-4 border-b border-blue-200">
           <div className="flex items-center justify-center relative">
             {/* Logo - Left */}
             <div className="absolute left-0 flex items-center">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2Fbd65b3cd7a86452e803a3d7dc7a3d048%2F5e321b77d52a4d30b523674ca83ee1d4?format=webp&width=800"
                 alt="GSM Fueling Logo"
-                className="h-28 md:h-40 w-auto"
+                className="h-16 md:h-24 w-auto"
               />
             </div>
 
