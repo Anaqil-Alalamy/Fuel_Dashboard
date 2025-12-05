@@ -305,14 +305,14 @@ export default function Dashboard() {
             <div className="flex-1 md:flex-none md:w-72">
               <div className="relative group">
                 <Search
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-cyan-400 transition-colors"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors"
                   size={16}
                 />
                 <Input
                   placeholder="Search sites..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 h-10 text-sm border-slate-600 bg-slate-800 text-white placeholder-slate-500 focus:border-cyan-400 focus:ring-cyan-400 focus:ring-opacity-20"
+                  className="pl-10 h-10 text-sm border-blue-200 bg-white text-gray-900 placeholder-gray-500 focus:border-blue-600 focus:ring-blue-600 focus:ring-opacity-20"
                 />
               </div>
             </div>
