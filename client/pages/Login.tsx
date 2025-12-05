@@ -36,7 +36,7 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-blue-100 flex items-center justify-center p-4 relative overflow-hidden" style={{ backgroundImage: 'url(https://cdn.builder.io/api/v1/image/assets%2Fbd65b3cd7a86452e803a3d7dc7a3d048%2F5a5097e5e0764b6d8b8c01e0f70a858e?format=webp&width=800)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
       {/* Overlay for readability */}
-      <div className="absolute inset-0 bg-blue-100/60 z-0"></div>
+      <div className="absolute inset-0 bg-blue-300/75 z-0"></div>
 
       <div className="w-full max-w-md relative z-10 flex flex-col items-center">
         {/* Title Outside Card */}
