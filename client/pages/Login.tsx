@@ -34,7 +34,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-blue-100 flex items-center justify-center p-4 relative overflow-hidden">
       {/* 3D Background Images */}
       <div className="absolute inset-0 z-0">
         {/* GSM Tower - Left side */}
