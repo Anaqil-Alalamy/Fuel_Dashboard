@@ -63,15 +63,6 @@ export default function Login() {
       </div>
 
       <div className="w-full max-w-md relative z-10">
-        {/* Logo */}
-        <div className="flex justify-center mb-8">
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets%2Fbd65b3cd7a86452e803a3d7dc7a3d048%2F5e321b77d52a4d30b523674ca83ee1d4?format=webp&width=800"
-            alt="GSM Fueling Logo"
-            className="h-48 w-auto"
-          />
-        </div>
-
         {/* Login Card */}
         <div className="bg-white rounded-2xl shadow-xl p-8 border border-blue-100">
           <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">
