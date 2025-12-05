@@ -4,21 +4,33 @@ const SHEET_URL =
 export async function handleSheetData(_req: any, res: any) {
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 
-    const response = await fetch(SHEET_URL, { signal: controller.signal });
-    clearTimeout(timeoutId);
+    try {
+      const response = await fetch(SHEET_URL, {
+        signal: controller.signal,
+        headers: {
+          "Cache-Control": "no-cache",
+        },
+      });
+      clearTimeout(timeoutId);
 
-    if (!response.ok) {
-      console.error(`HTTP Error: ${response.status}`);
-      return res
-        .status(response.status)
-        .json({ error: `HTTP ${response.status}` });
+      if (!response.ok) {
+        console.error(`HTTP Error: ${response.status}`);
+        return res.status(response.status).json({
+          error: `HTTP ${response.status}`,
+          details: "Failed to fetch from Google Sheets",
+        });
+      }
+
+      const csv = await response.text();
+      res.set("Content-Type", "text/csv");
+      res.set("Cache-Control", "no-cache, no-store, must-revalidate");
+      res.send(csv);
+    } catch (error) {
+      clearTimeout(timeoutId);
+      throw error;
     }
-
-    const csv = await response.text();
-    res.set("Content-Type", "text/csv");
-    res.send(csv);
   } catch (error) {
     console.error("Error fetching sheet data:", error);
     const errorMessage = error instanceof Error ? error.message : String(error);
@@ -26,6 +38,7 @@ export async function handleSheetData(_req: any, res: any) {
     res.status(statusCode).json({
       error: "Failed to fetch sheet data",
       message: errorMessage,
+      timestamp: new Date().toISOString(),
     });
   }
 }
