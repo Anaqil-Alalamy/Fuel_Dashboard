@@ -779,6 +779,87 @@ export default function Dashboard() {
           onClose={closeModal}
         />
       )}
+
+      {/* VVVIP Sites Modal */}
+      {modalState.open && modalState.type === "vvvip" && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] flex flex-col">
+            {/* Header */}
+            <div className="px-6 py-4 bg-gradient-to-r from-blue-100 to-blue-200 flex items-center gap-3 justify-between">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🏢</span>
+                <h2 className="text-xl font-bold text-gray-900">LDN Sites (VVVIP)</h2>
+                <span className="ml-auto text-xs bg-white/30 text-gray-900 rounded-full px-3 py-1 font-semibold">
+                  {vvvipSites.length} {vvvipSites.length === 1 ? "site" : "sites"}
+                </span>
+              </div>
+              <button
+                onClick={closeModal}
+                className="text-gray-900 hover:text-gray-700 transition-colors"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto">
+              {vvvipSites.length === 0 ? (
+                <div className="flex items-center justify-center py-12">
+                  <p className="text-gray-400">No VVVIP sites</p>
+                </div>
+              ) : (
+                <table className="w-full text-sm">
+                  <thead className="sticky top-0 bg-gray-100 border-b border-gray-200">
+                    <tr>
+                      <th className="text-left px-6 py-3 font-bold text-gray-700">
+                        Site Name
+                      </th>
+                      <th className="text-left px-6 py-3 font-bold text-gray-700">
+                        Next Fueling Date
+                      </th>
+                      <th className="text-left px-6 py-3 font-bold text-gray-700">
+                        Priority
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100">
+                    {vvvipSites.map((site) => (
+                      <tr
+                        key={site.id}
+                        className="hover:bg-gray-50 transition-colors"
+                      >
+                        <td className="px-6 py-3 text-gray-800 font-medium">
+                          {site.siteName}
+                        </td>
+                        <td className="px-6 py-3 text-gray-700">
+                          {site.nextFuelingDate
+                            ? (() => {
+                                const date = new Date(site.nextFuelingDate);
+                                date.setHours(date.getHours() + 3);
+                                const day = String(date.getDate()).padStart(2, "0");
+                                const month = String(date.getMonth() + 1).padStart(
+                                  2,
+                                  "0",
+                                );
+                                const year = date.getFullYear();
+                                return `${day}/${month}/${year}`;
+                              })()
+                            : "Not set"}
+                        </td>
+                        <td className="px-6 py-3 text-gray-700 font-semibold">
+                          <span className="bg-blue-100 text-blue-900 px-3 py-1 rounded-full text-xs">
+                            {site.priority}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
