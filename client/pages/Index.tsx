@@ -517,7 +517,7 @@ export default function Dashboard() {
       <main className="px-4 md:px-6 py-4">
         <div className="max-w-7xl mx-auto">
           {/* KPI Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 mb-4">
             <KPICard
               title="Total Sites"
               value={sites.length}
@@ -527,8 +527,8 @@ export default function Dashboard() {
               trend={12}
             />
             <KPICard
-              title="Overdue"
-              value={sites.filter((s) => s.status === "overdue").length}
+              title="Due"
+              value={sites.filter((s) => s.status === "due").length}
               icon={AlertCircle}
               color="bg-red-600"
               gradient="from-red-100 to-red-200"
@@ -541,13 +541,20 @@ export default function Dashboard() {
               gradient="from-orange-100 to-orange-200"
             />
             <KPICard
-              title="Coming (3D)"
+              title="Tomorrow"
+              value={sites.filter((s) => s.status === "tomorrow").length}
+              icon={TrendingUp}
+              color="bg-yellow-600"
+              gradient="from-yellow-100 to-yellow-200"
+            />
+            <KPICard
+              title="Upcoming"
               value={
                 sites.filter(
-                  (s) => s.status === "coming" || s.status === "tomorrow",
+                  (s) => s.status === "incoming" || s.status === "coming",
                 ).length
               }
-              icon={TrendingUp}
+              icon={CheckCircle2}
               color="bg-green-600"
               gradient="from-green-100 to-green-200"
             />
