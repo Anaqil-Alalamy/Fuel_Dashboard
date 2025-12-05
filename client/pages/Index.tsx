@@ -199,7 +199,12 @@ const DetailModal = ({
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] flex flex-col">
         {/* Header */}
-        <div className={cn("px-6 py-4 bg-gradient-to-r flex items-center gap-3 justify-between", gradient)}>
+        <div
+          className={cn(
+            "px-6 py-4 bg-gradient-to-r flex items-center gap-3 justify-between",
+            gradient,
+          )}
+        >
           <div className="flex items-center gap-3">
             <span className="text-2xl">{icon}</span>
             <h2 className="text-xl font-bold text-gray-900">{title}</h2>
@@ -225,21 +230,33 @@ const DetailModal = ({
             <table className="w-full text-sm">
               <thead className="sticky top-0 bg-gray-100 border-b border-gray-200">
                 <tr>
-                  <th className="text-left px-6 py-3 font-bold text-gray-700">Site Name</th>
-                  <th className="text-left px-6 py-3 font-bold text-gray-700">Next Fueling Date</th>
+                  <th className="text-left px-6 py-3 font-bold text-gray-700">
+                    Site Name
+                  </th>
+                  <th className="text-left px-6 py-3 font-bold text-gray-700">
+                    Next Fueling Date
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {sites.map((site) => (
-                  <tr key={site.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-3 text-gray-800 font-medium">{site.siteName}</td>
+                  <tr
+                    key={site.id}
+                    className="hover:bg-gray-50 transition-colors"
+                  >
+                    <td className="px-6 py-3 text-gray-800 font-medium">
+                      {site.siteName}
+                    </td>
                     <td className="px-6 py-3 text-gray-700">
                       {site.nextFuelingDate
-                        ? new Date(site.nextFuelingDate).toLocaleDateString("en-GB", {
-                            day: "2-digit",
-                            month: "short",
-                            year: "numeric",
-                          })
+                        ? new Date(site.nextFuelingDate).toLocaleDateString(
+                            "en-GB",
+                            {
+                              day: "2-digit",
+                              month: "short",
+                              year: "numeric",
+                            },
+                          )
                         : "Not set"}
                     </td>
                   </tr>
@@ -279,8 +296,12 @@ const KPICard = ({
     <div className="relative p-3">
       <div className="flex items-start justify-between mb-2">
         <div>
-          <p className="text-gray-600 text-[10px] font-medium mb-0.5">{title}</p>
-          <h3 className="text-lg font-bold text-gray-900 leading-tight">{value}</h3>
+          <p className="text-gray-600 text-[10px] font-medium mb-0.5">
+            {title}
+          </p>
+          <h3 className="text-lg font-bold text-gray-900 leading-tight">
+            {value}
+          </h3>
         </div>
         <div className={cn("p-1.5 rounded-lg", color)}>
           <Icon size={16} className="text-white" />
@@ -309,7 +330,9 @@ export default function Dashboard() {
     type: null,
   });
 
-  const openModal = (type: "due" | "today" | "tomorrow" | "incoming" | "coming") => {
+  const openModal = (
+    type: "due" | "today" | "tomorrow" | "incoming" | "coming",
+  ) => {
     setModalState({ open: true, type });
   };
 
@@ -391,7 +414,9 @@ export default function Dashboard() {
             {/* Title - Center */}
             <div className="flex items-center gap-2">
               <Fuel className="text-blue-600" size={22} />
-              <h1 className="text-xl font-bold text-gray-900">Fuel Dashboard</h1>
+              <h1 className="text-xl font-bold text-gray-900">
+                Fuel Dashboard
+              </h1>
             </div>
 
             {/* Date/Time and Stats - Right */}
@@ -432,7 +457,8 @@ export default function Dashboard() {
                   <div className="absolute top-full right-0 mt-2 bg-white border border-blue-300 rounded-lg shadow-xl z-50 max-h-96 overflow-y-auto w-80">
                     <div className="p-3">
                       <p className="text-xs font-bold text-gray-600 mb-2">
-                        Found {filteredSites.length} site{filteredSites.length !== 1 ? "s" : ""}
+                        Found {filteredSites.length} site
+                        {filteredSites.length !== 1 ? "s" : ""}
                       </p>
                       <div className="space-y-2">
                         {filteredSites.map((site) => (
@@ -440,12 +466,18 @@ export default function Dashboard() {
                             key={site.id}
                             className="p-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200 hover:border-blue-400 transition-colors"
                           >
-                            <p className="font-bold text-gray-900 text-sm">{site.siteName}</p>
+                            <p className="font-bold text-gray-900 text-sm">
+                              {site.siteName}
+                            </p>
                             <div className="mt-2 space-y-1 text-xs">
                               <p className="text-gray-700">
-                                <span className="font-semibold">Next Fueling:</span>{" "}
+                                <span className="font-semibold">
+                                  Next Fueling:
+                                </span>{" "}
                                 {site.nextFuelingDate
-                                  ? new Date(site.nextFuelingDate).toLocaleDateString("en-GB", {
+                                  ? new Date(
+                                      site.nextFuelingDate,
+                                    ).toLocaleDateString("en-GB", {
                                       day: "2-digit",
                                       month: "short",
                                       year: "numeric",
