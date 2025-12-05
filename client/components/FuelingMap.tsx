@@ -59,6 +59,23 @@ const getStatusLabel = (status: string): string => {
   }
 };
 
+const getStatusBadgeStyles = (
+  status: string
+): { bgColor: string; textColor: string } => {
+  switch (status) {
+    case "overdue":
+      return { bgColor: "#FEE2E2", textColor: "#991B1B" }; // Light red bg, dark red text
+    case "today":
+      return { bgColor: "#FEF3C7", textColor: "#92400E" }; // Light yellow bg, dark yellow text
+    case "coming":
+    case "incoming":
+    case "tomorrow":
+      return { bgColor: "#DCFCE7", textColor: "#166534" }; // Light green bg, dark green text
+    default:
+      return { bgColor: "#F3F4F6", textColor: "#374151" }; // Light gray bg, dark gray text
+  }
+};
+
 const MapLegend = () => {
   const map = useMap();
 
