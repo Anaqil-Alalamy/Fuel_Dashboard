@@ -689,65 +689,6 @@ export default function Dashboard() {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="pl-10 h-9 text-sm border-blue-200 bg-white text-gray-900 placeholder-gray-500 focus:border-blue-600 focus:ring-blue-600 focus:ring-opacity-20"
                   />
-
-                  {/* Search Results Popup */}
-                  {showSearchPopup && filteredSites.length > 0 && (
-                    <div className="absolute top-full right-0 mt-2 bg-white border border-blue-300 rounded-lg shadow-xl z-[9999] max-h-96 overflow-y-auto w-80">
-                      <div className="p-3">
-                        <p className="text-xs font-bold text-gray-600 mb-2">
-                          Found {filteredSites.length} site
-                          {filteredSites.length !== 1 ? "s" : ""}
-                        </p>
-                        <div className="space-y-2">
-                          {filteredSites.map((site) => (
-                            <div
-                              key={site.id}
-                              className="p-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200 hover:border-blue-400 transition-colors"
-                            >
-                              <p className="font-bold text-gray-900 text-sm">
-                                {site.siteName}
-                              </p>
-                              <div className="mt-2 space-y-1 text-xs">
-                                <p className="text-gray-700">
-                                  <span className="font-semibold">
-                                    Next Fueling:
-                                  </span>{" "}
-                                  {site.nextFuelingDate
-                                    ? new Date(
-                                        site.nextFuelingDate,
-                                      ).toLocaleDateString("en-GB", {
-                                        day: "2-digit",
-                                        month: "short",
-                                        year: "numeric",
-                                      })
-                                    : "Not set"}
-                                </p>
-                                <p className="text-gray-600">
-                                  <span className="font-semibold">Status:</span>{" "}
-                                  {site.status === "overdue"
-                                    ? "🔴 Overdue"
-                                    : site.status === "today"
-                                      ? "🟠 Today"
-                                      : site.status === "coming"
-                                        ? "🟡 Coming"
-                                        : "🟢 Tomorrow"}
-                                </p>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* No Results Message */}
-                  {showSearchPopup && filteredSites.length === 0 && (
-                    <div className="absolute top-full right-0 mt-2 bg-white border border-yellow-300 rounded-lg shadow-xl z-[9999] p-3 w-80">
-                      <p className="text-sm text-gray-600 text-center">
-                        No sites found matching "{searchTerm}"
-                      </p>
-                    </div>
-                  )}
                 </div>
               </div>
 
