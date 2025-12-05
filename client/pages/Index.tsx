@@ -248,10 +248,10 @@ const StatusCard = ({
         borderColor,
       )}
     >
-      <div className={cn("px-4 py-4 bg-gradient-to-r", gradient)}>
-        <div className="flex items-center gap-3">
-          <span className="text-2xl">{icon}</span>
-          <h3 className="text-lg font-bold text-gray-900">
+      <div className={cn("px-3 py-2 bg-gradient-to-r", gradient)}>
+        <div className="flex items-center gap-2">
+          <span className="text-lg">{icon}</span>
+          <h3 className="text-sm font-bold text-gray-900">
             {title} {sites.length} {sites.length === 1 ? "site" : "sites"}
           </h3>
         </div>
