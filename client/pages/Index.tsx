@@ -285,13 +285,18 @@ export default function Dashboard() {
   // Update search results and show popup when searching
   useEffect(() => {
     if (searchTerm.trim()) {
-      setSearchResults(filteredSites);
+      const results = sites.filter(
+        (site) =>
+          site.siteName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          site.location.toLowerCase().includes(searchTerm.toLowerCase()),
+      );
+      setSearchResults(results);
       setShowSearchPopup(true);
     } else {
       setShowSearchPopup(false);
       setSearchResults([]);
     }
-  }, [searchTerm, filteredSites]);
+  }, [searchTerm, sites]);
 
   const overdueSites = filteredSites.filter((s) => s.status === "overdue");
   const todaySites = filteredSites.filter((s) => s.status === "today");
