@@ -281,6 +281,18 @@ export default function Dashboard() {
   const [refreshing, setRefreshing] = useState(false);
   const [sites, setSites] = useState<FuelingSchedule[]>([]);
   const [lastUpdateTime, setLastUpdateTime] = useState<Date>(new Date());
+  const [expandedPanels, setExpandedPanels] = useState({
+    overdue: true,
+    today: true,
+    coming: true,
+  });
+
+  const togglePanel = (panelName: "overdue" | "today" | "coming") => {
+    setExpandedPanels((prev) => ({
+      ...prev,
+      [panelName]: !prev[panelName],
+    }));
+  };
 
   useEffect(() => {
     const loadData = async () => {
