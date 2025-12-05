@@ -875,17 +875,16 @@ export default function Dashboard() {
                   </p>
                   <div className="mt-2 space-y-1 text-xs">
                     <p className="text-gray-700">
-                      <span className="font-semibold">
-                        Next Fueling:
-                      </span>{" "}
+                      <span className="font-semibold">Next Fueling:</span>{" "}
                       {site.nextFuelingDate
-                        ? new Date(
-                            site.nextFuelingDate,
-                          ).toLocaleDateString("en-GB", {
-                            day: "2-digit",
-                            month: "short",
-                            year: "numeric",
-                          })
+                        ? new Date(site.nextFuelingDate).toLocaleDateString(
+                            "en-GB",
+                            {
+                              day: "2-digit",
+                              month: "short",
+                              year: "numeric",
+                            },
+                          )
                         : "Not set"}
                     </p>
                     <p className="text-gray-600">
