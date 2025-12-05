@@ -13,6 +13,7 @@ interface FuelingSchedule {
   lastUpdated: string;
   latitude: number;
   longitude: number;
+  nextFuelingDate: string;
 }
 
 interface FuelingMapProps {
