@@ -564,8 +564,13 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
+    console.log("🔍 Modal state changed:", modalState);
+  }, [modalState]);
+
+  useEffect(() => {
     const handleEscapeKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        console.log("⌨️ Escape key pressed, closing modal");
         setModalState({ open: false, type: null });
       }
     };
