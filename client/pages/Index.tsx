@@ -383,6 +383,7 @@ export default function Dashboard() {
   const tomorrowSites = sites.filter((s) => s.status === "tomorrow");
   const incomingSites = sites.filter((s) => s.status === "incoming");
   const comingSites = sites.filter((s) => s.status === "coming");
+  const vvvipSites = sites.filter((s) => s.priority.trim().toUpperCase() === "VVVIP");
 
   const handleDownloadExcel = () => {
     const formatDateWithTimezone = (dateStr: string): string => {
