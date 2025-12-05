@@ -490,7 +490,7 @@ const KPICard = ({
     <div className="absolute inset-0 opacity-10"></div>
     <div className="relative p-2">
       <div className="text-center mb-1">
-        <p className="text-gray-600 text-[9px] font-medium mb-1">{title}</p>
+        <p className="text-gray-600 text-sm font-bold mb-1">{title}</p>
         <h3 className="text-3xl font-bold text-gray-900 leading-tight">
           {value}
         </h3>
