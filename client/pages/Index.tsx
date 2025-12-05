@@ -209,7 +209,7 @@ const getRowHighlightColor = (nextFuelingDate: string): string => {
   fuelingDate.setHours(0, 0, 0, 0);
 
   const daysRemaining = Math.floor(
-    (fuelingDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+    (fuelingDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24),
   );
 
   if (daysRemaining < 0) {
