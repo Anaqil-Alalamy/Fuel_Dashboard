@@ -495,7 +495,7 @@ export default function Dashboard() {
             </Button>
 
             {/* Right-aligned controls */}
-            <div className="flex items-center gap-3 ms-auto">
+            <div className="flex items-center gap-3 ml-auto">
               {/* Search Bar */}
             <div className="flex-1 md:flex-none md:w-64 relative">
               <div className="relative group">
