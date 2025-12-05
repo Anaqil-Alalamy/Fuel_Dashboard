@@ -72,18 +72,28 @@ export default function FuelingMap({ sites }: FuelingMapProps) {
     );
   }
 
-  // Calculate center based on all sites
+  // Saudi Arabia bounds: [South, West] to [North, East]
+  const saudiArabiaBounds: [[number, number], [number, number]] = [
+    [16.3, 34.4], // Southwest corner
+    [32.1, 55.6], // Northeast corner
+  ];
+
+  // Calculate center based on all sites or use Saudi Arabia center
   const centerLat =
     validSites.reduce((sum, site) => sum + site.latitude, 0) /
-    validSites.length;
+    validSites.length || 24.2;
   const centerLon =
     validSites.reduce((sum, site) => sum + site.longitude, 0) /
-    validSites.length;
+    validSites.length || 44.9;
 
   return (
     <MapContainer
       center={[centerLat, centerLon]}
       zoom={6}
+      maxBounds={saudiArabiaBounds}
+      maxBoundsViscosity={1.0}
+      minZoom={5}
+      maxZoom={12}
       className="w-full h-full rounded-xl"
       style={{ minHeight: "400px" }}
     >
