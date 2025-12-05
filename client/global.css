@@ -117,4 +117,10 @@
     overflow-x: auto;
     white-space: pre;
   }
+
+  /* Ensure modals only show when explicitly open */
+  [role="button"][class*="inset-0"][class*="bg-black"] {
+    display: none !important;
+    pointer-events: none !important;
+  }
 }
