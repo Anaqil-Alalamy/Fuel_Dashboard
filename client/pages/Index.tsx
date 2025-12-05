@@ -344,7 +344,7 @@ export default function Dashboard() {
   const [lastUpdateTime, setLastUpdateTime] = useState<Date>(new Date());
   const [modalState, setModalState] = useState<{
     open: boolean;
-    type: "overdue" | "today" | "tomorrow" | "incoming" | "coming" | null;
+    type: "overdue" | "today" | "tomorrow" | "incoming" | "coming" | "vvvip" | null;
   }>({
     open: false,
     type: null,
