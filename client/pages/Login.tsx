@@ -45,7 +45,7 @@ export default function Login() {
         />
         {/* Fuel Truck - Right side */}
         <img
-          src="https://images.pexels.com/photos/27946843/pexels-photo-27946843.jpeg"
+          src="https://images.pexels.com/photos/16023092/pexels-photo-16023092.jpeg"
           alt="Fuel Truck"
           className="absolute right-0 bottom-0 h-full object-cover opacity-25 transform scale-110"
         />
