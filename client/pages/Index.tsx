@@ -296,7 +296,7 @@ export default function Dashboard() {
       setShowSearchPopup(false);
       setSearchResults([]);
     }
-  }, [searchTerm, sites]);
+  }, [searchTerm]);
 
   const overdueSites = filteredSites.filter((s) => s.status === "overdue");
   const todaySites = filteredSites.filter((s) => s.status === "today");
