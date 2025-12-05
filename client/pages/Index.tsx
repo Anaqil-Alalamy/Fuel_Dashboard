@@ -377,17 +377,17 @@ const KPICard = ({
     )}
   >
     <div className="absolute inset-0 opacity-10"></div>
-    <div className="relative p-3">
-      <div className="flex items-start justify-between mb-2">
+    <div className="relative p-2">
+      <div className="flex items-start justify-between mb-1">
         <div>
-          <p className="text-gray-600 text-[10px] font-medium mb-0.5">
+          <p className="text-gray-600 text-[9px] font-medium mb-0.5">
             {title}
           </p>
-          <h3 className="text-lg font-bold text-gray-900 leading-tight">
+          <h3 className="text-base font-bold text-gray-900 leading-tight">
             {value}
           </h3>
         </div>
-        <div className={cn("p-1.5 rounded-lg", color)}>
+        <div className={cn("p-1 rounded-lg", color)}>
           <Icon size={16} className="text-white" />
         </div>
       </div>
