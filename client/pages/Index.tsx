@@ -147,92 +147,110 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
   }
 };
 
-const StatusPanel = ({
+const StatusCard = ({
   title,
   borderColor,
   sites,
   icon,
   gradient,
-  expanded,
-  onToggle,
-  maxHeight = "max-h-64",
+  onClick,
 }: {
   title: string;
   borderColor: string;
   sites: FuelingSchedule[];
   icon: string;
   gradient: string;
-  expanded: boolean;
-  onToggle: () => void;
-  maxHeight?: string;
+  onClick: () => void;
 }) => {
   return (
-    <div
+    <button
+      onClick={onClick}
       className={cn(
-        "bg-white rounded-xl shadow-lg overflow-hidden flex flex-col border border-gray-200",
+        "text-left w-full bg-white rounded-xl shadow-lg overflow-hidden border-t-2 border-gray-200 hover:shadow-xl hover:scale-105 transition-all",
         borderColor,
       )}
     >
-      <button
-        onClick={onToggle}
-        className={cn("px-4 py-3 bg-gradient-to-r flex items-center gap-2 cursor-pointer hover:opacity-90 transition-opacity", gradient)}
-      >
-        <span className="text-lg">{icon}</span>
-        <h3 className="text-sm font-bold text-gray-900 flex-1 text-left">{title}</h3>
-        <span className="text-xs bg-gray-200 text-gray-700 rounded-full px-2 py-0.5 font-semibold">
-          {sites.length}
-        </span>
-        <ChevronDown
-          size={18}
-          className={cn(
-            "text-gray-700 transition-transform",
-            expanded ? "rotate-180" : ""
-          )}
-        />
-      </button>
+      <div className={cn("px-4 py-4 bg-gradient-to-r", gradient)}>
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-2xl">{icon}</span>
+          <h3 className="text-lg font-bold text-gray-900 flex-1">{title}</h3>
+        </div>
+        <div className="flex items-baseline gap-2">
+          <p className="text-3xl font-bold text-gray-900">{sites.length}</p>
+          <p className="text-xs text-gray-600">
+            {sites.length === 1 ? "site" : "sites"}
+          </p>
+        </div>
+      </div>
+    </button>
+  );
+};
 
-      {expanded && (
-        <>
+const DetailModal = ({
+  title,
+  sites,
+  icon,
+  gradient,
+  onClose,
+}: {
+  title: string;
+  sites: FuelingSchedule[];
+  icon: string;
+  gradient: string;
+  onClose: () => void;
+}) => {
+  return (
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] flex flex-col">
+        {/* Header */}
+        <div className={cn("px-6 py-4 bg-gradient-to-r flex items-center gap-3 justify-between", gradient)}>
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">{icon}</span>
+            <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+            <span className="ml-auto text-xs bg-white/30 text-gray-900 rounded-full px-3 py-1 font-semibold">
+              {sites.length} {sites.length === 1 ? "site" : "sites"}
+            </span>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-gray-900 hover:text-gray-700 transition-colors"
+          >
+            <X size={24} />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto">
           {sites.length === 0 ? (
-            <div className="flex items-center justify-center py-8">
-              <p className="text-sm text-gray-400">No sites</p>
+            <div className="flex items-center justify-center py-12">
+              <p className="text-gray-400">No sites</p>
             </div>
           ) : (
-            <div className={cn("overflow-y-auto flex-1", maxHeight)}>
-              <table className="w-full text-xs">
-                <thead className="sticky top-0 bg-gray-100 border-b border-gray-200">
-                  <tr>
-                    <th className="text-left px-3 py-2 font-bold text-gray-700">
-                      Site Name
-                    </th>
-                    <th className="text-left px-3 py-2 font-bold text-gray-700">
-                      Date
-                    </th>
+            <table className="w-full text-sm">
+              <thead className="sticky top-0 bg-gray-100 border-b border-gray-200">
+                <tr>
+                  <th className="text-left px-6 py-3 font-bold text-gray-700">Site Name</th>
+                  <th className="text-left px-6 py-3 font-bold text-gray-700">Scheduled Date</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {sites.map((site) => (
+                  <tr key={site.id} className="hover:bg-gray-50 transition-colors">
+                    <td className="px-6 py-3 text-gray-800 font-medium">{site.siteName}</td>
+                    <td className="px-6 py-3 text-gray-700">
+                      {new Date(site.scheduledDate).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </td>
                   </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {sites.map((site) => (
-                    <tr
-                      key={site.id}
-                      className="hover:bg-gray-50 transition-colors"
-                    >
-                      <td className="px-3 py-2 text-gray-800 font-medium truncate max-w-[150px]">
-                        {site.siteName}
-                      </td>
-                      <td className="px-3 py-2 text-gray-700 whitespace-nowrap">
-                        {new Date(site.scheduledDate).toLocaleDateString("en-GB", {
-                          day: "2-digit",
-                          month: "short",
-                        })}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           )}
-        </>
-      )}
+        </div>
+      </div>
     </div>
   );
 };
