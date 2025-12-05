@@ -436,41 +436,33 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              {/* Legend */}
-              <div className="bg-white border border-gray-300 rounded-xl p-4 shadow-lg">
-                <p className="text-xs font-bold text-gray-900 mb-3 flex items-center gap-2">
-                  <Zap size={14} className="text-orange-500" />
-                  Status Legend
-                </p>
-                <div className="space-y-2 text-xs">
-                  <div className="flex items-center gap-3">
-                    <div className="w-4 h-4 rounded-full bg-red-500"></div>
-                    <div>
-                      <p className="text-gray-900 font-semibold">Overdue (DUE)</p>
-                      <p className="text-gray-600">{overdueSites.length} sites</p>
+              {/* Legend and Footer */}
+              <div className="flex flex-col gap-3">
+                <div className="bg-white border border-gray-300 rounded-xl p-3 shadow-lg">
+                  <p className="text-xs font-bold text-gray-900 mb-2 flex items-center gap-2">
+                    <Zap size={12} className="text-orange-500" />
+                    Status Legend
+                  </p>
+                  <div className="space-y-1 text-xs">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                      <span>Overdue: {overdueSites.length}</span>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-4 h-4 rounded-full bg-yellow-400"></div>
-                    <div>
-                      <p className="text-gray-900 font-semibold">Today</p>
-                      <p className="text-gray-600">{todaySites.length} sites</p>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                      <span>Today: {todaySites.length}</span>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-4 h-4 rounded-full bg-green-500"></div>
-                    <div>
-                      <p className="text-gray-900 font-semibold">Coming (3 Days)</p>
-                      <p className="text-gray-600">{comingSites.length} sites</p>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                      <span>Coming: {comingSites.length}</span>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Info Footer */}
-              <div className="text-xs text-gray-600 text-center py-2 px-4 bg-gradient-to-r from-white to-blue-50 rounded-lg border border-gray-200">
-                <p className="font-medium">Last updated: {lastUpdateTime.toLocaleTimeString()}</p>
-                <p className="text-gray-500">Auto-refreshes every 2 minutes</p>
+                {/* Info Footer */}
+                <div className="text-xs text-gray-600 text-center py-1 px-3 bg-gradient-to-r from-white to-blue-50 rounded-lg border border-gray-200">
+                  <p className="font-medium">Last updated: {lastUpdateTime.toLocaleTimeString()}</p>
+                </div>
               </div>
             </div>
           </div>
