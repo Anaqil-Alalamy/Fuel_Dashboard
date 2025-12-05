@@ -32,14 +32,15 @@ export function createServer() {
       err: any,
       _req: express.Request,
       res: express.Response,
-      _next: express.NextFunction
+      _next: express.NextFunction,
     ) => {
       console.error("Express error:", err);
       res.status(err.status || 500).json({
         error: "Internal server error",
-        message: process.env.NODE_ENV === "development" ? err.message : undefined,
+        message:
+          process.env.NODE_ENV === "development" ? err.message : undefined,
       });
-    }
+    },
   );
 
   return app;
