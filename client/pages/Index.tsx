@@ -609,6 +609,12 @@ export default function Dashboard() {
     return () => clearInterval(interval);
   }, [handleRefresh]);
 
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
   const currentDateTime = new Date().toLocaleString("en-GB", {
     weekday: "short",
     month: "short",
