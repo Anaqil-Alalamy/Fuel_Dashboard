@@ -554,6 +554,7 @@ export default function Dashboard() {
                 gradient="from-orange-100 to-orange-200"
                 expanded={expandedPanels.today}
                 onToggle={() => togglePanel("today")}
+                maxHeight="max-h-96"
               />
 
               {/* Coming Panel */}
