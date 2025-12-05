@@ -61,23 +61,13 @@ const getDaysDifference = (date: Date, baseDate: Date = new Date()): number => {
 
 const determineStatus = (
   scheduledDate: Date,
-): "today" | "tomorrow" | "coming" | "overdue" => {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+): "due" | "today" | "tomorrow" | "incoming" | "coming" => {
+  const daysDiff = getDaysDifference(scheduledDate);
 
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-
-  const threeFromNow = new Date(today);
-  threeFromNow.setDate(threeFromNow.getDate() + 3);
-
-  const scheduled = new Date(scheduledDate);
-  scheduled.setHours(0, 0, 0, 0);
-
-  if (scheduled.getTime() === today.getTime()) return "today";
-  if (scheduled.getTime() === tomorrow.getTime()) return "tomorrow";
-  if (scheduled > today && scheduled <= threeFromNow) return "coming";
-  if (scheduled < today) return "overdue";
+  if (daysDiff < 0) return "due";
+  if (daysDiff === 0) return "today";
+  if (daysDiff === 1) return "tomorrow";
+  if (daysDiff >= 2 && daysDiff <= 4) return "incoming";
   return "coming";
 };
 
