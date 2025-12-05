@@ -5,9 +5,10 @@
 
 
 [functions]
-  external_node_modules = ["express"]
+  external_node_modules = ["express", "cors", "dotenv"]
   node_bundler = "esbuild"
-  
+  timeout = 30
+
 [[redirects]]
   force = true
   from = "/api/*"
