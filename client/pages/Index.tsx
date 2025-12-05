@@ -118,6 +118,10 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
       // Column M (index 12) is Priority
       const priority = values[12] || "";
 
+      if (i <= 10 && priority.trim()) {
+        console.log(`Row ${i}: ${siteName}, Priority: "${priority}"`);
+      }
+
       // Column N (index 13) is NextfuelingPlan
       const nextFuelingStr = values[13] || "";
       let parsedDate = nextFuelingStr
