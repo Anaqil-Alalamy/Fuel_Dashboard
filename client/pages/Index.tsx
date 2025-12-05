@@ -667,9 +667,9 @@ export default function Dashboard() {
       : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pointer-events-auto">
       {/* Top Bar */}
-      <header className="sticky top-0 z-50 bg-gradient-to-r from-white to-blue-50 border-b border-blue-200 shadow-lg backdrop-blur-sm bg-opacity-90">
+      <header className="sticky top-0 z-50 bg-gradient-to-r from-white to-blue-50 border-b border-blue-200 shadow-lg backdrop-blur-sm bg-opacity-90 pointer-events-auto">
         {/* First row: Logo (left), Title (center), Date/Time (right) */}
         <div className="px-4 md:px-6 py-3 md:py-4 border-b border-blue-200">
           <div className="flex items-center justify-center relative">
