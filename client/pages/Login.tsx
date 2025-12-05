@@ -52,14 +52,6 @@ export default function Login() {
         {/* Gradient overlay to enhance depth and readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/40 to-white/60"></div>
 
-        {/* Logo on Truck Door - Right side */}
-        <div className="absolute right-20 top-1/4 z-20">
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets%2Fbd65b3cd7a86452e803a3d7dc7a3d048%2F5e321b77d52a4d30b523674ca83ee1d4?format=webp&width=800"
-            alt="GSM Fueling Logo"
-            className="h-40 w-auto drop-shadow-2xl filter"
-          />
-        </div>
       </div>
 
       <div className="w-full max-w-md relative z-10">
