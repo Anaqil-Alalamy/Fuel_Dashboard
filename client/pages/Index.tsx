@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import FuelingMap from "@/components/FuelingMap";
+import { useNavigate } from "react-router-dom";
 import {
   MapPin,
   Fuel,
@@ -17,6 +18,7 @@ import {
   ArrowUpRight,
   Zap,
   X,
+  LogOut,
 } from "lucide-react";
 import * as XLSX from "xlsx";
 import { cn } from "@/lib/utils";
