@@ -233,20 +233,20 @@ const KPICard = ({
 }) => (
   <div
     className={cn(
-      "relative rounded-2xl overflow-hidden shadow-lg border border-gray-200",
+      "relative rounded-xl overflow-hidden shadow-md border border-gray-200",
       "bg-gradient-to-br",
       gradient,
     )}
   >
     <div className="absolute inset-0 opacity-10"></div>
-    <div className="relative p-6">
-      <div className="flex items-start justify-between mb-4">
+    <div className="relative p-4">
+      <div className="flex items-start justify-between mb-3">
         <div>
-          <p className="text-gray-600 text-sm font-medium mb-1">{title}</p>
-          <h3 className="text-4xl font-bold text-gray-900">{value}</h3>
+          <p className="text-gray-600 text-xs font-medium mb-0.5">{title}</p>
+          <h3 className="text-2xl font-bold text-gray-900">{value}</h3>
         </div>
-        <div className={cn("p-3 rounded-xl", color)}>
-          <Icon size={24} className="text-white" />
+        <div className={cn("p-2 rounded-lg", color)}>
+          <Icon size={18} className="text-white" />
         </div>
       </div>
       {trend !== undefined && (
