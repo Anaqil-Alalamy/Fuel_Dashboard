@@ -26,7 +26,7 @@ interface FuelingSchedule {
   location: string;
   fuelType: string;
   scheduledDate: string;
-  status: "due" | "today" | "tomorrow" | "incoming" | "coming";
+  status: "overdue" | "today" | "tomorrow" | "incoming" | "coming";
   lastUpdated: string;
   latitude: number;
   longitude: number;
