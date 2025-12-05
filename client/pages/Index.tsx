@@ -378,6 +378,27 @@ export default function Dashboard() {
   const incomingSites = sites.filter((s) => s.status === "incoming");
   const comingSites = sites.filter((s) => s.status === "coming");
 
+  const handleDownloadExcel = () => {
+    const data = sites.map((site) => ({
+      "Site Name": site.siteName,
+      "Next Fueling Date": site.nextFuelingDate
+        ? new Date(site.nextFuelingDate).toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          })
+        : "Not set",
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sites");
+
+    worksheet["!cols"] = [{ wch: 25 }, { wch: 18 }];
+
+    XLSX.writeFile(workbook, `GSM_Sites_${new Date().toISOString().split("T")[0]}.xlsx`);
+  };
+
   const handleRefresh = useCallback(async () => {
     setRefreshing(true);
     const data = await fetchFuelingData();
