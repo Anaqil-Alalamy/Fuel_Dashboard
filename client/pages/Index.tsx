@@ -546,17 +546,18 @@ export default function Dashboard() {
 
   useEffect(() => {
     // Force close any modal on page load and log for debugging
-    console.log("Index page mounted, closing any modals");
+    console.log("🔍 Index page mounted, initializing...");
     setModalState({ open: false, type: null });
+    console.log("🔍 Modal state reset to:", { open: false, type: null });
 
     const loadData = async () => {
       try {
         const data = await fetchFuelingData();
         setSites(data);
         setLastUpdateTime(new Date());
-        console.log("Data loaded successfully", data.length, "sites");
+        console.log("✅ Data loaded successfully:", data.length, "sites");
       } catch (error) {
-        console.error("Failed to load data:", error);
+        console.error("❌ Failed to load data:", error);
       }
     };
     loadData();
