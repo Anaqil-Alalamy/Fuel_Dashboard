@@ -199,16 +199,16 @@ const KPICard = ({
   trend?: number;
 }) => (
   <div className={cn(
-    "relative rounded-2xl overflow-hidden shadow-xl border border-slate-700",
+    "relative rounded-2xl overflow-hidden shadow-lg border border-gray-200",
     "bg-gradient-to-br",
     gradient,
   )}>
-    <div className="absolute inset-0 opacity-20"></div>
+    <div className="absolute inset-0 opacity-10"></div>
     <div className="relative p-6">
       <div className="flex items-start justify-between mb-4">
         <div>
-          <p className="text-slate-300 text-sm font-medium mb-1">{title}</p>
-          <h3 className="text-4xl font-bold text-white">{value}</h3>
+          <p className="text-gray-600 text-sm font-medium mb-1">{title}</p>
+          <h3 className="text-4xl font-bold text-gray-900">{value}</h3>
         </div>
         <div className={cn(
           "p-3 rounded-xl",
@@ -218,7 +218,7 @@ const KPICard = ({
         </div>
       </div>
       {trend !== undefined && (
-        <div className="flex items-center gap-1 text-green-400 text-xs font-semibold">
+        <div className="flex items-center gap-1 text-green-600 text-xs font-semibold">
           <ArrowUpRight size={14} />
           <span>{trend}% from yesterday</span>
         </div>
