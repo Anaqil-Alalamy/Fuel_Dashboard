@@ -196,7 +196,7 @@ const StatusPanel = ({
               <p className="text-sm text-gray-400">No sites</p>
             </div>
           ) : (
-            <div className="overflow-y-auto flex-1 max-h-64">
+            <div className={cn("overflow-y-auto flex-1", maxHeight)}>
               <table className="w-full text-xs">
                 <thead className="sticky top-0 bg-gray-100 border-b border-gray-200">
                   <tr>
