@@ -17,16 +17,29 @@ export default function Login() {
     setError("");
     setLoading(true);
 
+    console.log("🔐 Login attempt with username:", username);
+
     // Simulate login delay
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     // Check credentials
     if (username === "Hamdey" && password === "123456") {
+      console.log("✅ Credentials valid, setting auth token...");
       // Store auth token in localStorage
       localStorage.setItem("authToken", "true");
       localStorage.setItem("user", username);
+      console.log("✅ Auth token set in localStorage");
+
+      // Verify it was set
+      const token = localStorage.getItem("authToken");
+      console.log("✅ Verifying token:", token);
+
+      // Navigate to dashboard
+      console.log("🚀 Navigating to dashboard...");
       navigate("/");
+      console.log("🚀 Navigation called");
     } else {
+      console.log("❌ Credentials invalid");
       setError("Invalid username or password");
     }
 
