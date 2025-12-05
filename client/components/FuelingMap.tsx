@@ -115,12 +115,6 @@ export default function FuelingMap({ sites }: FuelingMapProps) {
         !isNaN(site.latitude) &&
         !isNaN(site.longitude),
     );
-    console.log("Map sites:", filtered.length);
-    const overdueOnMap = filtered.filter((s) => s.status === "overdue");
-    console.log("Overdue on map:", overdueOnMap.length);
-    if (overdueOnMap.length > 0) {
-      console.log("Sample overdue site:", overdueOnMap[0]);
-    }
     setValidSites(filtered);
   }, [sites]);
 
