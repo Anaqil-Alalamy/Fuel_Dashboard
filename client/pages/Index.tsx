@@ -135,14 +135,14 @@ const StatusPanel = ({
 }) => {
   return (
     <div className={cn(
-      "bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl overflow-hidden flex flex-col border border-slate-700",
+      "bg-white rounded-xl shadow-lg overflow-hidden flex flex-col border border-gray-200",
       borderColor,
     )}>
       <div className={cn("px-4 py-3 bg-gradient-to-r", gradient)}>
-        <h3 className="text-sm font-bold text-white flex items-center gap-2">
+        <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
           <span className="text-lg">{icon}</span>
           {title}
-          <span className="ml-auto text-xs bg-white/20 text-white rounded-full px-2 py-0.5 font-semibold">
+          <span className="ml-auto text-xs bg-gray-200 text-gray-700 rounded-full px-2 py-0.5 font-semibold">
             {sites.length}
           </span>
         </h3>
@@ -150,24 +150,24 @@ const StatusPanel = ({
 
       {sites.length === 0 ? (
         <div className="flex items-center justify-center py-8">
-          <p className="text-sm text-slate-400">No sites</p>
+          <p className="text-sm text-gray-400">No sites</p>
         </div>
       ) : (
         <div className="overflow-y-auto flex-1">
           <table className="w-full text-xs">
-            <thead className="sticky top-0 bg-slate-700 border-b border-slate-600">
+            <thead className="sticky top-0 bg-gray-100 border-b border-gray-200">
               <tr>
-                <th className="text-left px-3 py-2 font-bold text-white">Site Name</th>
-                <th className="text-left px-3 py-2 font-bold text-white">Date</th>
+                <th className="text-left px-3 py-2 font-bold text-gray-700">Site Name</th>
+                <th className="text-left px-3 py-2 font-bold text-gray-700">Date</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-700">
+            <tbody className="divide-y divide-gray-100">
               {sites.map((site) => (
-                <tr key={site.id} className="hover:bg-slate-700 transition-colors">
-                  <td className="px-3 py-2 text-slate-200 font-medium truncate max-w-[150px]">
+                <tr key={site.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-3 py-2 text-gray-800 font-medium truncate max-w-[150px]">
                     {site.siteName}
                   </td>
-                  <td className="px-3 py-2 text-slate-300 whitespace-nowrap">
+                  <td className="px-3 py-2 text-gray-700 whitespace-nowrap">
                     {new Date(site.scheduledDate).toLocaleDateString("en-GB", {
                       day: "2-digit",
                       month: "short",
