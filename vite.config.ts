@@ -24,6 +24,9 @@ export default defineConfig(({ mode }) => ({
       "@shared": path.resolve(__dirname, "./shared"),
     },
   },
+  define: {
+    __GITHUB_PAGES__: JSON.stringify(!!process.env.GITHUB_PAGES),
+  },
 }));
 
 function expressPlugin(): Plugin {
