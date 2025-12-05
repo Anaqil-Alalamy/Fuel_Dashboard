@@ -351,7 +351,7 @@ export default function Dashboard() {
   });
 
   const openModal = (
-    type: "overdue" | "today" | "tomorrow" | "incoming" | "coming",
+    type: "overdue" | "today" | "tomorrow" | "incoming" | "coming" | "vvvip",
   ) => {
     setModalState({ open: true, type });
   };
