@@ -226,7 +226,7 @@ const DetailModal = ({
               <thead className="sticky top-0 bg-gray-100 border-b border-gray-200">
                 <tr>
                   <th className="text-left px-6 py-3 font-bold text-gray-700">Site Name</th>
-                  <th className="text-left px-6 py-3 font-bold text-gray-700">Scheduled Date</th>
+                  <th className="text-left px-6 py-3 font-bold text-gray-700">Next Fueling Date</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
