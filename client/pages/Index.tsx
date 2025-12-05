@@ -16,6 +16,7 @@ import {
   Calendar,
   ArrowUpRight,
   Zap,
+  ChevronDown,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
