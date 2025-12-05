@@ -164,30 +164,30 @@ const SiteCard = ({ site }: { site: FuelingSchedule }) => {
   return (
     <div
       className={cn(
-        "border rounded-lg p-4 hover:shadow-md transition-shadow",
+        "border rounded-lg p-3 md:p-4 hover:shadow-md transition-shadow text-sm md:text-base",
         getStatusColor(site.status)
       )}
     >
-      <div className="flex items-start justify-between mb-3">
-        <div>
-          <h3 className="font-semibold text-sm">{site.siteName}</h3>
-          <p className="text-xs opacity-75 flex items-center gap-1 mt-1">
-            <MapPin size={14} />
-            {site.location}
+      <div className="flex items-start justify-between gap-2 mb-3">
+        <div className="min-w-0 flex-1">
+          <h3 className="font-semibold text-sm md:text-base truncate">{site.siteName}</h3>
+          <p className="text-xs opacity-75 flex items-center gap-1 mt-1 line-clamp-2">
+            <MapPin size={12} className="flex-shrink-0" />
+            <span>{site.location}</span>
           </p>
         </div>
-        <span className={cn("text-xs px-2 py-1 rounded-full font-medium", getStatusBadgeColor(site.status))}>
+        <span className={cn("text-xs px-2 py-1 rounded-full font-medium whitespace-nowrap flex-shrink-0", getStatusBadgeColor(site.status))}>
           {getStatusLabel(site.status)}
         </span>
       </div>
-      <div className="grid grid-cols-2 gap-2 text-xs">
+      <div className="grid grid-cols-2 gap-2 md:gap-3 text-xs md:text-sm">
         <div>
-          <p className="opacity-75">Fuel Type</p>
-          <p className="font-medium">{site.fuelType}</p>
+          <p className="opacity-75 text-xs">Fuel Type</p>
+          <p className="font-medium text-sm">{site.fuelType}</p>
         </div>
         <div>
-          <p className="opacity-75">Scheduled</p>
-          <p className="font-medium">{new Date(site.scheduledDate).toLocaleDateString()}</p>
+          <p className="opacity-75 text-xs">Scheduled</p>
+          <p className="font-medium text-sm">{new Date(site.scheduledDate).toLocaleDateString()}</p>
         </div>
       </div>
     </div>
