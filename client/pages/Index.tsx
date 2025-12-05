@@ -451,7 +451,7 @@ export default function Dashboard() {
         <div className="px-4 md:px-6 py-2 md:py-3 border-b border-blue-200">
           <div className="flex items-center justify-center relative">
             {/* Logo - Left */}
-            <div className="absolute left-0 flex items-center pt-4">
+            <div className="absolute left-0 flex items-center pt-8">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2Fbd65b3cd7a86452e803a3d7dc7a3d048%2F5e321b77d52a4d30b523674ca83ee1d4?format=webp&width=800"
                 alt="GSM Fueling Logo"
