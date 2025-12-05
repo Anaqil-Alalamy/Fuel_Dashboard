@@ -117,10 +117,4 @@
     overflow-x: auto;
     white-space: pre;
   }
-
-  /* Ensure no unexpected overlays block the page */
-  [class*="inset-0"][class*="fixed"][class*="z-\[9999\]"] {
-    display: none;
-    pointer-events: none;
-  }
 }
