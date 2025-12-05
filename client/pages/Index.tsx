@@ -553,6 +553,7 @@ export default function Dashboard() {
               color="bg-blue-600"
               gradient="from-blue-100 to-blue-200"
               trend={12}
+              borderColor="border-blue-600"
             />
             <KPICard
               title="Due"
@@ -560,6 +561,7 @@ export default function Dashboard() {
               icon={AlertCircle}
               color="bg-red-600"
               gradient="from-red-100 to-red-200"
+              borderColor="border-yellow-400"
             />
             <KPICard
               title="Today"
@@ -567,6 +569,7 @@ export default function Dashboard() {
               icon={Clock}
               color="bg-orange-600"
               gradient="from-orange-100 to-orange-200"
+              borderColor="border-blue-600"
             />
             <KPICard
               title="Tomorrow"
@@ -574,6 +577,7 @@ export default function Dashboard() {
               icon={TrendingUp}
               color="bg-yellow-600"
               gradient="from-yellow-100 to-yellow-200"
+              borderColor="border-yellow-400"
             />
             <KPICard
               title="Upcoming"
@@ -585,6 +589,7 @@ export default function Dashboard() {
               icon={CheckCircle2}
               color="bg-green-600"
               gradient="from-green-100 to-green-200"
+              borderColor="border-blue-600"
             />
           </div>
 
