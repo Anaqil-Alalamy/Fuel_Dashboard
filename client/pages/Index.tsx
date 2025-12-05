@@ -431,52 +431,37 @@ export default function Dashboard() {
             <div className="sticky top-[140px] h-fit flex flex-col gap-4">
               {/* Map Container with Double Borders */}
               <div className="border-4 border-blue-600 rounded-2xl shadow-xl p-1 overflow-hidden flex-1">
-                <div className="border-2 border-red-500 rounded-xl h-full bg-gradient-to-br from-blue-50 via-white to-blue-50 flex flex-col items-center justify-center min-h-[400px] md:min-h-[600px]">
-                  <div className="text-center px-6 space-y-4">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full">
-                      <MapPin className="text-white" size={32} />
-                    </div>
-                    <div>
-                      <p className="text-gray-900 font-bold text-xl">
-                        Interactive Site Map
-                      </p>
-                      <p className="text-gray-600 text-sm mt-1">
-                        Showing {sites.length} fueling sites
-                      </p>
-                    </div>
-                    <p className="text-gray-500 text-xs">
-                      Map visualization powered by Leaflet
-                    </p>
+                <div className="border-2 border-red-500 rounded-xl h-full overflow-hidden min-h-[400px] md:min-h-[600px]">
+                  <FuelingMap sites={sites} />
+                </div>
+              </div>
 
-                    {/* Legend */}
-                    <div className="bg-white border border-gray-300 rounded-xl p-4 text-left shadow-lg mt-6 w-full max-w-xs">
-                      <p className="text-xs font-bold text-gray-900 mb-4 flex items-center gap-2">
-                        <Zap size={14} className="text-orange-500" />
-                        Status Legend
-                      </p>
-                      <div className="space-y-2 text-xs">
-                        <div className="flex items-center gap-3 p-2 bg-gray-100 rounded-lg">
-                          <span className="text-lg">🔴</span>
-                          <div>
-                            <p className="text-gray-900 font-semibold">Overdue</p>
-                            <p className="text-gray-600">{overdueSites.length} sites</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3 p-2 bg-gray-100 rounded-lg">
-                          <span className="text-lg">🟠</span>
-                          <div>
-                            <p className="text-gray-900 font-semibold">Today</p>
-                            <p className="text-gray-600">{todaySites.length} sites</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3 p-2 bg-gray-100 rounded-lg">
-                          <span className="text-lg">🟡</span>
-                          <div>
-                            <p className="text-gray-900 font-semibold">Coming</p>
-                            <p className="text-gray-600">{comingSites.length} sites</p>
-                          </div>
-                        </div>
-                      </div>
+              {/* Legend */}
+              <div className="bg-white border border-gray-300 rounded-xl p-4 shadow-lg">
+                <p className="text-xs font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <Zap size={14} className="text-orange-500" />
+                  Status Legend
+                </p>
+                <div className="space-y-2 text-xs">
+                  <div className="flex items-center gap-3">
+                    <div className="w-4 h-4 rounded-full bg-red-500"></div>
+                    <div>
+                      <p className="text-gray-900 font-semibold">Overdue (DUE)</p>
+                      <p className="text-gray-600">{overdueSites.length} sites</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-4 h-4 rounded-full bg-yellow-400"></div>
+                    <div>
+                      <p className="text-gray-900 font-semibold">Today</p>
+                      <p className="text-gray-600">{todaySites.length} sites</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-4 h-4 rounded-full bg-green-500"></div>
+                    <div>
+                      <p className="text-gray-900 font-semibold">Coming (3 Days)</p>
+                      <p className="text-gray-600">{comingSites.length} sites</p>
                     </div>
                   </div>
                 </div>
