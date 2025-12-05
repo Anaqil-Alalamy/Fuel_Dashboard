@@ -420,8 +420,8 @@ export default function Dashboard() {
               />
             </div>
 
-            {/* Right Column - Map Container */}
-            <div className="flex flex-col gap-4">
+            {/* Right Column - Map Container (Sticky) */}
+            <div className="sticky top-[120px] h-fit flex flex-col gap-4">
               {/* Map Container with Double Borders */}
               <div className="border-[3px] border-blue-900 rounded-lg shadow-lg p-0.5 overflow-hidden flex-1">
                 <div className="border-2 border-red-500 rounded-md h-full bg-gradient-to-br from-gray-100 to-gray-200 flex flex-col items-center justify-center min-h-[400px] md:min-h-[600px]">
