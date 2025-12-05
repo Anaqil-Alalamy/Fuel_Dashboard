@@ -234,11 +234,13 @@ const DetailModal = ({
                   <tr key={site.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-3 text-gray-800 font-medium">{site.siteName}</td>
                     <td className="px-6 py-3 text-gray-700">
-                      {new Date(site.scheduledDate).toLocaleDateString("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      })}
+                      {site.nextFuelingDate
+                        ? new Date(site.nextFuelingDate).toLocaleDateString("en-GB", {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                          })
+                        : "Not set"}
                     </td>
                   </tr>
                 ))}
