@@ -264,8 +264,6 @@ export default function Dashboard() {
   const [refreshing, setRefreshing] = useState(false);
   const [sites, setSites] = useState<FuelingSchedule[]>([]);
   const [lastUpdateTime, setLastUpdateTime] = useState<Date>(new Date());
-  const [showSearchPopup, setShowSearchPopup] = useState(false);
-  const [searchResults, setSearchResults] = useState<FuelingSchedule[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -282,21 +280,7 @@ export default function Dashboard() {
       site.location.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
-  // Update search results and show popup when searching
-  useEffect(() => {
-    if (searchTerm.trim()) {
-      const results = sites.filter(
-        (site) =>
-          site.siteName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          site.location.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-      setSearchResults(results);
-      setShowSearchPopup(true);
-    } else {
-      setShowSearchPopup(false);
-      setSearchResults([]);
-    }
-  }, [searchTerm]);
+  const showSearchPopup = searchTerm.trim().length > 0;
 
   const overdueSites = filteredSites.filter((s) => s.status === "overdue");
   const todaySites = filteredSites.filter((s) => s.status === "today");
