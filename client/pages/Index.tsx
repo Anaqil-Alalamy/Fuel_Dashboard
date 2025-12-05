@@ -328,14 +328,14 @@ export default function Dashboard() {
   const [lastUpdateTime, setLastUpdateTime] = useState<Date>(new Date());
   const [modalState, setModalState] = useState<{
     open: boolean;
-    type: "due" | "today" | "tomorrow" | "incoming" | "coming" | null;
+    type: "overdue" | "today" | "tomorrow" | "incoming" | "coming" | null;
   }>({
     open: false,
     type: null,
   });
 
   const openModal = (
-    type: "due" | "today" | "tomorrow" | "incoming" | "coming",
+    type: "overdue" | "today" | "tomorrow" | "incoming" | "coming",
   ) => {
     setModalState({ open: true, type });
   };
@@ -362,7 +362,7 @@ export default function Dashboard() {
   const showSearchPopup = searchTerm.trim().length > 0;
 
   // Filter sites by status from the full sites array
-  const dueSites = sites.filter((s) => s.status === "due");
+  const dueSites = sites.filter((s) => s.status === "overdue");
   const todaySites = sites.filter((s) => s.status === "today");
   const tomorrowSites = sites.filter((s) => s.status === "tomorrow");
   const incomingSites = sites.filter((s) => s.status === "incoming");
@@ -557,7 +557,7 @@ export default function Dashboard() {
             />
             <KPICard
               title="Due"
-              value={sites.filter((s) => s.status === "due").length}
+              value={sites.filter((s) => s.status === "overdue").length}
               icon={AlertCircle}
               color="bg-red-600"
               gradient="from-red-100 to-red-200"
@@ -604,7 +604,7 @@ export default function Dashboard() {
                 sites={dueSites}
                 icon="🔴"
                 gradient="from-red-100 to-red-200"
-                onClick={() => openModal("due")}
+                onClick={() => openModal("overdue")}
               />
 
               {/* Today Card */}
@@ -672,7 +672,7 @@ export default function Dashboard() {
       </main>
 
       {/* Detail Modal */}
-      {modalState.open && modalState.type === "due" && (
+      {modalState.open && modalState.type === "overdue" && (
         <DetailModal
           title="Due"
           sites={dueSites}
