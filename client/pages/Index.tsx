@@ -115,6 +115,9 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
       if (isNaN(latitude)) latitude = 0;
       if (isNaN(longitude)) longitude = 0;
 
+      // Column M (index 12) is Priority
+      const priority = values[12] || "";
+
       // Column N (index 13) is NextfuelingPlan
       const nextFuelingStr = values[13] || "";
       let parsedDate = nextFuelingStr
@@ -147,6 +150,7 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
         latitude,
         longitude,
         nextFuelingDate,
+        priority,
       });
     }
 
