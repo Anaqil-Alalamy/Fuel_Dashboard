@@ -344,7 +344,14 @@ export default function Dashboard() {
   const [lastUpdateTime, setLastUpdateTime] = useState<Date>(new Date());
   const [modalState, setModalState] = useState<{
     open: boolean;
-    type: "overdue" | "today" | "tomorrow" | "incoming" | "coming" | "vvvip" | null;
+    type:
+      | "overdue"
+      | "today"
+      | "tomorrow"
+      | "incoming"
+      | "coming"
+      | "vvvip"
+      | null;
   }>({
     open: false,
     type: null,
@@ -383,7 +390,9 @@ export default function Dashboard() {
   const tomorrowSites = sites.filter((s) => s.status === "tomorrow");
   const incomingSites = sites.filter((s) => s.status === "incoming");
   const comingSites = sites.filter((s) => s.status === "coming");
-  const vvvipSites = sites.filter((s) => s.priority.trim().toUpperCase() === "VVVIP");
+  const vvvipSites = sites.filter(
+    (s) => s.priority.trim().toUpperCase() === "VVVIP",
+  );
 
   const handleDownloadExcel = () => {
     const formatDateWithTimezone = (dateStr: string): string => {
@@ -490,116 +499,120 @@ export default function Dashboard() {
               className="gap-2 border-blue-300 bg-blue-50 text-gray-700 hover:bg-blue-100 hover:text-gray-900 whitespace-nowrap"
             >
               <span>🏢</span>
-              <span className="hidden sm:inline">LDN Sites ({vvvipSites.length})</span>
+              <span className="hidden sm:inline">
+                LDN Sites ({vvvipSites.length})
+              </span>
               <span className="sm:hidden">LDN</span>
             </Button>
 
             {/* Right-aligned controls */}
             <div className="flex items-center gap-3 ml-auto">
               {/* Search Bar */}
-            <div className="flex-1 md:flex-none md:w-64 relative">
-              <div className="relative group">
-                <Search
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors"
-                  size={16}
-                />
-                <Input
-                  placeholder="Search sites..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 h-9 text-sm border-blue-200 bg-white text-gray-900 placeholder-gray-500 focus:border-blue-600 focus:ring-blue-600 focus:ring-opacity-20"
-                />
+              <div className="flex-1 md:flex-none md:w-64 relative">
+                <div className="relative group">
+                  <Search
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors"
+                    size={16}
+                  />
+                  <Input
+                    placeholder="Search sites..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-10 h-9 text-sm border-blue-200 bg-white text-gray-900 placeholder-gray-500 focus:border-blue-600 focus:ring-blue-600 focus:ring-opacity-20"
+                  />
 
-                {/* Search Results Popup */}
-                {showSearchPopup && filteredSites.length > 0 && (
-                  <div className="absolute top-full right-0 mt-2 bg-white border border-blue-300 rounded-lg shadow-xl z-50 max-h-96 overflow-y-auto w-80">
-                    <div className="p-3">
-                      <p className="text-xs font-bold text-gray-600 mb-2">
-                        Found {filteredSites.length} site
-                        {filteredSites.length !== 1 ? "s" : ""}
-                      </p>
-                      <div className="space-y-2">
-                        {filteredSites.map((site) => (
-                          <div
-                            key={site.id}
-                            className="p-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200 hover:border-blue-400 transition-colors"
-                          >
-                            <p className="font-bold text-gray-900 text-sm">
-                              {site.siteName}
-                            </p>
-                            <div className="mt-2 space-y-1 text-xs">
-                              <p className="text-gray-700">
-                                <span className="font-semibold">
-                                  Next Fueling:
-                                </span>{" "}
-                                {site.nextFuelingDate
-                                  ? new Date(
-                                      site.nextFuelingDate,
-                                    ).toLocaleDateString("en-GB", {
-                                      day: "2-digit",
-                                      month: "short",
-                                      year: "numeric",
-                                    })
-                                  : "Not set"}
+                  {/* Search Results Popup */}
+                  {showSearchPopup && filteredSites.length > 0 && (
+                    <div className="absolute top-full right-0 mt-2 bg-white border border-blue-300 rounded-lg shadow-xl z-50 max-h-96 overflow-y-auto w-80">
+                      <div className="p-3">
+                        <p className="text-xs font-bold text-gray-600 mb-2">
+                          Found {filteredSites.length} site
+                          {filteredSites.length !== 1 ? "s" : ""}
+                        </p>
+                        <div className="space-y-2">
+                          {filteredSites.map((site) => (
+                            <div
+                              key={site.id}
+                              className="p-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200 hover:border-blue-400 transition-colors"
+                            >
+                              <p className="font-bold text-gray-900 text-sm">
+                                {site.siteName}
                               </p>
-                              <p className="text-gray-600">
-                                <span className="font-semibold">Status:</span>{" "}
-                                {site.status === "overdue"
-                                  ? "🔴 Overdue"
-                                  : site.status === "today"
-                                    ? "🟠 Today"
-                                    : site.status === "coming"
-                                      ? "🟡 Coming"
-                                      : "🟢 Tomorrow"}
-                              </p>
+                              <div className="mt-2 space-y-1 text-xs">
+                                <p className="text-gray-700">
+                                  <span className="font-semibold">
+                                    Next Fueling:
+                                  </span>{" "}
+                                  {site.nextFuelingDate
+                                    ? new Date(
+                                        site.nextFuelingDate,
+                                      ).toLocaleDateString("en-GB", {
+                                        day: "2-digit",
+                                        month: "short",
+                                        year: "numeric",
+                                      })
+                                    : "Not set"}
+                                </p>
+                                <p className="text-gray-600">
+                                  <span className="font-semibold">Status:</span>{" "}
+                                  {site.status === "overdue"
+                                    ? "🔴 Overdue"
+                                    : site.status === "today"
+                                      ? "🟠 Today"
+                                      : site.status === "coming"
+                                        ? "🟡 Coming"
+                                        : "🟢 Tomorrow"}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {/* No Results Message */}
-                {showSearchPopup && filteredSites.length === 0 && (
-                  <div className="absolute top-full right-0 mt-2 bg-white border border-yellow-300 rounded-lg shadow-xl z-50 p-3 w-80">
-                    <p className="text-sm text-gray-600 text-center">
-                      No sites found matching "{searchTerm}"
-                    </p>
-                  </div>
-                )}
+                  {/* No Results Message */}
+                  {showSearchPopup && filteredSites.length === 0 && (
+                    <div className="absolute top-full right-0 mt-2 bg-white border border-yellow-300 rounded-lg shadow-xl z-50 p-3 w-80">
+                      <p className="text-sm text-gray-600 text-center">
+                        No sites found matching "{searchTerm}"
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleRefresh}
+                  disabled={refreshing}
+                  className="gap-2 border-blue-300 bg-blue-50 text-gray-700 hover:bg-blue-100 hover:text-gray-900"
+                >
+                  <RefreshCw
+                    size={16}
+                    className={
+                      refreshing
+                        ? "animate-spin text-blue-600"
+                        : "text-blue-600"
+                    }
+                  />
+                  <span className="hidden sm:inline">Refresh</span>
+                </Button>
+                <Button
+                  onClick={handleDownloadExcel}
+                  variant="outline"
+                  size="sm"
+                  className="gap-2 border-blue-300 bg-blue-50 text-gray-700 hover:bg-blue-100 hover:text-gray-900"
+                >
+                  <Download size={16} className="text-blue-600" />
+                  <span className="hidden sm:inline">Download</span>
+                </Button>
               </div>
             </div>
-
-            {/* Action Buttons */}
-            <div className="flex items-center gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleRefresh}
-                disabled={refreshing}
-                className="gap-2 border-blue-300 bg-blue-50 text-gray-700 hover:bg-blue-100 hover:text-gray-900"
-              >
-                <RefreshCw
-                  size={16}
-                  className={
-                    refreshing ? "animate-spin text-blue-600" : "text-blue-600"
-                  }
-                />
-                <span className="hidden sm:inline">Refresh</span>
-              </Button>
-              <Button
-                onClick={handleDownloadExcel}
-                variant="outline"
-                size="sm"
-                className="gap-2 border-blue-300 bg-blue-50 text-gray-700 hover:bg-blue-100 hover:text-gray-900"
-              >
-                <Download size={16} className="text-blue-600" />
-                <span className="hidden sm:inline">Download</span>
-              </Button>
-            </div>
           </div>
-        </div>
         </div>
       </header>
 
@@ -788,9 +801,12 @@ export default function Dashboard() {
             <div className="px-6 py-4 bg-gradient-to-r from-blue-100 to-blue-200 flex items-center gap-3 justify-between">
               <div className="flex items-center gap-3">
                 <span className="text-2xl">🏢</span>
-                <h2 className="text-xl font-bold text-gray-900">LDN Sites (VVVIP)</h2>
+                <h2 className="text-xl font-bold text-gray-900">
+                  LDN Sites (VVVIP)
+                </h2>
                 <span className="ml-auto text-xs bg-white/30 text-gray-900 rounded-full px-3 py-1 font-semibold">
-                  {vvvipSites.length} {vvvipSites.length === 1 ? "site" : "sites"}
+                  {vvvipSites.length}{" "}
+                  {vvvipSites.length === 1 ? "site" : "sites"}
                 </span>
               </div>
               <button
@@ -836,11 +852,13 @@ export default function Dashboard() {
                             ? (() => {
                                 const date = new Date(site.nextFuelingDate);
                                 date.setHours(date.getHours() + 3);
-                                const day = String(date.getDate()).padStart(2, "0");
-                                const month = String(date.getMonth() + 1).padStart(
+                                const day = String(date.getDate()).padStart(
                                   2,
                                   "0",
                                 );
+                                const month = String(
+                                  date.getMonth() + 1,
+                                ).padStart(2, "0");
                                 const year = date.getFullYear();
                                 return `${day}/${month}/${year}`;
                               })()
