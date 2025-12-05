@@ -55,11 +55,13 @@ export default function Login() {
       </div>
 
       <div className="w-full max-w-md relative z-10">
+        {/* Title Outside Card */}
+        <h1 className="text-4xl font-bold text-center text-blue-600 mb-6 whitespace-nowrap">
+          مؤسسة نورة الدوسري للمقاولات العامة
+        </h1>
+
         {/* Login Card */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 border border-blue-100 mt-4">
-          <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">
-            مؤسسة نورة الدوسري للمقاولات العامة
-          </h1>
+        <div className="bg-white rounded-2xl shadow-xl p-8 border border-blue-100">
           <p className="text-center text-gray-600 text-sm mb-8">
             Sign in to your account
           </p>
