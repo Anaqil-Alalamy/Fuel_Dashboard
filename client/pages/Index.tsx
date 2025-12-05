@@ -562,51 +562,56 @@ export default function Dashboard() {
 
           {/* Two Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-6 min-h-screen">
-            {/* Left Column - Status Panels (Scrollable) */}
+            {/* Left Column - Status Cards (Scrollable) */}
             <div className="flex flex-col gap-4 overflow-y-auto pr-2 max-h-[calc(100vh-200px)]">
-              {/* Overdue Panel */}
-              <StatusPanel
-                title="Overdue"
-                borderColor="border-t-2 border-t-red-500"
-                sites={overdueSites}
+              {/* Due Card */}
+              <StatusCard
+                title="Due"
+                borderColor="border-t-4 border-t-red-500"
+                sites={dueSites}
                 icon="🔴"
                 gradient="from-red-100 to-red-200"
-                expanded={expandedPanels.overdue}
-                onToggle={() => togglePanel("overdue")}
+                onClick={() => openModal("due")}
               />
 
-              {/* Today Panel */}
-              <StatusPanel
+              {/* Today Card */}
+              <StatusCard
                 title="Today"
-                borderColor="border-t-2 border-t-orange-500"
+                borderColor="border-t-4 border-t-orange-500"
                 sites={todaySites}
                 icon="🟠"
                 gradient="from-orange-100 to-orange-200"
-                expanded={expandedPanels.today}
-                onToggle={() => togglePanel("today")}
-                maxHeight="max-h-96"
+                onClick={() => openModal("today")}
               />
 
-              {/* Tomorrow Panel */}
-              <StatusPanel
+              {/* Tomorrow Card */}
+              <StatusCard
                 title="Tomorrow"
-                borderColor="border-t-2 border-t-blue-400"
+                borderColor="border-t-4 border-t-blue-500"
                 sites={tomorrowSites}
                 icon="🔵"
                 gradient="from-blue-100 to-blue-200"
-                expanded={expandedPanels.tomorrow}
-                onToggle={() => togglePanel("tomorrow")}
+                onClick={() => openModal("tomorrow")}
               />
 
-              {/* Coming Panel */}
-              <StatusPanel
-                title="Coming (3D)"
-                borderColor="border-t-2 border-t-yellow-500"
-                sites={comingSites}
+              {/* Incoming Card (2-4 days) */}
+              <StatusCard
+                title="Incoming (2-4D)"
+                borderColor="border-t-4 border-t-yellow-500"
+                sites={incomingSites}
                 icon="🟡"
                 gradient="from-yellow-100 to-yellow-200"
-                expanded={expandedPanels.coming}
-                onToggle={() => togglePanel("coming")}
+                onClick={() => openModal("incoming")}
+              />
+
+              {/* Coming Card (5+ days) */}
+              <StatusCard
+                title="Coming"
+                borderColor="border-t-4 border-t-green-500"
+                sites={comingSites}
+                icon="🟢"
+                gradient="from-green-100 to-green-200"
+                onClick={() => openModal("coming")}
               />
             </div>
 
