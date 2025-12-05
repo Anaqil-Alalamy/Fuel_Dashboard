@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import FuelingMap from "@/components/FuelingMap";
-import { useNavigate } from "react-router-dom";
 import {
   MapPin,
   Fuel,
@@ -18,7 +17,6 @@ import {
   ArrowUpRight,
   Zap,
   X,
-  LogOut,
 } from "lucide-react";
 import * as XLSX from "xlsx";
 import { cn } from "@/lib/utils";
@@ -643,15 +641,6 @@ export default function Dashboard() {
     return () => clearInterval(interval);
   }, [handleRefresh]);
 
-  const handleLogout = () => {
-    // Close any open modals first
-    setModalState({ open: false, type: null });
-    // Clear auth tokens
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("user");
-    // Navigate to login
-    navigate("/login");
-  };
 
   const currentDateTime = new Date().toLocaleString("en-GB", {
     weekday: "short",
@@ -766,15 +755,6 @@ export default function Dashboard() {
                 >
                   <Download size={16} className="text-blue-600" />
                   <span className="hidden sm:inline">Download</span>
-                </Button>
-                <Button
-                  onClick={handleLogout}
-                  variant="outline"
-                  size="sm"
-                  className="gap-2 border-red-300 bg-red-50 text-gray-700 hover:bg-red-100 hover:text-gray-900"
-                >
-                  <LogOut size={16} className="text-red-600" />
-                  <span className="hidden sm:inline">Logout</span>
                 </Button>
               </div>
             </div>
