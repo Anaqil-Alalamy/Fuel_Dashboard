@@ -264,6 +264,8 @@ export default function Dashboard() {
   const [refreshing, setRefreshing] = useState(false);
   const [sites, setSites] = useState<FuelingSchedule[]>([]);
   const [lastUpdateTime, setLastUpdateTime] = useState<Date>(new Date());
+  const [showSearchPopup, setShowSearchPopup] = useState(false);
+  const [searchResults, setSearchResults] = useState<FuelingSchedule[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
