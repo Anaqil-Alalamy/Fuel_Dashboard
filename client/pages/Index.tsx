@@ -87,20 +87,27 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
 
     for (let i = 1; i < lines.length; i++) {
       const values = lines[i].split(",").map((v) => v.trim());
-      if (values.length < 14) continue;
 
+      // Get site name (column A) - required
       const siteName = values[0];
-      const latStr = values[5];
-      const lonStr = values[6];
-      const dateStr = values[13];
+      if (!siteName) continue;
 
-      if (!siteName || !latStr || !lonStr || !dateStr) continue;
+      // Get coordinates (columns F & G) - use defaults if missing
+      const latStr = values[5] || "0";
+      const lonStr = values[6] || "0";
+      let latitude = parseFloat(latStr);
+      let longitude = parseFloat(lonStr);
 
-      const latitude = parseFloat(latStr);
-      const longitude = parseFloat(lonStr);
-      const parsedDate = parseDateDDMMYYYY(dateStr);
+      // Handle invalid coordinates
+      if (isNaN(latitude)) latitude = 0;
+      if (isNaN(longitude)) longitude = 0;
 
-      if (isNaN(latitude) || isNaN(longitude) || !parsedDate) continue;
+      // Get scheduled date (column N) - use today if missing/invalid
+      const dateStr = values[13] || "";
+      let parsedDate = dateStr ? parseDateDDMMYYYY(dateStr) : null;
+      if (!parsedDate) {
+        parsedDate = new Date();
+      }
 
       const status = determineStatus(parsedDate);
       const scheduledDateISO = parsedDate.toISOString().split("T")[0];
