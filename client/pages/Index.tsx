@@ -539,6 +539,8 @@ export default function Dashboard() {
                 sites={overdueSites}
                 icon="🔴"
                 gradient="from-red-100 to-red-200"
+                expanded={expandedPanels.overdue}
+                onToggle={() => togglePanel("overdue")}
               />
 
               {/* Today Panel */}
@@ -548,6 +550,8 @@ export default function Dashboard() {
                 sites={todaySites}
                 icon="🟠"
                 gradient="from-orange-100 to-orange-200"
+                expanded={expandedPanels.today}
+                onToggle={() => togglePanel("today")}
               />
 
               {/* Coming Panel */}
@@ -557,6 +561,8 @@ export default function Dashboard() {
                 sites={comingSites}
                 icon="🟡"
                 gradient="from-yellow-100 to-yellow-200"
+                expanded={expandedPanels.coming}
+                onToggle={() => togglePanel("coming")}
               />
             </div>
 
