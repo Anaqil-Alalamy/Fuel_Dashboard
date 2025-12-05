@@ -359,7 +359,7 @@ const StatusCard = ({
     >
       <div className={cn("px-3 py-2 bg-gradient-to-r", gradient)}>
         <div className="flex flex-col items-center justify-center gap-1">
-          <h3 className="text-base font-bold text-gray-900 text-center">
+          <h3 className="text-lg font-bold text-gray-900 text-center">
             {title}
           </h3>
           <p className="text-2xl font-bold text-gray-900">
