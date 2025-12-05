@@ -429,50 +429,50 @@ export default function Dashboard() {
             {/* Right Column - Map Container (Sticky) */}
             <div className="sticky top-[140px] h-fit flex flex-col gap-4">
               {/* Map Container with Double Borders */}
-              <div className="border-4 border-cyan-500 rounded-2xl shadow-2xl p-1 overflow-hidden flex-1">
-                <div className="border-2 border-red-500 rounded-xl h-full bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 flex flex-col items-center justify-center min-h-[400px] md:min-h-[600px]">
+              <div className="border-4 border-blue-600 rounded-2xl shadow-xl p-1 overflow-hidden flex-1">
+                <div className="border-2 border-red-500 rounded-xl h-full bg-gradient-to-br from-blue-50 via-white to-blue-50 flex flex-col items-center justify-center min-h-[400px] md:min-h-[600px]">
                   <div className="text-center px-6 space-y-4">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-full">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full">
                       <MapPin className="text-white" size={32} />
                     </div>
                     <div>
-                      <p className="text-white font-bold text-xl">
+                      <p className="text-gray-900 font-bold text-xl">
                         Interactive Site Map
                       </p>
-                      <p className="text-slate-400 text-sm mt-1">
+                      <p className="text-gray-600 text-sm mt-1">
                         Showing {sites.length} fueling sites
                       </p>
                     </div>
-                    <p className="text-slate-500 text-xs">
+                    <p className="text-gray-500 text-xs">
                       Map visualization powered by Leaflet
                     </p>
 
                     {/* Legend */}
-                    <div className="bg-gradient-to-br from-slate-700 to-slate-800 border border-slate-600 rounded-xl p-4 text-left shadow-xl mt-6 w-full max-w-xs">
-                      <p className="text-xs font-bold text-white mb-4 flex items-center gap-2">
-                        <Zap size={14} className="text-yellow-400" />
+                    <div className="bg-white border border-gray-300 rounded-xl p-4 text-left shadow-lg mt-6 w-full max-w-xs">
+                      <p className="text-xs font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <Zap size={14} className="text-orange-500" />
                         Status Legend
                       </p>
                       <div className="space-y-2 text-xs">
-                        <div className="flex items-center gap-3 p-2 bg-slate-600 rounded-lg">
+                        <div className="flex items-center gap-3 p-2 bg-gray-100 rounded-lg">
                           <span className="text-lg">🔴</span>
                           <div>
-                            <p className="text-white font-semibold">Overdue</p>
-                            <p className="text-slate-400">{overdueSites.length} sites</p>
+                            <p className="text-gray-900 font-semibold">Overdue</p>
+                            <p className="text-gray-600">{overdueSites.length} sites</p>
                           </div>
                         </div>
-                        <div className="flex items-center gap-3 p-2 bg-slate-600 rounded-lg">
+                        <div className="flex items-center gap-3 p-2 bg-gray-100 rounded-lg">
                           <span className="text-lg">🟠</span>
                           <div>
-                            <p className="text-white font-semibold">Today</p>
-                            <p className="text-slate-400">{todaySites.length} sites</p>
+                            <p className="text-gray-900 font-semibold">Today</p>
+                            <p className="text-gray-600">{todaySites.length} sites</p>
                           </div>
                         </div>
-                        <div className="flex items-center gap-3 p-2 bg-slate-600 rounded-lg">
+                        <div className="flex items-center gap-3 p-2 bg-gray-100 rounded-lg">
                           <span className="text-lg">🟡</span>
                           <div>
-                            <p className="text-white font-semibold">Coming</p>
-                            <p className="text-slate-400">{comingSites.length} sites</p>
+                            <p className="text-gray-900 font-semibold">Coming</p>
+                            <p className="text-gray-600">{comingSites.length} sites</p>
                           </div>
                         </div>
                       </div>
@@ -482,9 +482,9 @@ export default function Dashboard() {
               </div>
 
               {/* Info Footer */}
-              <div className="text-xs text-slate-400 text-center py-2 px-4 bg-gradient-to-r from-slate-800 to-slate-900 rounded-lg border border-slate-700">
+              <div className="text-xs text-gray-600 text-center py-2 px-4 bg-gradient-to-r from-white to-blue-50 rounded-lg border border-gray-200">
                 <p className="font-medium">Last updated: {lastUpdateTime.toLocaleTimeString()}</p>
-                <p className="text-slate-500">Auto-refreshes every 2 minutes</p>
+                <p className="text-gray-500">Auto-refreshes every 2 minutes</p>
               </div>
             </div>
           </div>
