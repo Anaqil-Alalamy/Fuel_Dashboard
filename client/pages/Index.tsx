@@ -351,12 +351,12 @@ export default function Dashboard() {
           {/* Header Section */}
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-2">
-              <Fuel className="text-cyan-400" size={28} />
-              <h1 className="text-3xl md:text-4xl font-bold text-white">
+              <Fuel className="text-blue-600" size={28} />
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
                 Fuel Dashboard
               </h1>
             </div>
-            <p className="text-slate-400 text-sm">
+            <p className="text-gray-600 text-sm">
               Real-time monitoring of {sites.length} GSM fueling sites
             </p>
           </div>
