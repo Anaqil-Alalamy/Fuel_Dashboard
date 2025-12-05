@@ -734,9 +734,9 @@ export default function Dashboard() {
           </div>
 
           {/* Two Column Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-6 min-h-screen">
+          <div className="grid grid-cols-1 lg:grid-cols-[38%_62%] gap-3 h-auto">
             {/* Left Column - Status Cards (Scrollable) */}
-            <div className="flex flex-col gap-4 overflow-y-auto pr-2 max-h-[calc(100vh-200px)]">
+            <div className="flex flex-col gap-2 overflow-y-auto pr-2 max-h-[500px]">
               {/* Due Card */}
               <StatusCard
                 title="Due"
