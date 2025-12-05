@@ -604,25 +604,25 @@ export default function Dashboard() {
               title="Due"
               value={sites.filter((s) => s.status === "overdue").length}
               icon={AlertCircle}
-              color="bg-red-600"
-              gradient="from-red-100 to-red-200"
-              borderColor="border-yellow-400"
+              color="bg-blue-600"
+              gradient="from-blue-100 to-blue-200"
+              borderColor="border-blue-600"
             />
             <KPICard
               title="Today"
               value={sites.filter((s) => s.status === "today").length}
               icon={Clock}
-              color="bg-orange-600"
-              gradient="from-orange-100 to-orange-200"
-              borderColor="border-blue-600"
+              color="bg-gray-600"
+              gradient="from-gray-100 to-gray-200"
+              borderColor="border-gray-600"
             />
             <KPICard
               title="Tomorrow"
               value={sites.filter((s) => s.status === "tomorrow").length}
               icon={TrendingUp}
-              color="bg-yellow-600"
-              gradient="from-yellow-100 to-yellow-200"
-              borderColor="border-yellow-400"
+              color="bg-blue-400"
+              gradient="from-blue-50 to-blue-100"
+              borderColor="border-blue-400"
             />
             <KPICard
               title="Upcoming"
@@ -632,9 +632,9 @@ export default function Dashboard() {
                 ).length
               }
               icon={CheckCircle2}
-              color="bg-green-600"
-              gradient="from-green-100 to-green-200"
-              borderColor="border-blue-600"
+              color="bg-gray-500"
+              gradient="from-gray-50 to-gray-100"
+              borderColor="border-gray-500"
             />
           </div>
 
@@ -645,50 +645,50 @@ export default function Dashboard() {
               {/* Due Card */}
               <StatusCard
                 title="Due"
-                borderColor="border-t-4 border-t-red-500"
+                borderColor="border-t-4 border-t-blue-600"
                 sites={dueSites}
-                icon="🔴"
-                gradient="from-red-100 to-red-200"
+                icon="🔵"
+                gradient="from-blue-100 to-blue-200"
                 onClick={() => openModal("overdue")}
               />
 
               {/* Today Card */}
               <StatusCard
                 title="Today"
-                borderColor="border-t-4 border-t-orange-500"
+                borderColor="border-t-4 border-t-gray-600"
                 sites={todaySites}
-                icon="🟠"
-                gradient="from-orange-100 to-orange-200"
+                icon="⚪"
+                gradient="from-gray-100 to-gray-200"
                 onClick={() => openModal("today")}
               />
 
               {/* Tomorrow Card */}
               <StatusCard
                 title="Tomorrow"
-                borderColor="border-t-4 border-t-blue-500"
+                borderColor="border-t-4 border-t-blue-400"
                 sites={tomorrowSites}
-                icon="🔵"
-                gradient="from-blue-100 to-blue-200"
+                icon="🔷"
+                gradient="from-blue-50 to-blue-100"
                 onClick={() => openModal("tomorrow")}
               />
 
               {/* Incoming Card (2-4 days) */}
               <StatusCard
                 title="Incoming (2-4D)"
-                borderColor="border-t-4 border-t-yellow-500"
+                borderColor="border-t-4 border-t-gray-400"
                 sites={incomingSites}
-                icon="🟡"
-                gradient="from-yellow-100 to-yellow-200"
+                icon="▫️"
+                gradient="from-gray-50 to-gray-100"
                 onClick={() => openModal("incoming")}
               />
 
               {/* Coming Card (5+ days) */}
               <StatusCard
                 title="Coming"
-                borderColor="border-t-4 border-t-green-500"
+                borderColor="border-t-4 border-t-gray-300"
                 sites={comingSites}
-                icon="🟢"
-                gradient="from-green-100 to-green-200"
+                icon="⬜"
+                gradient="from-white to-gray-50"
                 onClick={() => openModal("coming")}
               />
             </div>
@@ -721,8 +721,8 @@ export default function Dashboard() {
         <DetailModal
           title="Due"
           sites={dueSites}
-          icon="🔴"
-          gradient="from-red-100 to-red-200"
+          icon="🔵"
+          gradient="from-blue-100 to-blue-200"
           onClose={closeModal}
         />
       )}
@@ -730,8 +730,8 @@ export default function Dashboard() {
         <DetailModal
           title="Today"
           sites={todaySites}
-          icon="🟠"
-          gradient="from-orange-100 to-orange-200"
+          icon="⚪"
+          gradient="from-gray-100 to-gray-200"
           onClose={closeModal}
         />
       )}
@@ -739,8 +739,8 @@ export default function Dashboard() {
         <DetailModal
           title="Tomorrow"
           sites={tomorrowSites}
-          icon="🔵"
-          gradient="from-blue-100 to-blue-200"
+          icon="🔷"
+          gradient="from-blue-50 to-blue-100"
           onClose={closeModal}
         />
       )}
@@ -748,8 +748,8 @@ export default function Dashboard() {
         <DetailModal
           title="Incoming (2-4D)"
           sites={incomingSites}
-          icon="🟡"
-          gradient="from-yellow-100 to-yellow-200"
+          icon="▫️"
+          gradient="from-gray-50 to-gray-100"
           onClose={closeModal}
         />
       )}
@@ -757,8 +757,8 @@ export default function Dashboard() {
         <DetailModal
           title="Coming"
           sites={comingSites}
-          icon="🟢"
-          gradient="from-green-100 to-green-200"
+          icon="⬜"
+          gradient="from-white to-gray-50"
           onClose={closeModal}
         />
       )}
