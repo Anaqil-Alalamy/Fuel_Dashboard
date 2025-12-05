@@ -116,8 +116,9 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
       if (isNaN(latitude)) latitude = 0;
       if (isNaN(longitude)) longitude = 0;
 
-      const dateStr = values[13] || "";
-      let parsedDate = dateStr ? parseDateDDMMYYYY(dateStr) : null;
+      // Column N (index 13) is NextfuelingPlan
+      const nextFuelingStr = values[13] || "";
+      let parsedDate = nextFuelingStr ? parseDateDDMMYYYY(nextFuelingStr) : null;
       if (!parsedDate) {
         parsedDate = new Date();
       }
@@ -126,13 +127,16 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
       const scheduledDateISO = parsedDate.toISOString().split("T")[0];
 
       // Column N (index 13) is NextfuelingPlan
-      const nextFuelingStr = values[13] || "";
       let nextFuelingDate = nextFuelingStr;
       if (nextFuelingStr) {
         const nextFuelingParsed = parseDateDDMMYYYY(nextFuelingStr);
         if (nextFuelingParsed) {
           nextFuelingDate = nextFuelingParsed.toISOString().split("T")[0];
         }
+      }
+
+      if (i <= 5) {
+        console.log(`Row ${i}: ${siteName}, DateStr: ${nextFuelingStr}, Parsed: ${scheduledDateISO}, Status: ${status}`);
       }
 
       sites.push({
