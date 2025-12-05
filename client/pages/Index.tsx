@@ -378,15 +378,20 @@ export default function Dashboard() {
   const comingSites = sites.filter((s) => s.status === "coming");
 
   const handleDownloadExcel = () => {
+    const formatDateWithTimezone = (dateStr: string): string => {
+      if (!dateStr) return "Not set";
+      const date = new Date(dateStr);
+      // Adjust for GMT+3 timezone
+      date.setHours(date.getHours() + 3);
+      const day = String(date.getDate()).padStart(2, "0");
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const year = date.getFullYear();
+      return `${day}/${month}/${year}`;
+    };
+
     const data = sites.map((site) => ({
       "Site Name": site.siteName,
-      "Next Fueling Date": site.nextFuelingDate
-        ? new Date(site.nextFuelingDate).toLocaleDateString("en-GB", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          })
-        : "Not set",
+      "Next Fueling Date": formatDateWithTimezone(site.nextFuelingDate),
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(data);
