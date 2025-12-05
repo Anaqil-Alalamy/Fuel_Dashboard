@@ -189,26 +189,59 @@ export default function FuelingMap({ sites }: FuelingMapProps) {
           fillOpacity={0.9}
         >
           <Popup>
-            <div className="text-sm space-y-2">
-              <p className="font-bold text-gray-900">{site.siteName}</p>
-              <p className="text-gray-700">
-                <span className="font-semibold">Status:</span>{" "}
-                <span>{getStatusLabel(site.status)}</span>
-              </p>
-              <p className="text-gray-600">
-                <span className="font-semibold">Scheduled:</span>{" "}
-                {new Date(site.scheduledDate).toLocaleDateString("en-GB")}
-              </p>
-              <p className="text-gray-600">
-                <span className="font-semibold">Next Fueling:</span>{" "}
-                {site.nextFuelingDate
-                  ? new Date(site.nextFuelingDate).toLocaleDateString("en-GB")
-                  : "Not set"}
-              </p>
-              <p className="text-gray-500 text-xs">
-                {site.latitude.toFixed(4)}, {site.longitude.toFixed(4)}
-              </p>
-            </div>
+            {(() => {
+              const badgeStyles = getStatusBadgeStyles(site.status);
+              return (
+                <div className="text-sm space-y-3 min-w-64">
+                  <div>
+                    <p className="font-bold text-gray-900 text-base mb-1">
+                      {site.siteName}
+                    </p>
+                    <div
+                      style={{
+                        backgroundColor: badgeStyles.bgColor,
+                        color: badgeStyles.textColor,
+                      }}
+                      className="inline-block px-3 py-1 rounded-full font-semibold text-xs"
+                    >
+                      {getStatusLabel(site.status)}
+                    </div>
+                  </div>
+                  <hr className="border-gray-200" />
+                  <div>
+                    <p className="text-gray-600 text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">
+                      Next Fueling Date
+                    </p>
+                    <p className="font-semibold text-gray-900">
+                      {site.nextFuelingDate
+                        ? new Date(site.nextFuelingDate).toLocaleDateString(
+                            "en-GB"
+                          )
+                        : "Not set"}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-gray-600 text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">
+                      Legend Status
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <div
+                        style={{
+                          backgroundColor: getStatusColor(site.status),
+                        }}
+                        className="w-3 h-3 rounded-full"
+                      />
+                      <span className="text-gray-700">
+                        {getStatusLabel(site.status)}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-gray-500 text-xs pt-2 border-t border-gray-200">
+                    {site.latitude.toFixed(4)}, {site.longitude.toFixed(4)}
+                  </p>
+                </div>
+              );
+            })()}
           </Popup>
         </CircleMarker>
       ))}
