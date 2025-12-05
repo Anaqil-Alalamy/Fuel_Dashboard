@@ -20,7 +20,14 @@ import {
 } from "lucide-react";
 import * as XLSX from "xlsx";
 import { cn } from "@/lib/utils";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Legend,
+  Tooltip,
+} from "recharts";
 
 interface FuelingSchedule {
   id: string;
@@ -111,7 +118,7 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
       console.log(
         "Successfully fetched from Google Sheets CSV, received",
         csv.length,
-        "bytes"
+        "bytes",
       );
     } catch (error) {
       clearTimeout(timeoutId);
@@ -142,7 +149,7 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
         console.log(
           "Successfully fetched from local API, received",
           csv.length,
-          "bytes"
+          "bytes",
         );
       } catch (error) {
         clearTimeout(timeoutId);
@@ -234,7 +241,8 @@ const PerformanceChart = ({ sites }: { sites: FuelingSchedule[] }) => {
   const totalSites = sites.length;
   const dueSites = sites.filter((s) => s.status === "overdue").length;
   const healthySites = totalSites - dueSites;
-  const performancePercentage = totalSites > 0 ? Math.round((healthySites / totalSites) * 100) : 0;
+  const performancePercentage =
+    totalSites > 0 ? Math.round((healthySites / totalSites) * 100) : 0;
 
   const data = [
     {
@@ -251,7 +259,15 @@ const PerformanceChart = ({ sites }: { sites: FuelingSchedule[] }) => {
 
   return (
     <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 mb-3">
-      <div style={{ height: "150px", position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div
+        style={{
+          height: "150px",
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
@@ -280,7 +296,9 @@ const PerformanceChart = ({ sites }: { sites: FuelingSchedule[] }) => {
             pointerEvents: "none",
           }}
         >
-          <div className="text-3xl font-bold text-blue-600">{performancePercentage}%</div>
+          <div className="text-3xl font-bold text-blue-600">
+            {performancePercentage}%
+          </div>
         </div>
       </div>
       <div className="text-center mt-3">
@@ -471,9 +489,7 @@ const KPICard = ({
     <div className="relative p-2">
       <div className="flex items-start justify-between mb-1">
         <div>
-          <p className="text-gray-600 text-[9px] font-medium mb-0.5">
-            {title}
-          </p>
+          <p className="text-gray-600 text-[9px] font-medium mb-0.5">{title}</p>
           <h3 className="text-base font-bold text-gray-900 leading-tight">
             {value}
           </h3>

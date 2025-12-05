@@ -60,7 +60,7 @@ const getStatusLabel = (status: string): string => {
 };
 
 const getStatusBadgeStyles = (
-  status: string
+  status: string,
 ): { bgColor: string; textColor: string } => {
   switch (status) {
     case "overdue":
@@ -215,7 +215,7 @@ export default function FuelingMap({ sites }: FuelingMapProps) {
                     <p className="font-semibold text-gray-900">
                       {site.nextFuelingDate
                         ? new Date(site.nextFuelingDate).toLocaleDateString(
-                            "en-GB"
+                            "en-GB",
                           )
                         : "Not set"}
                     </p>
