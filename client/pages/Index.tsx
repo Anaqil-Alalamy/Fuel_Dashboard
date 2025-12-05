@@ -552,7 +552,7 @@ export default function Dashboard() {
     };
     loadData();
     // Force close any modal on page load
-    closeModal();
+    setModalState({ open: false, type: null });
   }, []);
 
   useEffect(() => {
