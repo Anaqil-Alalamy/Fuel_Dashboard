@@ -151,12 +151,16 @@ const StatusPanel = ({
   sites,
   icon,
   gradient,
+  expanded,
+  onToggle,
 }: {
   title: string;
   borderColor: string;
   sites: FuelingSchedule[];
   icon: string;
   gradient: string;
+  expanded: boolean;
+  onToggle: () => void;
 }) => {
   return (
     <div
@@ -165,53 +169,65 @@ const StatusPanel = ({
         borderColor,
       )}
     >
-      <div className={cn("px-4 py-3 bg-gradient-to-r", gradient)}>
-        <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
-          <span className="text-lg">{icon}</span>
-          {title}
-          <span className="ml-auto text-xs bg-gray-200 text-gray-700 rounded-full px-2 py-0.5 font-semibold">
-            {sites.length}
-          </span>
-        </h3>
-      </div>
+      <button
+        onClick={onToggle}
+        className={cn("px-4 py-3 bg-gradient-to-r flex items-center gap-2 cursor-pointer hover:opacity-90 transition-opacity", gradient)}
+      >
+        <span className="text-lg">{icon}</span>
+        <h3 className="text-sm font-bold text-gray-900 flex-1 text-left">{title}</h3>
+        <span className="text-xs bg-gray-200 text-gray-700 rounded-full px-2 py-0.5 font-semibold">
+          {sites.length}
+        </span>
+        <ChevronDown
+          size={18}
+          className={cn(
+            "text-gray-700 transition-transform",
+            expanded ? "rotate-180" : ""
+          )}
+        />
+      </button>
 
-      {sites.length === 0 ? (
-        <div className="flex items-center justify-center py-8">
-          <p className="text-sm text-gray-400">No sites</p>
-        </div>
-      ) : (
-        <div className="overflow-y-auto flex-1">
-          <table className="w-full text-xs">
-            <thead className="sticky top-0 bg-gray-100 border-b border-gray-200">
-              <tr>
-                <th className="text-left px-3 py-2 font-bold text-gray-700">
-                  Site Name
-                </th>
-                <th className="text-left px-3 py-2 font-bold text-gray-700">
-                  Date
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100">
-              {sites.map((site) => (
-                <tr
-                  key={site.id}
-                  className="hover:bg-gray-50 transition-colors"
-                >
-                  <td className="px-3 py-2 text-gray-800 font-medium truncate max-w-[150px]">
-                    {site.siteName}
-                  </td>
-                  <td className="px-3 py-2 text-gray-700 whitespace-nowrap">
-                    {new Date(site.scheduledDate).toLocaleDateString("en-GB", {
-                      day: "2-digit",
-                      month: "short",
-                    })}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      {expanded && (
+        <>
+          {sites.length === 0 ? (
+            <div className="flex items-center justify-center py-8">
+              <p className="text-sm text-gray-400">No sites</p>
+            </div>
+          ) : (
+            <div className="overflow-y-auto flex-1 max-h-64">
+              <table className="w-full text-xs">
+                <thead className="sticky top-0 bg-gray-100 border-b border-gray-200">
+                  <tr>
+                    <th className="text-left px-3 py-2 font-bold text-gray-700">
+                      Site Name
+                    </th>
+                    <th className="text-left px-3 py-2 font-bold text-gray-700">
+                      Date
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {sites.map((site) => (
+                    <tr
+                      key={site.id}
+                      className="hover:bg-gray-50 transition-colors"
+                    >
+                      <td className="px-3 py-2 text-gray-800 font-medium truncate max-w-[150px]">
+                        {site.siteName}
+                      </td>
+                      <td className="px-3 py-2 text-gray-700 whitespace-nowrap">
+                        {new Date(site.scheduledDate).toLocaleDateString("en-GB", {
+                          day: "2-digit",
+                          month: "short",
+                        })}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
