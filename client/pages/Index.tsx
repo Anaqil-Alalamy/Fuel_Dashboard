@@ -796,6 +796,9 @@ export default function Dashboard() {
             />
           </div>
 
+          {/* Performance Chart */}
+          <PerformanceChart sites={sites} />
+
           {/* Two Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-[38%_62%] gap-3 h-auto">
             {/* Left Column - Status Cards (Scrollable) */}
