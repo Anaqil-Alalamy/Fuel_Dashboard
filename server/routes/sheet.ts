@@ -1,15 +1,14 @@
 const SHEET_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRDnTkwpbgsnY_i60u3ZleNs1DL3vMdG3fYHMrr5rwVDqMb3GpgKH40Y-7WQsEzEAi-wDHwLaimN8NC/pub?gid=1871402380&single=true&output=csv";
 
-export async function handleSheetData(
-  _req: any,
-  res: any,
-) {
+export async function handleSheetData(_req: any, res: any) {
   try {
     const response = await fetch(SHEET_URL);
     if (!response.ok) {
       console.error(`HTTP Error: ${response.status}`);
-      return res.status(response.status).json({ error: `HTTP ${response.status}` });
+      return res
+        .status(response.status)
+        .json({ error: `HTTP ${response.status}` });
     }
 
     const csv = await response.text();

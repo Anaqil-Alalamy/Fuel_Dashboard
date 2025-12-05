@@ -395,7 +395,10 @@ export default function Dashboard() {
 
     worksheet["!cols"] = [{ wch: 25 }, { wch: 18 }];
 
-    XLSX.writeFile(workbook, `GSM_Sites_${new Date().toISOString().split("T")[0]}.xlsx`);
+    XLSX.writeFile(
+      workbook,
+      `GSM_Sites_${new Date().toISOString().split("T")[0]}.xlsx`,
+    );
   };
 
   const handleRefresh = useCallback(async () => {
