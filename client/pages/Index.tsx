@@ -367,30 +367,30 @@ export default function Dashboard() {
               title="Total Sites"
               value={sites.length}
               icon={MapPin}
-              color="bg-cyan-500"
-              gradient="from-cyan-600 to-cyan-900"
+              color="bg-blue-600"
+              gradient="from-blue-100 to-blue-200"
               trend={12}
             />
             <KPICard
               title="Overdue"
               value={sites.filter((s) => s.status === "overdue").length}
               icon={AlertCircle}
-              color="bg-red-500"
-              gradient="from-red-600 to-red-900"
+              color="bg-red-600"
+              gradient="from-red-100 to-red-200"
             />
             <KPICard
               title="Today"
               value={sites.filter((s) => s.status === "today").length}
               icon={Clock}
-              color="bg-orange-500"
-              gradient="from-orange-600 to-orange-900"
+              color="bg-orange-600"
+              gradient="from-orange-100 to-orange-200"
             />
             <KPICard
               title="Coming (3D)"
               value={sites.filter((s) => s.status === "coming" || s.status === "tomorrow").length}
               icon={TrendingUp}
-              color="bg-green-500"
-              gradient="from-green-600 to-green-900"
+              color="bg-green-600"
+              gradient="from-green-100 to-green-200"
             />
           </div>
 
