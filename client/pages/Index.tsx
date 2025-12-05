@@ -354,14 +354,14 @@ export default function Dashboard() {
                 />
 
                 {/* Search Results Popup */}
-                {showSearchPopup && searchResults.length > 0 && (
+                {showSearchPopup && filteredSites.length > 0 && (
                   <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-blue-300 rounded-lg shadow-xl z-50 max-h-96 overflow-y-auto">
                     <div className="p-3">
                       <p className="text-xs font-bold text-gray-600 mb-2">
-                        Found {searchResults.length} site{searchResults.length !== 1 ? "s" : ""}
+                        Found {filteredSites.length} site{filteredSites.length !== 1 ? "s" : ""}
                       </p>
                       <div className="space-y-2">
-                        {searchResults.map((site) => (
+                        {filteredSites.map((site) => (
                           <div
                             key={site.id}
                             className="p-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200 hover:border-blue-400 transition-colors"
