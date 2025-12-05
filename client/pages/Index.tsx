@@ -428,10 +428,10 @@ export default function Dashboard() {
             </div>
 
             {/* Right Column - Map Container (Sticky) */}
-            <div className="sticky top-[140px] h-fit flex flex-col gap-4">
+            <div className="sticky top-[140px] flex flex-col gap-4" style={{ height: "calc(100vh - 180px)" }}>
               {/* Map Container with Double Borders */}
-              <div className="border-4 border-blue-600 rounded-2xl shadow-xl p-1 overflow-hidden flex-1">
-                <div className="border-2 border-red-500 rounded-xl h-full overflow-hidden min-h-[400px] md:min-h-[600px]">
+              <div className="border-4 border-blue-600 rounded-2xl shadow-xl p-1 overflow-hidden flex-1 flex flex-col">
+                <div className="border-2 border-red-500 rounded-xl h-full overflow-hidden flex-1">
                   <FuelingMap sites={sites} />
                 </div>
               </div>
