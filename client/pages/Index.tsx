@@ -289,13 +289,13 @@ export default function Dashboard() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             {/* Date/Time and Title */}
             <div className="flex items-center gap-4 flex-1">
-              <div className="flex items-center gap-2 text-sm text-slate-300 font-medium">
-                <Calendar size={16} className="text-cyan-400" />
+              <div className="flex items-center gap-2 text-sm text-gray-700 font-medium">
+                <Calendar size={16} className="text-blue-600" />
                 <span>{currentDateTime}</span>
               </div>
-              <div className="hidden md:flex items-center gap-2 ml-4 pl-4 border-l border-slate-700">
-                <Zap size={16} className="text-yellow-400" />
-                <span className="text-xs text-slate-400">
+              <div className="hidden md:flex items-center gap-2 ml-4 pl-4 border-l border-blue-200">
+                <Zap size={16} className="text-orange-500" />
+                <span className="text-xs text-gray-600">
                   {onSchedulePercentage}% On Schedule
                 </span>
               </div>
