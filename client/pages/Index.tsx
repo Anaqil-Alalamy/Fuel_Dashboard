@@ -86,51 +86,81 @@ const determineStatus = (
 };
 
 const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
-  let csv: string;
+  let csv: string = "";
 
+  // Try Google Sheets CSV first (more reliable)
   try {
-    // Try to fetch from the local API endpoint first
-    console.log("Attempting to fetch from local API endpoint...");
+    console.log("Attempting to fetch from Google Sheets CSV...");
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 
-    const response = await fetch(SHEET_URL, { signal: controller.signal });
-    clearTimeout(timeoutId);
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-
-    csv = await response.text();
-    console.log("Successfully fetched from local API endpoint");
-  } catch (apiError) {
-    console.warn(
-      "Local API endpoint failed, falling back to Google Sheets CSV:",
-      apiError,
-    );
     try {
-      // Fallback to fetching directly from Google Sheets
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
-
       const response = await fetch(GOOGLE_SHEETS_CSV_URL, {
         signal: controller.signal,
+        headers: {
+          "Cache-Control": "no-cache",
+        },
       });
       clearTimeout(timeoutId);
 
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
+        throw new Error(`HTTP ${response.status} from Google Sheets`);
       }
 
       csv = await response.text();
-      console.log("Successfully fetched from Google Sheets CSV");
-    } catch (sheetError) {
-      console.error(
-        "Failed to fetch from both API and Google Sheets:",
-        sheetError,
+      console.log(
+        "Successfully fetched from Google Sheets CSV, received",
+        csv.length,
+        "bytes"
       );
+    } catch (error) {
+      clearTimeout(timeoutId);
+      throw error;
+    }
+  } catch (sheetError) {
+    console.warn("Google Sheets fetch failed, trying local API:", sheetError);
+
+    // Fallback to local API
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
+      try {
+        const response = await fetch(SHEET_URL, {
+          signal: controller.signal,
+          headers: {
+            "Cache-Control": "no-cache",
+          },
+        });
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status} from local API`);
+        }
+
+        csv = await response.text();
+        console.log(
+          "Successfully fetched from local API, received",
+          csv.length,
+          "bytes"
+        );
+      } catch (error) {
+        clearTimeout(timeoutId);
+        throw error;
+      }
+    } catch (apiError) {
+      console.error("Failed to fetch from both sources:", {
+        sheetError,
+        apiError,
+      });
+      // Return empty array but don't break the app
       return [];
     }
+  }
+
+  if (!csv || csv.length === 0) {
+    console.warn("No CSV data received");
+    return [];
   }
 
   const lines = csv.split("\n").filter((line) => line.trim());
