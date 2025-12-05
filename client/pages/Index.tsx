@@ -55,11 +55,14 @@ const getDateWithoutTime = (date: Date): Date => {
 
 const getDaysDifference = (date: Date, baseDate: Date = new Date()): number => {
   const d1 = getDateWithoutTime(date);
+  // Adjust for GMT+3 timezone
+  const adjustedBase = new Date(baseDate);
+  adjustedBase.setHours(adjustedBase.getHours() + 3);
   const utcDate = new Date(
     Date.UTC(
-      baseDate.getUTCFullYear(),
-      baseDate.getUTCMonth(),
-      baseDate.getUTCDate(),
+      adjustedBase.getUTCFullYear(),
+      adjustedBase.getUTCMonth(),
+      adjustedBase.getUTCDate(),
     ),
   );
   const d2 = getDateWithoutTime(utcDate);
