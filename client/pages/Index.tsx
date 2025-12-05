@@ -206,14 +206,14 @@ const KPICard = ({
   color: string;
 }) => (
   <Card className="border-0 shadow-md">
-    <CardHeader className="pb-3">
-      <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2">
-        <Icon size={18} className={color} />
-        {title}
+    <CardHeader className="pb-2 md:pb-3">
+      <CardTitle className="text-xs md:text-sm font-medium text-gray-600 flex items-center gap-2">
+        <Icon size={16} className={cn(color, "flex-shrink-0")} />
+        <span className="truncate">{title}</span>
       </CardTitle>
     </CardHeader>
     <CardContent>
-      <div className="text-3xl font-bold text-gray-900">{value}</div>
+      <div className="text-2xl md:text-3xl font-bold text-gray-900">{value}</div>
       <p className="text-xs text-gray-500 mt-1">Active sites</p>
     </CardContent>
   </Card>
