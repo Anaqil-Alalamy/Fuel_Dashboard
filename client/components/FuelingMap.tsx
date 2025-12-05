@@ -52,6 +52,52 @@ const getStatusLabel = (status: string): string => {
   }
 };
 
+const MapLegend = () => {
+  const map = useMap();
+
+  useEffect(() => {
+    const legend = L.control({ position: "topright" });
+
+    legend.onAdd = () => {
+      const div = L.DomUtil.create("div", "map-legend");
+      div.style.backgroundColor = "white";
+      div.style.padding = "12px";
+      div.style.borderRadius = "8px";
+      div.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
+      div.style.fontFamily = "system-ui, -apple-system, sans-serif";
+      div.style.fontSize = "12px";
+      div.style.lineHeight = "1.6";
+      div.style.zIndex = "1000";
+
+      div.innerHTML = `
+        <div style="font-weight: bold; margin-bottom: 8px; color: #333;">Status Legend</div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <div style="width: 12px; height: 12px; background-color: #EF4444; border-radius: 50%;"></div>
+          <span>Due (Overdue)</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <div style="width: 12px; height: 12px; background-color: #EACC00; border-radius: 50%;"></div>
+          <span>Today</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div style="width: 12px; height: 12px; background-color: #22C55E; border-radius: 50%;"></div>
+          <span>Upcoming</span>
+        </div>
+      `;
+
+      return div;
+    };
+
+    legend.addTo(map);
+
+    return () => {
+      legend.remove();
+    };
+  }, [map]);
+
+  return null;
+};
+
 export default function FuelingMap({ sites }: FuelingMapProps) {
   const [validSites, setValidSites] = useState<FuelingSchedule[]>([]);
 
