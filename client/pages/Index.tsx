@@ -233,22 +233,14 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
 const PerformanceChart = ({ sites }: { sites: FuelingSchedule[] }) => {
   const totalSites = sites.length;
   const dueSites = sites.filter((s) => s.status === "overdue").length;
-  const scheduledSites = sites.filter(
-    (s) => s.status === "tomorrow" || s.status === "incoming" || s.status === "coming"
-  ).length;
-  const healthySites = totalSites - dueSites - scheduledSites;
-  const performancePercentage = totalSites > 0 ? Math.round(((healthySites + scheduledSites) / totalSites) * 100) : 0;
+  const healthySites = totalSites - dueSites;
+  const performancePercentage = totalSites > 0 ? Math.round((healthySites / totalSites) * 100) : 0;
 
   const data = [
     {
       name: "Healthy",
       value: healthySites,
       color: "#10B981",
-    },
-    {
-      name: "Scheduled tasks",
-      value: scheduledSites,
-      color: "#3B82F6",
     },
     {
       name: "Due",
@@ -285,20 +277,6 @@ const PerformanceChart = ({ sites }: { sites: FuelingSchedule[] }) => {
             <Tooltip formatter={(value) => `${value} sites`} />
           </PieChart>
         </ResponsiveContainer>
-      </div>
-      <div className="flex justify-center gap-3 mt-2 text-xs flex-wrap">
-        <div className="flex items-center gap-1">
-          <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#10B981" }}></div>
-          <span className="text-gray-600">Healthy: {healthySites}</span>
-        </div>
-        <div className="flex items-center gap-1">
-          <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#3B82F6" }}></div>
-          <span className="text-gray-600">Scheduled: {scheduledSites}</span>
-        </div>
-        <div className="flex items-center gap-1">
-          <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#EF4444" }}></div>
-          <span className="text-gray-600">Due: {dueSites}</span>
-        </div>
       </div>
     </div>
   );
