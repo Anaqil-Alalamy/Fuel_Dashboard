@@ -153,6 +153,7 @@ const StatusPanel = ({
   gradient,
   expanded,
   onToggle,
+  maxHeight = "max-h-64",
 }: {
   title: string;
   borderColor: string;
@@ -161,6 +162,7 @@ const StatusPanel = ({
   gradient: string;
   expanded: boolean;
   onToggle: () => void;
+  maxHeight?: string;
 }) => {
   return (
     <div
