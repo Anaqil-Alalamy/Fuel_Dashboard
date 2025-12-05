@@ -560,6 +560,7 @@ export default function Dashboard() {
                 <span className="hidden sm:inline">Refresh</span>
               </Button>
               <Button
+                onClick={handleDownloadExcel}
                 variant="outline"
                 size="sm"
                 className="gap-2 border-blue-300 bg-blue-50 text-gray-700 hover:bg-blue-100 hover:text-gray-900"
