@@ -34,8 +34,7 @@ interface FuelingSchedule {
   nextFuelingDate: string;
 }
 
-const SHEET_URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRDnTkwpbgsnY_i60u3ZleNs1DL3vMdG3fYHMrr5rwVDqMb3GpgKH40Y-7WQsEzEAi-wDHwLaimN8NC/pub?gid=1871402380&single=true&output=csv";
+const SHEET_URL = "/api/sheet";
 
 const parseDateDDMMYYYY = (dateStr: string): Date | null => {
   if (!dateStr) return null;
