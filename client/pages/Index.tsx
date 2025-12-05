@@ -200,6 +200,68 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
   return sites;
 };
 
+const PerformanceChart = ({ sites }: { sites: FuelingSchedule[] }) => {
+  const totalSites = sites.length;
+  const dueSites = sites.filter((s) => s.status === "overdue").length;
+  const healthySites = totalSites - dueSites;
+  const performancePercentage = totalSites > 0 ? Math.round((healthySites / totalSites) * 100) : 0;
+
+  const data = [
+    {
+      name: "Healthy",
+      value: healthySites,
+      color: "#22C55E",
+    },
+    {
+      name: "Due",
+      value: dueSites,
+      color: "#EF4444",
+    },
+  ];
+
+  return (
+    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 mb-3">
+      <div className="flex items-center justify-between mb-2">
+        <h3 className="text-sm font-bold text-gray-900">Overall Performance</h3>
+        <div className="text-right">
+          <div className="text-2xl font-bold text-green-600">{performancePercentage}%</div>
+          <div className="text-xs text-gray-500">Health Score</div>
+        </div>
+      </div>
+      <div className="flex items-center justify-center" style={{ height: "120px" }}>
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={data}
+              cx="50%"
+              cy="50%"
+              innerRadius={40}
+              outerRadius={60}
+              paddingAngle={2}
+              dataKey="value"
+            >
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color} />
+              ))}
+            </Pie>
+            <Tooltip formatter={(value) => `${value} sites`} />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+      <div className="flex justify-center gap-4 mt-2 text-xs">
+        <div className="flex items-center gap-1">
+          <div className="w-2 h-2 rounded-full bg-green-600"></div>
+          <span className="text-gray-600">Healthy: {healthySites}</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="w-2 h-2 rounded-full bg-red-600"></div>
+          <span className="text-gray-600">Due: {dueSites}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const getRowHighlightColor = (nextFuelingDate: string): string => {
   if (!nextFuelingDate) return "bg-gray-50";
 
