@@ -742,7 +742,7 @@ export default function Dashboard() {
 
                   {/* No Results Message */}
                   {showSearchPopup && filteredSites.length === 0 && (
-                    <div className="absolute top-full right-0 mt-2 bg-white border border-yellow-300 rounded-lg shadow-xl z-50 p-3 w-80">
+                    <div className="absolute top-full right-0 mt-2 bg-white border border-yellow-300 rounded-lg shadow-xl z-[9999] p-3 w-80">
                       <p className="text-sm text-gray-600 text-center">
                         No sites found matching "{searchTerm}"
                       </p>
