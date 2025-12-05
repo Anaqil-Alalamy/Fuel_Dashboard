@@ -55,7 +55,13 @@ const getDateWithoutTime = (date: Date): Date => {
 
 const getDaysDifference = (date: Date, baseDate: Date = new Date()): number => {
   const d1 = getDateWithoutTime(date);
-  const utcDate = new Date(Date.UTC(baseDate.getUTCFullYear(), baseDate.getUTCMonth(), baseDate.getUTCDate()));
+  const utcDate = new Date(
+    Date.UTC(
+      baseDate.getUTCFullYear(),
+      baseDate.getUTCMonth(),
+      baseDate.getUTCDate(),
+    ),
+  );
   const d2 = getDateWithoutTime(utcDate);
   return Math.floor((d1.getTime() - d2.getTime()) / (1000 * 60 * 60 * 24));
 };
