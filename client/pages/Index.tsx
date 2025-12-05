@@ -336,10 +336,11 @@ export default function Dashboard() {
 
   const showSearchPopup = searchTerm.trim().length > 0;
 
-  // Always filter by status from the full sites array to show all status panels
-  const overdueSites = sites.filter((s) => s.status === "overdue");
+  // Filter sites by status from the full sites array
+  const dueSites = sites.filter((s) => s.status === "due");
   const todaySites = sites.filter((s) => s.status === "today");
   const tomorrowSites = sites.filter((s) => s.status === "tomorrow");
+  const incomingSites = sites.filter((s) => s.status === "incoming");
   const comingSites = sites.filter((s) => s.status === "coming");
 
   const handleRefresh = useCallback(async () => {
