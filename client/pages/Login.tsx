@@ -43,11 +43,11 @@ export default function Login() {
           alt="GSM Tower"
           className="absolute left-0 top-0 h-full object-cover opacity-25 transform -scale-x-100 scale-110"
         />
-        {/* Fuel Truck - Right side */}
+        {/* Fuel Truck - Left side */}
         <img
           src="https://cdn.builder.io/api/v1/image/assets%2Fbd65b3cd7a86452e803a3d7dc7a3d048%2Fa3d8612ca0424bcca370521e3474ed71?format=webp&width=800"
           alt="Fuel Truck"
-          className="absolute right-0 bottom-0 h-full object-cover opacity-25 transform scale-110"
+          className="absolute left-0 bottom-0 h-full object-cover opacity-25 transform -scale-x-100 scale-110"
         />
         {/* Gradient overlay to enhance depth and readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/40 to-white/60"></div>
