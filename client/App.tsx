@@ -20,7 +20,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 const App = () => {
   const basename = __GITHUB_PAGES__ ? "/Fuel_Dashboard/" : "/";
   const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem("authToken")
+    !!localStorage.getItem("authToken"),
   );
 
   useEffect(() => {
