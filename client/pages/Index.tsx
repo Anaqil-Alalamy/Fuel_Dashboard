@@ -18,6 +18,7 @@ import {
   Zap,
   X,
 } from "lucide-react";
+import * as XLSX from "xlsx";
 import { cn } from "@/lib/utils";
 
 interface FuelingSchedule {
