@@ -692,7 +692,7 @@ export default function Dashboard() {
 
                   {/* Search Results Popup */}
                   {showSearchPopup && filteredSites.length > 0 && (
-                    <div className="absolute top-full right-0 mt-2 bg-white border border-blue-300 rounded-lg shadow-xl z-50 max-h-96 overflow-y-auto w-80">
+                    <div className="absolute top-full right-0 mt-2 bg-white border border-blue-300 rounded-lg shadow-xl z-[9999] max-h-96 overflow-y-auto w-80">
                       <div className="p-3">
                         <p className="text-xs font-bold text-gray-600 mb-2">
                           Found {filteredSites.length} site
