@@ -282,6 +282,17 @@ export default function Dashboard() {
       site.location.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
+  // Update search results and show popup when searching
+  useEffect(() => {
+    if (searchTerm.trim()) {
+      setSearchResults(filteredSites);
+      setShowSearchPopup(true);
+    } else {
+      setShowSearchPopup(false);
+      setSearchResults([]);
+    }
+  }, [searchTerm, filteredSites]);
+
   const overdueSites = filteredSites.filter((s) => s.status === "overdue");
   const todaySites = filteredSites.filter((s) => s.status === "today");
   const comingSites = filteredSites.filter(
