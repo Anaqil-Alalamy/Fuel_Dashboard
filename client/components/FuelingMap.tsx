@@ -171,7 +171,6 @@ export default function FuelingMap({ sites }: FuelingMapProps) {
       maxZoom={12}
       className="w-full h-full"
       style={{ height: "100%", width: "100%" }}
-      layersControl={{ position: "bottomleft" }}
     >
       <LayersControl position="bottomleft">
         <LayersControl.BaseLayer checked name="Street Map">
