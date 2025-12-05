@@ -27,6 +27,7 @@ const getStatusColor = (status: string): string => {
     case "today":
       return "#EACC00"; // Yellow
     case "coming":
+    case "incoming":
     case "tomorrow":
       return "#22C55E"; // Green
     default:
@@ -42,6 +43,8 @@ const getStatusLabel = (status: string): string => {
       return "TODAY";
     case "coming":
       return "COMING";
+    case "incoming":
+      return "INCOMING";
     case "tomorrow":
       return "TOMORROW";
     default:
