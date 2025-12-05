@@ -286,10 +286,11 @@ export default function Dashboard() {
   const [expandedPanels, setExpandedPanels] = useState({
     overdue: true,
     today: true,
+    tomorrow: true,
     coming: true,
   });
 
-  const togglePanel = (panelName: "overdue" | "today" | "coming") => {
+  const togglePanel = (panelName: "overdue" | "today" | "tomorrow" | "coming") => {
     setExpandedPanels((prev) => ({
       ...prev,
       [panelName]: !prev[panelName],
