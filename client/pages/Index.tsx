@@ -455,7 +455,7 @@ export default function Dashboard() {
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2Fbd65b3cd7a86452e803a3d7dc7a3d048%2F5e321b77d52a4d30b523674ca83ee1d4?format=webp&width=800"
                 alt="GSM Fueling Logo"
-                className="h-10 md:h-12 w-auto"
+                className="h-16 md:h-20 w-auto"
               />
             </div>
 
