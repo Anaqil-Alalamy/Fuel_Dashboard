@@ -481,7 +481,7 @@ export default function Dashboard() {
 
         {/* Second row: LDN Sites Card (left), Search Bar, Refresh, Download (right) */}
         <div className="px-4 md:px-6 py-2 md:py-3">
-          <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center justify-start gap-3">
             {/* LDN Sites Card - Left */}
             <Button
               onClick={() => openModal("vvvip")}
@@ -495,7 +495,7 @@ export default function Dashboard() {
             </Button>
 
             {/* Right-aligned controls */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 ms-auto">
               {/* Search Bar */}
             <div className="flex-1 md:flex-none md:w-64 relative">
               <div className="relative group">
