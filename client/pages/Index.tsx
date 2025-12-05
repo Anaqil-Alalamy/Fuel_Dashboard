@@ -1,62 +1,440 @@
-import { DemoResponse } from "@shared/api";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Search,
+  MapPin,
+  Fuel,
+  AlertCircle,
+  TrendingUp,
+  Download,
+  RefreshCw,
+  Clock,
+  CheckCircle2,
+  AlertTriangle,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
-export default function Index() {
-  const [exampleFromServer, setExampleFromServer] = useState("");
-  // Fetch users on component mount
-  useEffect(() => {
-    fetchDemo();
-  }, []);
+interface FuelingSchedule {
+  id: string;
+  siteName: string;
+  location: string;
+  fuelType: string;
+  scheduledDate: string;
+  status: "today" | "tomorrow" | "coming" | "overdue";
+  lastUpdated: string;
+  latitude: number;
+  longitude: number;
+}
 
-  // Example of how to fetch data from the server (if needed)
-  const fetchDemo = async () => {
-    try {
-      const response = await fetch("/api/demo");
-      const data = (await response.json()) as DemoResponse;
-      setExampleFromServer(data.message);
-    } catch (error) {
-      console.error("Error fetching hello:", error);
-    }
+const mockSites: FuelingSchedule[] = [
+  {
+    id: "GSM001",
+    siteName: "Downtown Station",
+    location: "123 Main St, City Center",
+    fuelType: "Diesel",
+    scheduledDate: new Date().toISOString().split("T")[0],
+    status: "today",
+    lastUpdated: new Date().toISOString(),
+    latitude: 40.7128,
+    longitude: -74.006,
+  },
+  {
+    id: "GSM002",
+    siteName: "Airport Hub",
+    location: "456 Terminal Rd, Airport Zone",
+    fuelType: "Premium Gasoline",
+    scheduledDate: new Date(Date.now() + 86400000).toISOString().split("T")[0],
+    status: "tomorrow",
+    lastUpdated: new Date().toISOString(),
+    latitude: 40.6895,
+    longitude: -74.1745,
+  },
+  {
+    id: "GSM003",
+    siteName: "Highway Junction",
+    location: "789 Interstate Ave, North Valley",
+    fuelType: "Regular Gasoline",
+    scheduledDate: new Date(Date.now() + 172800000).toISOString().split("T")[0],
+    status: "coming",
+    lastUpdated: new Date().toISOString(),
+    latitude: 40.7614,
+    longitude: -73.9776,
+  },
+  {
+    id: "GSM004",
+    siteName: "Industrial Complex",
+    location: "321 Factory Ln, Industrial Dist",
+    fuelType: "Heavy Diesel",
+    scheduledDate: new Date(Date.now() - 172800000).toISOString().split("T")[0],
+    status: "overdue",
+    lastUpdated: new Date().toISOString(),
+    latitude: 40.7489,
+    longitude: -73.968,
+  },
+  {
+    id: "GSM005",
+    siteName: "Suburban Terminal",
+    location: "555 Oak Blvd, Suburbs",
+    fuelType: "Diesel",
+    scheduledDate: new Date().toISOString().split("T")[0],
+    status: "today",
+    lastUpdated: new Date().toISOString(),
+    latitude: 40.6501,
+    longitude: -73.9496,
+  },
+  {
+    id: "GSM006",
+    siteName: "Commercial Park",
+    location: "888 Commerce Dr, Business Park",
+    fuelType: "Premium Gasoline",
+    scheduledDate: new Date(Date.now() - 86400000).toISOString().split("T")[0],
+    status: "overdue",
+    lastUpdated: new Date().toISOString(),
+    latitude: 40.7282,
+    longitude: -74.0076,
+  },
+  {
+    id: "GSM007",
+    siteName: "Metro Station",
+    location: "200 Transit Way, Central Hub",
+    fuelType: "Regular Gasoline",
+    scheduledDate: new Date(Date.now() + 259200000).toISOString().split("T")[0],
+    status: "coming",
+    lastUpdated: new Date().toISOString(),
+    latitude: 40.7549,
+    longitude: -73.9840,
+  },
+];
+
+const getStatusColor = (status: string) => {
+  switch (status) {
+    case "today":
+      return "bg-yellow-50 border-yellow-200 text-yellow-700";
+    case "tomorrow":
+      return "bg-blue-50 border-blue-200 text-blue-700";
+    case "coming":
+      return "bg-green-50 border-green-200 text-green-700";
+    case "overdue":
+      return "bg-red-50 border-red-200 text-red-700";
+    default:
+      return "bg-gray-50 border-gray-200 text-gray-700";
+  }
+};
+
+const getStatusBadgeColor = (status: string) => {
+  switch (status) {
+    case "today":
+      return "bg-yellow-100 text-yellow-800";
+    case "tomorrow":
+      return "bg-blue-100 text-blue-800";
+    case "coming":
+      return "bg-green-100 text-green-800";
+    case "overdue":
+      return "bg-red-100 text-red-800";
+    default:
+      return "bg-gray-100 text-gray-800";
+  }
+};
+
+const getStatusLabel = (status: string) => {
+  switch (status) {
+    case "today":
+      return "🟡 Today";
+    case "tomorrow":
+      return "🔵 Tomorrow";
+    case "coming":
+      return "🟢 Coming Soon";
+    case "overdue":
+      return "🔴 Overdue";
+    default:
+      return "⚫ Unscheduled";
+  }
+};
+
+const SiteCard = ({ site }: { site: FuelingSchedule }) => {
+  return (
+    <div
+      className={cn(
+        "border rounded-lg p-4 hover:shadow-md transition-shadow",
+        getStatusColor(site.status)
+      )}
+    >
+      <div className="flex items-start justify-between mb-3">
+        <div>
+          <h3 className="font-semibold text-sm">{site.siteName}</h3>
+          <p className="text-xs opacity-75 flex items-center gap-1 mt-1">
+            <MapPin size={14} />
+            {site.location}
+          </p>
+        </div>
+        <span className={cn("text-xs px-2 py-1 rounded-full font-medium", getStatusBadgeColor(site.status))}>
+          {getStatusLabel(site.status)}
+        </span>
+      </div>
+      <div className="grid grid-cols-2 gap-2 text-xs">
+        <div>
+          <p className="opacity-75">Fuel Type</p>
+          <p className="font-medium">{site.fuelType}</p>
+        </div>
+        <div>
+          <p className="opacity-75">Scheduled</p>
+          <p className="font-medium">{new Date(site.scheduledDate).toLocaleDateString()}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const KPICard = ({
+  title,
+  value,
+  icon: Icon,
+  color,
+}: {
+  title: string;
+  value: number;
+  icon: React.ComponentType<{ size: number; className?: string }>;
+  color: string;
+}) => (
+  <Card className="border-0 shadow-md">
+    <CardHeader className="pb-3">
+      <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2">
+        <Icon size={18} className={color} />
+        {title}
+      </CardTitle>
+    </CardHeader>
+    <CardContent>
+      <div className="text-3xl font-bold text-gray-900">{value}</div>
+      <p className="text-xs text-gray-500 mt-1">Active sites</p>
+    </CardContent>
+  </Card>
+);
+
+export default function Dashboard() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [refreshing, setRefreshing] = useState(false);
+  const [sites, setSites] = useState<FuelingSchedule[]>(mockSites);
+
+  const filteredSites = sites.filter(
+    (site) =>
+      site.siteName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      site.location.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const todaySites = filteredSites.filter((s) => s.status === "today");
+  const tomorrowSites = filteredSites.filter((s) => s.status === "tomorrow");
+  const comingSites = filteredSites.filter((s) => s.status === "coming");
+  const overdueSites = filteredSites.filter((s) => s.status === "overdue");
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setRefreshing(false);
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleRefresh();
+    }, 120000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
-      <div className="text-center">
-        {/* TODO: FUSION_GENERATION_APP_PLACEHOLDER replace everything here with the actual app! */}
-        <h1 className="text-2xl font-semibold text-slate-800 flex items-center justify-center gap-3">
-          <svg
-            className="animate-spin h-8 w-8 text-slate-400"
-            viewBox="0 0 50 50"
-          >
-            <circle
-              className="opacity-30"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+      {/* Header */}
+      <header className="border-b bg-white shadow-sm sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg">
+              <Fuel className="text-white" size={24} />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Fuel Dashboard</h1>
+              <p className="text-sm text-gray-500">GSM Sites Fueling Plan Management</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleRefresh}
+              disabled={refreshing}
+              className="gap-2"
+            >
+              <RefreshCw size={16} className={refreshing ? "animate-spin" : ""} />
+              Refresh
+            </Button>
+            <Button variant="outline" size="sm" className="gap-2">
+              <Download size={16} />
+              Export
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-6 py-8">
+        {/* KPI Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <KPICard
+            title="Total Sites"
+            value={sites.length}
+            icon={MapPin}
+            color="text-blue-600"
+          />
+          <KPICard
+            title="Today Schedule"
+            value={todaySites.length}
+            icon={Clock}
+            color="text-yellow-600"
+          />
+          <KPICard
+            title="Upcoming (3 Days)"
+            value={tomorrowSites.length + comingSites.length}
+            icon={TrendingUp}
+            color="text-green-600"
+          />
+          <KPICard
+            title="Overdue"
+            value={overdueSites.length}
+            icon={AlertCircle}
+            color="text-red-600"
+          />
+        </div>
+
+        {/* Search Bar */}
+        <div className="mb-8">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+            <Input
+              placeholder="Search sites by name or location..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 h-11 border-gray-200"
             />
-            <circle
-              className="text-slate-600"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-              strokeDasharray="100"
-              strokeDashoffset="75"
-            />
-          </svg>
-          Generating your app...
-        </h1>
-        <p className="mt-4 text-slate-600 max-w-md">
-          Watch the chat on the left for updates that might need your attention
-          to finish generating
-        </p>
-        <p className="mt-4 hidden max-w-md">{exampleFromServer}</p>
-      </div>
+          </div>
+        </div>
+
+        {/* Schedules Tabs */}
+        <Tabs defaultValue="today" className="w-full">
+          <TabsList className="grid w-full grid-cols-4 mb-6 bg-white border border-gray-200 h-auto p-1 rounded-lg">
+            <TabsTrigger value="today" className="flex items-center gap-2">
+              <Clock size={16} />
+              <span className="hidden sm:inline">Today</span>
+              <span className="inline sm:hidden">({todaySites.length})</span>
+            </TabsTrigger>
+            <TabsTrigger value="tomorrow" className="flex items-center gap-2">
+              <TrendingUp size={16} />
+              <span className="hidden sm:inline">Tomorrow</span>
+              <span className="inline sm:hidden">({tomorrowSites.length})</span>
+            </TabsTrigger>
+            <TabsTrigger value="coming" className="flex items-center gap-2">
+              <CheckCircle2 size={16} />
+              <span className="hidden sm:inline">Coming (3d)</span>
+              <span className="inline sm:hidden">({comingSites.length})</span>
+            </TabsTrigger>
+            <TabsTrigger value="overdue" className="flex items-center gap-2">
+              <AlertTriangle size={16} />
+              <span className="hidden sm:inline">Overdue</span>
+              <span className="inline sm:hidden">({overdueSites.length})</span>
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="today">
+            <div className="space-y-4">
+              {todaySites.length === 0 ? (
+                <Card>
+                  <CardContent className="pt-8 text-center">
+                    <p className="text-gray-500">No deliveries scheduled for today</p>
+                  </CardContent>
+                </Card>
+              ) : (
+                todaySites.map((site) => <SiteCard key={site.id} site={site} />)
+              )}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="tomorrow">
+            <div className="space-y-4">
+              {tomorrowSites.length === 0 ? (
+                <Card>
+                  <CardContent className="pt-8 text-center">
+                    <p className="text-gray-500">No deliveries scheduled for tomorrow</p>
+                  </CardContent>
+                </Card>
+              ) : (
+                tomorrowSites.map((site) => <SiteCard key={site.id} site={site} />)
+              )}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="coming">
+            <div className="space-y-4">
+              {comingSites.length === 0 ? (
+                <Card>
+                  <CardContent className="pt-8 text-center">
+                    <p className="text-gray-500">
+                      No deliveries coming in the next 3 days
+                    </p>
+                  </CardContent>
+                </Card>
+              ) : (
+                comingSites.map((site) => <SiteCard key={site.id} site={site} />)
+              )}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="overdue">
+            <div className="space-y-4">
+              {overdueSites.length === 0 ? (
+                <Card>
+                  <CardContent className="pt-8 text-center">
+                    <p className="text-gray-500">No overdue deliveries</p>
+                  </CardContent>
+                </Card>
+              ) : (
+                overdueSites.map((site) => <SiteCard key={site.id} site={site} />)
+              )}
+            </div>
+          </TabsContent>
+        </Tabs>
+
+        {/* Map Placeholder Section */}
+        <div className="mt-12 mb-8">
+          <Card className="border-0 shadow-md overflow-hidden">
+            <CardHeader>
+              <CardTitle>Interactive Site Map</CardTitle>
+              <CardDescription>
+                Visual representation of all fueling sites and their statuses
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg h-96 flex items-center justify-center">
+                <div className="text-center">
+                  <MapPin className="mx-auto text-gray-400 mb-3" size={48} />
+                  <p className="text-gray-600 font-medium">Interactive map coming soon</p>
+                  <p className="text-gray-500 text-sm">Map visualization of {sites.length} sites</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Footer Info */}
+        <div className="text-center text-sm text-gray-500 py-8 border-t">
+          <p>Last updated: {new Date().toLocaleTimeString()}</p>
+          <p className="mt-1">Dashboard auto-refreshes every 2 minutes</p>
+        </div>
+      </main>
     </div>
   );
 }
