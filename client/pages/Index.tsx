@@ -324,20 +324,20 @@ export default function Dashboard() {
                 size="sm"
                 onClick={handleRefresh}
                 disabled={refreshing}
-                className="gap-2 border-slate-600 bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white"
+                className="gap-2 border-blue-300 bg-blue-50 text-gray-700 hover:bg-blue-100 hover:text-gray-900"
               >
                 <RefreshCw
                   size={16}
-                  className={refreshing ? "animate-spin text-cyan-400" : "text-cyan-400"}
+                  className={refreshing ? "animate-spin text-blue-600" : "text-blue-600"}
                 />
                 <span className="hidden sm:inline">Refresh</span>
               </Button>
               <Button
                 variant="outline"
                 size="sm"
-                className="gap-2 border-slate-600 bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white"
+                className="gap-2 border-blue-300 bg-blue-50 text-gray-700 hover:bg-blue-100 hover:text-gray-900"
               >
-                <Download size={16} className="text-cyan-400" />
+                <Download size={16} className="text-blue-600" />
                 <span className="hidden sm:inline">Download</span>
               </Button>
             </div>
