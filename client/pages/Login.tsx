@@ -35,22 +35,6 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-blue-100 flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Background Images */}
-      <div className="absolute inset-0 z-0">
-        {/* GSM Tower - Right side */}
-        <img
-          src="https://images.pexels.com/photos/94844/pexels-photo-94844.jpeg"
-          alt="GSM Tower"
-          className="absolute right-0 top-0 h-full object-cover opacity-25 transform scale-110"
-        />
-        {/* Fuel Truck - Left side */}
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets%2Fbd65b3cd7a86452e803a3d7dc7a3d048%2Fa3d8612ca0424bcca370521e3474ed71?format=webp&width=800"
-          alt="Fuel Truck"
-          className="absolute left-0 bottom-0 h-full object-cover opacity-25 transform -scale-x-100 scale-110"
-        />
-      </div>
-
       <div className="w-full max-w-md relative z-10 flex flex-col items-center">
         {/* Title Outside Card */}
         <h1 className="text-4xl font-bold text-center text-blue-600 mb-6 whitespace-nowrap">
