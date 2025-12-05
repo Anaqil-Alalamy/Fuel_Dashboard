@@ -545,20 +545,27 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
+    // Force close any modal on page load and log for debugging
+    console.log("Index page mounted, closing any modals");
+    setModalState({ open: false, type: null });
+
     const loadData = async () => {
-      const data = await fetchFuelingData();
-      setSites(data);
-      setLastUpdateTime(new Date());
+      try {
+        const data = await fetchFuelingData();
+        setSites(data);
+        setLastUpdateTime(new Date());
+        console.log("Data loaded successfully", data.length, "sites");
+      } catch (error) {
+        console.error("Failed to load data:", error);
+      }
     };
     loadData();
-    // Force close any modal on page load
-    setModalState({ open: false, type: null });
   }, []);
 
   useEffect(() => {
     const handleEscapeKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        closeModal();
+        setModalState({ open: false, type: null });
       }
     };
     window.addEventListener("keydown", handleEscapeKey);
