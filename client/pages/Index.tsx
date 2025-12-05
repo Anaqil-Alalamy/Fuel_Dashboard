@@ -392,9 +392,9 @@ export default function Dashboard() {
           </div>
 
           {/* Two Column Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-6">
-            {/* Left Column - Status Panels */}
-            <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-6 min-h-screen">
+            {/* Left Column - Status Panels (Scrollable) */}
+            <div className="flex flex-col gap-4 overflow-y-auto pr-2 max-h-[calc(100vh-200px)]">
               {/* Overdue Panel */}
               <StatusPanel
                 title="Overdue"
