@@ -47,6 +47,18 @@ const parseDateDDMMYYYY = (dateStr: string): Date | null => {
   return new Date(year, month - 1, day);
 };
 
+const getDateWithoutTime = (date: Date): Date => {
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  return d;
+};
+
+const getDaysDifference = (date: Date, baseDate: Date = new Date()): number => {
+  const d1 = getDateWithoutTime(date);
+  const d2 = getDateWithoutTime(baseDate);
+  return Math.floor((d1.getTime() - d2.getTime()) / (1000 * 60 * 60 * 24));
+};
+
 const determineStatus = (
   scheduledDate: Date,
 ): "today" | "tomorrow" | "coming" | "overdue" => {
