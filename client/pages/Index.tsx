@@ -111,7 +111,7 @@ const mockSites: FuelingSchedule[] = [
     status: "coming",
     lastUpdated: new Date().toISOString(),
     latitude: 40.7549,
-    longitude: -73.9840,
+    longitude: -73.984,
   },
 ];
 
@@ -165,18 +165,25 @@ const SiteCard = ({ site }: { site: FuelingSchedule }) => {
     <div
       className={cn(
         "border rounded-lg p-3 md:p-4 hover:shadow-md transition-shadow text-sm md:text-base",
-        getStatusColor(site.status)
+        getStatusColor(site.status),
       )}
     >
       <div className="flex items-start justify-between gap-2 mb-3">
         <div className="min-w-0 flex-1">
-          <h3 className="font-semibold text-sm md:text-base truncate">{site.siteName}</h3>
+          <h3 className="font-semibold text-sm md:text-base truncate">
+            {site.siteName}
+          </h3>
           <p className="text-xs opacity-75 flex items-center gap-1 mt-1 line-clamp-2">
             <MapPin size={12} className="flex-shrink-0" />
             <span>{site.location}</span>
           </p>
         </div>
-        <span className={cn("text-xs px-2 py-1 rounded-full font-medium whitespace-nowrap flex-shrink-0", getStatusBadgeColor(site.status))}>
+        <span
+          className={cn(
+            "text-xs px-2 py-1 rounded-full font-medium whitespace-nowrap flex-shrink-0",
+            getStatusBadgeColor(site.status),
+          )}
+        >
           {getStatusLabel(site.status)}
         </span>
       </div>
@@ -187,7 +194,9 @@ const SiteCard = ({ site }: { site: FuelingSchedule }) => {
         </div>
         <div>
           <p className="opacity-75 text-xs">Scheduled</p>
-          <p className="font-medium text-sm">{new Date(site.scheduledDate).toLocaleDateString()}</p>
+          <p className="font-medium text-sm">
+            {new Date(site.scheduledDate).toLocaleDateString()}
+          </p>
         </div>
       </div>
     </div>
@@ -213,7 +222,9 @@ const KPICard = ({
       </CardTitle>
     </CardHeader>
     <CardContent>
-      <div className="text-2xl md:text-3xl font-bold text-gray-900">{value}</div>
+      <div className="text-2xl md:text-3xl font-bold text-gray-900">
+        {value}
+      </div>
       <p className="text-xs text-gray-500 mt-1">Active sites</p>
     </CardContent>
   </Card>
@@ -227,7 +238,7 @@ export default function Dashboard() {
   const filteredSites = sites.filter(
     (site) =>
       site.siteName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      site.location.toLowerCase().includes(searchTerm.toLowerCase())
+      site.location.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   const todaySites = filteredSites.filter((s) => s.status === "today");
@@ -259,8 +270,12 @@ export default function Dashboard() {
                 <Fuel className="text-white" size={24} />
               </div>
               <div className="min-w-0">
-                <h1 className="text-lg md:text-2xl font-bold text-gray-900 truncate">Fuel Dashboard</h1>
-                <p className="text-xs md:text-sm text-gray-500 truncate">GSM Sites Fueling Management</p>
+                <h1 className="text-lg md:text-2xl font-bold text-gray-900 truncate">
+                  Fuel Dashboard
+                </h1>
+                <p className="text-xs md:text-sm text-gray-500 truncate">
+                  GSM Sites Fueling Management
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-2 flex-shrink-0">
@@ -271,10 +286,17 @@ export default function Dashboard() {
                 disabled={refreshing}
                 className="gap-2 whitespace-nowrap"
               >
-                <RefreshCw size={16} className={refreshing ? "animate-spin" : ""} />
+                <RefreshCw
+                  size={16}
+                  className={refreshing ? "animate-spin" : ""}
+                />
                 <span className="hidden sm:inline">Refresh</span>
               </Button>
-              <Button variant="outline" size="sm" className="gap-2 whitespace-nowrap">
+              <Button
+                variant="outline"
+                size="sm"
+                className="gap-2 whitespace-nowrap"
+              >
                 <Download size={16} />
                 <span className="hidden sm:inline">Export</span>
               </Button>
@@ -316,7 +338,10 @@ export default function Dashboard() {
         {/* Search Bar */}
         <div className="mb-8">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+            <Search
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              size={20}
+            />
             <Input
               placeholder="Search sites by name or location..."
               value={searchTerm}
@@ -329,25 +354,45 @@ export default function Dashboard() {
         {/* Schedules Tabs */}
         <Tabs defaultValue="today" className="w-full">
           <TabsList className="grid w-full grid-cols-4 mb-6 bg-white border border-gray-200 h-auto p-1 rounded-lg text-xs md:text-sm">
-            <TabsTrigger value="today" className="flex items-center gap-1 md:gap-2 px-1 md:px-2">
+            <TabsTrigger
+              value="today"
+              className="flex items-center gap-1 md:gap-2 px-1 md:px-2"
+            >
               <Clock size={14} className="md:w-4 md:h-4" />
               <span className="hidden md:inline text-xs">Today</span>
-              <span className="inline md:hidden text-xs">{todaySites.length}</span>
+              <span className="inline md:hidden text-xs">
+                {todaySites.length}
+              </span>
             </TabsTrigger>
-            <TabsTrigger value="tomorrow" className="flex items-center gap-1 md:gap-2 px-1 md:px-2">
+            <TabsTrigger
+              value="tomorrow"
+              className="flex items-center gap-1 md:gap-2 px-1 md:px-2"
+            >
               <TrendingUp size={14} className="md:w-4 md:h-4" />
               <span className="hidden md:inline text-xs">Tomorrow</span>
-              <span className="inline md:hidden text-xs">{tomorrowSites.length}</span>
+              <span className="inline md:hidden text-xs">
+                {tomorrowSites.length}
+              </span>
             </TabsTrigger>
-            <TabsTrigger value="coming" className="flex items-center gap-1 md:gap-2 px-1 md:px-2">
+            <TabsTrigger
+              value="coming"
+              className="flex items-center gap-1 md:gap-2 px-1 md:px-2"
+            >
               <CheckCircle2 size={14} className="md:w-4 md:h-4" />
               <span className="hidden md:inline text-xs">Coming</span>
-              <span className="inline md:hidden text-xs">{comingSites.length}</span>
+              <span className="inline md:hidden text-xs">
+                {comingSites.length}
+              </span>
             </TabsTrigger>
-            <TabsTrigger value="overdue" className="flex items-center gap-1 md:gap-2 px-1 md:px-2">
+            <TabsTrigger
+              value="overdue"
+              className="flex items-center gap-1 md:gap-2 px-1 md:px-2"
+            >
               <AlertTriangle size={14} className="md:w-4 md:h-4" />
               <span className="hidden md:inline text-xs">Overdue</span>
-              <span className="inline md:hidden text-xs">{overdueSites.length}</span>
+              <span className="inline md:hidden text-xs">
+                {overdueSites.length}
+              </span>
             </TabsTrigger>
           </TabsList>
 
@@ -356,7 +401,9 @@ export default function Dashboard() {
               {todaySites.length === 0 ? (
                 <Card>
                   <CardContent className="pt-8 text-center">
-                    <p className="text-gray-500">No deliveries scheduled for today</p>
+                    <p className="text-gray-500">
+                      No deliveries scheduled for today
+                    </p>
                   </CardContent>
                 </Card>
               ) : (
@@ -370,11 +417,15 @@ export default function Dashboard() {
               {tomorrowSites.length === 0 ? (
                 <Card>
                   <CardContent className="pt-8 text-center">
-                    <p className="text-gray-500">No deliveries scheduled for tomorrow</p>
+                    <p className="text-gray-500">
+                      No deliveries scheduled for tomorrow
+                    </p>
                   </CardContent>
                 </Card>
               ) : (
-                tomorrowSites.map((site) => <SiteCard key={site.id} site={site} />)
+                tomorrowSites.map((site) => (
+                  <SiteCard key={site.id} site={site} />
+                ))
               )}
             </div>
           </TabsContent>
@@ -390,7 +441,9 @@ export default function Dashboard() {
                   </CardContent>
                 </Card>
               ) : (
-                comingSites.map((site) => <SiteCard key={site.id} site={site} />)
+                comingSites.map((site) => (
+                  <SiteCard key={site.id} site={site} />
+                ))
               )}
             </div>
           </TabsContent>
@@ -404,7 +457,9 @@ export default function Dashboard() {
                   </CardContent>
                 </Card>
               ) : (
-                overdueSites.map((site) => <SiteCard key={site.id} site={site} />)
+                overdueSites.map((site) => (
+                  <SiteCard key={site.id} site={site} />
+                ))
               )}
             </div>
           </TabsContent>
@@ -414,7 +469,9 @@ export default function Dashboard() {
         <div className="mt-12 mb-8">
           <Card className="border-0 shadow-md overflow-hidden">
             <CardHeader className="pb-3 md:pb-4">
-              <CardTitle className="text-base md:text-lg">Interactive Site Map</CardTitle>
+              <CardTitle className="text-base md:text-lg">
+                Interactive Site Map
+              </CardTitle>
               <CardDescription className="text-xs md:text-sm">
                 Visual representation of all fueling sites and their statuses
               </CardDescription>
@@ -423,8 +480,12 @@ export default function Dashboard() {
               <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg h-64 md:h-96 flex items-center justify-center">
                 <div className="text-center px-4">
                   <MapPin className="mx-auto text-gray-400 mb-3" size={40} />
-                  <p className="text-gray-600 font-medium text-sm md:text-base">Interactive map coming soon</p>
-                  <p className="text-gray-500 text-xs md:text-sm">Map visualization of {sites.length} sites</p>
+                  <p className="text-gray-600 font-medium text-sm md:text-base">
+                    Interactive map coming soon
+                  </p>
+                  <p className="text-gray-500 text-xs md:text-sm">
+                    Map visualization of {sites.length} sites
+                  </p>
                 </div>
               </div>
             </CardContent>
