@@ -32,6 +32,7 @@ interface FuelingSchedule {
   latitude: number;
   longitude: number;
   nextFuelingDate: string;
+  priority: string;
 }
 
 const SHEET_URL = "/api/sheet";
