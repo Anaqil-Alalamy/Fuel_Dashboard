@@ -115,18 +115,23 @@ export default function FuelingMap({ sites }: FuelingMapProps) {
           fillOpacity={0.9}
         >
           <Popup>
-            <div className="text-sm">
+            <div className="text-sm space-y-2">
               <p className="font-bold text-gray-900">{site.siteName}</p>
               <p className="text-gray-700">
-                Status:{" "}
-                <span className="font-semibold">
-                  {getStatusLabel(site.status)}
-                </span>
+                <span className="font-semibold">Status:</span>{" "}
+                <span>{getStatusLabel(site.status)}</span>
               </p>
               <p className="text-gray-600">
-                Date: {new Date(site.scheduledDate).toLocaleDateString()}
+                <span className="font-semibold">Scheduled:</span>{" "}
+                {new Date(site.scheduledDate).toLocaleDateString("en-GB")}
               </p>
-              <p className="text-gray-600 text-xs">
+              <p className="text-gray-600">
+                <span className="font-semibold">Next Fueling:</span>{" "}
+                {site.nextFuelingDate
+                  ? new Date(site.nextFuelingDate).toLocaleDateString("en-GB")
+                  : "Not set"}
+              </p>
+              <p className="text-gray-500 text-xs">
                 {site.latitude.toFixed(4)}, {site.longitude.toFixed(4)}
               </p>
             </div>
