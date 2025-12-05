@@ -9,7 +9,7 @@ interface FuelingSchedule {
   location: string;
   fuelType: string;
   scheduledDate: string;
-  status: "today" | "tomorrow" | "coming" | "overdue";
+  status: "today" | "tomorrow" | "coming" | "incoming" | "overdue";
   lastUpdated: string;
   latitude: number;
   longitude: number;
