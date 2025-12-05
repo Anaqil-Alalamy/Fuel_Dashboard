@@ -117,4 +117,17 @@
     overflow-x: auto;
     white-space: pre;
   }
+
+  /* CRITICAL: Prevent any unexpected fixed overlays from blocking interaction */
+  div[class*="fixed"][class*="inset-0"][class*="bg-black"] {
+    pointer-events: none !important;
+    opacity: 0 !important;
+    display: none !important;
+  }
+
+  div[class*="fixed"][class*="inset-0"][class*="bg-blue"] {
+    pointer-events: none !important;
+    opacity: 0 !important;
+    display: none !important;
+  }
 }
