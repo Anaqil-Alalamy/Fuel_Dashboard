@@ -564,7 +564,10 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    console.log("🔍 Modal state changed:", modalState);
+    console.log("🔍 Modal state changed:", {
+      open: modalState.open,
+      type: modalState.type,
+    });
   }, [modalState]);
 
   useEffect(() => {
