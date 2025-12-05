@@ -129,79 +129,73 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
     }
   }
 
-  try {
+  const lines = csv.split("\n").filter((line) => line.trim());
 
-    const lines = csv.split("\n").filter((line) => line.trim());
-
-    if (lines.length < 2) {
-      console.warn("CSV has no data rows");
-      return [];
-    }
-
-    const sites: FuelingSchedule[] = [];
-
-    for (let i = 1; i < lines.length; i++) {
-      const values = lines[i].split(",").map((v) => v.trim());
-
-      const siteName = values[0];
-      if (!siteName) continue;
-
-      const latStr = values[5] || "0";
-      const lonStr = values[6] || "0";
-      let latitude = parseFloat(latStr);
-      let longitude = parseFloat(lonStr);
-
-      if (isNaN(latitude)) latitude = 0;
-      if (isNaN(longitude)) longitude = 0;
-
-      // Column O (index 14) is Priority
-      const priority = values[14] || "";
-
-      if (i <= 10 && priority.trim()) {
-        console.log(`Row ${i}: ${siteName}, Priority: "${priority}"`);
-      }
-
-      // Column N (index 13) is NextfuelingPlan
-      const nextFuelingStr = values[13] || "";
-      let parsedDate = nextFuelingStr
-        ? parseDateDDMMYYYY(nextFuelingStr)
-        : null;
-      if (!parsedDate) {
-        parsedDate = new Date();
-      }
-
-      const status = determineStatus(parsedDate);
-      const scheduledDateISO = parsedDate.toISOString().split("T")[0];
-
-      // Column N (index 13) is NextfuelingPlan
-      let nextFuelingDate = nextFuelingStr;
-      if (nextFuelingStr) {
-        const nextFuelingParsed = parseDateDDMMYYYY(nextFuelingStr);
-        if (nextFuelingParsed) {
-          nextFuelingDate = nextFuelingParsed.toISOString().split("T")[0];
-        }
-      }
-
-      sites.push({
-        id: `${siteName.replace(/\s+/g, "_")}_${i}`,
-        siteName,
-        location: siteName,
-        fuelType: "Fuel",
-        scheduledDate: scheduledDateISO,
-        status,
-        lastUpdated: new Date().toISOString(),
-        latitude,
-        longitude,
-        nextFuelingDate,
-        priority,
-      });
-    }
-
-    return sites;
-  } catch (error) {
-    console.error("Error fetching fueling data:", error);
+  if (lines.length < 2) {
+    console.warn("CSV has no data rows");
     return [];
   }
+
+  const sites: FuelingSchedule[] = [];
+
+  for (let i = 1; i < lines.length; i++) {
+    const values = lines[i].split(",").map((v) => v.trim());
+
+    const siteName = values[0];
+    if (!siteName) continue;
+
+    const latStr = values[5] || "0";
+    const lonStr = values[6] || "0";
+    let latitude = parseFloat(latStr);
+    let longitude = parseFloat(lonStr);
+
+    if (isNaN(latitude)) latitude = 0;
+    if (isNaN(longitude)) longitude = 0;
+
+    // Column O (index 14) is Priority
+    const priority = values[14] || "";
+
+    if (i <= 10 && priority.trim()) {
+      console.log(`Row ${i}: ${siteName}, Priority: "${priority}"`);
+    }
+
+    // Column N (index 13) is NextfuelingPlan
+    const nextFuelingStr = values[13] || "";
+    let parsedDate = nextFuelingStr
+      ? parseDateDDMMYYYY(nextFuelingStr)
+      : null;
+    if (!parsedDate) {
+      parsedDate = new Date();
+    }
+
+    const status = determineStatus(parsedDate);
+    const scheduledDateISO = parsedDate.toISOString().split("T")[0];
+
+    // Column N (index 13) is NextfuelingPlan
+    let nextFuelingDate = nextFuelingStr;
+    if (nextFuelingStr) {
+      const nextFuelingParsed = parseDateDDMMYYYY(nextFuelingStr);
+      if (nextFuelingParsed) {
+        nextFuelingDate = nextFuelingParsed.toISOString().split("T")[0];
+      }
+    }
+
+    sites.push({
+      id: `${siteName.replace(/\s+/g, "_")}_${i}`,
+      siteName,
+      location: siteName,
+      fuelType: "Fuel",
+      scheduledDate: scheduledDateISO,
+      status,
+      lastUpdated: new Date().toISOString(),
+      latitude,
+      longitude,
+      nextFuelingDate,
+      priority,
+    });
+  }
+
+  return sites;
 };
 
 const StatusCard = ({
