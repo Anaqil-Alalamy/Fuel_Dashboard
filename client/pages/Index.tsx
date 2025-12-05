@@ -115,8 +115,8 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
       if (isNaN(latitude)) latitude = 0;
       if (isNaN(longitude)) longitude = 0;
 
-      // Column M (index 12) is Priority
-      const priority = values[12] || "";
+      // Column O (index 14) is Priority
+      const priority = values[14] || "";
 
       if (i <= 10 && priority.trim()) {
         console.log(`Row ${i}: ${siteName}, Priority: "${priority}"`);
