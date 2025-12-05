@@ -447,18 +447,18 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
       {/* Top Bar */}
       <header className="sticky top-0 z-50 bg-gradient-to-r from-white to-blue-50 border-b border-blue-200 shadow-lg backdrop-blur-sm bg-opacity-90">
-        {/* First row: Logo (left), Title (center), Date/Time (right) */}
+        {/* Logo Row */}
+        <div className="px-4 md:px-6 py-2 md:py-3 border-b border-blue-200 flex justify-center">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets%2Fbd65b3cd7a86452e803a3d7dc7a3d048%2F5e321b77d52a4d30b523674ca83ee1d4?format=webp&width=800"
+            alt="GSM Fueling Logo"
+            className="h-28 md:h-40 w-auto"
+          />
+        </div>
+
+        {/* Second row: Title (center), Date/Time (right) */}
         <div className="px-4 md:px-6 py-2 md:py-3 border-b border-blue-200">
           <div className="flex items-center justify-center relative">
-            {/* Logo - Left */}
-            <div className="absolute left-0 flex items-center">
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2Fbd65b3cd7a86452e803a3d7dc7a3d048%2F5e321b77d52a4d30b523674ca83ee1d4?format=webp&width=800"
-                alt="GSM Fueling Logo"
-                className="h-28 md:h-40 w-auto"
-              />
-            </div>
-
             {/* Title - Center */}
             <div className="flex items-center gap-2">
               <Fuel className="text-blue-600" size={22} />
