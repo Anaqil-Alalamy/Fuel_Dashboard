@@ -282,9 +282,9 @@ export default function Dashboard() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
       {/* Top Bar */}
-      <header className="sticky top-0 z-50 bg-gradient-to-r from-slate-900 to-slate-800 border-b border-slate-700 shadow-2xl backdrop-blur-sm bg-opacity-80">
+      <header className="sticky top-0 z-50 bg-gradient-to-r from-white to-blue-50 border-b border-blue-200 shadow-lg backdrop-blur-sm bg-opacity-90">
         <div className="px-4 md:px-6 py-4 md:py-5">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             {/* Date/Time and Title */}
