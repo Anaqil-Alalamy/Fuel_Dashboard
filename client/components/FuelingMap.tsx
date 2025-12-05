@@ -94,8 +94,8 @@ export default function FuelingMap({ sites }: FuelingMapProps) {
       maxBoundsViscosity={1.0}
       minZoom={5}
       maxZoom={12}
-      className="w-full h-full rounded-xl"
-      style={{ minHeight: "400px" }}
+      className="w-full h-full"
+      style={{ height: "100%", width: "100%" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
