@@ -506,16 +506,25 @@ export default function Dashboard() {
                 Interactive Site Map
               </CardTitle>
               <CardDescription className="text-xs md:text-sm">
-                Visual representation of all {sites.length} fueling sites - 🔴 Red: Overdue, 🟡 Yellow: Today, 🟢 Green: Upcoming, 🔵 Blue: Tomorrow
+                Visual representation of all {sites.length} fueling sites - 🔴
+                Red: Overdue, 🟡 Yellow: Today, 🟢 Green: Upcoming, 🔵 Blue:
+                Tomorrow
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-96 md:h-[600px] rounded-lg overflow-hidden border border-gray-200 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
                 <div className="text-center px-4">
                   <MapPin className="mx-auto text-gray-400 mb-3" size={48} />
-                  <p className="text-gray-600 font-medium text-base">Interactive map with Leaflet</p>
-                  <p className="text-gray-500 text-sm mt-2">Shows all {sites.length} sites with real-time location data</p>
-                  <p className="text-gray-500 text-xs mt-4">Map visualization with layer controls (Street, Satellite, Terrain, Dark mode)</p>
+                  <p className="text-gray-600 font-medium text-base">
+                    Interactive map with Leaflet
+                  </p>
+                  <p className="text-gray-500 text-sm mt-2">
+                    Shows all {sites.length} sites with real-time location data
+                  </p>
+                  <p className="text-gray-500 text-xs mt-4">
+                    Map visualization with layer controls (Street, Satellite,
+                    Terrain, Dark mode)
+                  </p>
                 </div>
               </div>
             </CardContent>
