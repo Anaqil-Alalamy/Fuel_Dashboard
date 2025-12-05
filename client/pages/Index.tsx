@@ -780,7 +780,7 @@ export default function Dashboard() {
       </header>
 
       {/* Main Content */}
-      <main className="px-4 md:px-6 py-2">
+      <main className="px-4 md:px-6 py-2 pointer-events-auto">
         <div className="max-w-7xl mx-auto">
           {/* KPI Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 mb-3">
