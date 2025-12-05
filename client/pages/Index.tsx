@@ -35,85 +35,95 @@ interface FuelingSchedule {
   longitude: number;
 }
 
-const mockSites: FuelingSchedule[] = [
-  {
-    id: "GSM001",
-    siteName: "Downtown Station",
-    location: "123 Main St, City Center",
-    fuelType: "Diesel",
-    scheduledDate: new Date().toISOString().split("T")[0],
-    status: "today",
-    lastUpdated: new Date().toISOString(),
-    latitude: 40.7128,
-    longitude: -74.006,
-  },
-  {
-    id: "GSM002",
-    siteName: "Airport Hub",
-    location: "456 Terminal Rd, Airport Zone",
-    fuelType: "Premium Gasoline",
-    scheduledDate: new Date(Date.now() + 86400000).toISOString().split("T")[0],
-    status: "tomorrow",
-    lastUpdated: new Date().toISOString(),
-    latitude: 40.6895,
-    longitude: -74.1745,
-  },
-  {
-    id: "GSM003",
-    siteName: "Highway Junction",
-    location: "789 Interstate Ave, North Valley",
-    fuelType: "Regular Gasoline",
-    scheduledDate: new Date(Date.now() + 172800000).toISOString().split("T")[0],
-    status: "coming",
-    lastUpdated: new Date().toISOString(),
-    latitude: 40.7614,
-    longitude: -73.9776,
-  },
-  {
-    id: "GSM004",
-    siteName: "Industrial Complex",
-    location: "321 Factory Ln, Industrial Dist",
-    fuelType: "Heavy Diesel",
-    scheduledDate: new Date(Date.now() - 172800000).toISOString().split("T")[0],
-    status: "overdue",
-    lastUpdated: new Date().toISOString(),
-    latitude: 40.7489,
-    longitude: -73.968,
-  },
-  {
-    id: "GSM005",
-    siteName: "Suburban Terminal",
-    location: "555 Oak Blvd, Suburbs",
-    fuelType: "Diesel",
-    scheduledDate: new Date().toISOString().split("T")[0],
-    status: "today",
-    lastUpdated: new Date().toISOString(),
-    latitude: 40.6501,
-    longitude: -73.9496,
-  },
-  {
-    id: "GSM006",
-    siteName: "Commercial Park",
-    location: "888 Commerce Dr, Business Park",
-    fuelType: "Premium Gasoline",
-    scheduledDate: new Date(Date.now() - 86400000).toISOString().split("T")[0],
-    status: "overdue",
-    lastUpdated: new Date().toISOString(),
-    latitude: 40.7282,
-    longitude: -74.0076,
-  },
-  {
-    id: "GSM007",
-    siteName: "Metro Station",
-    location: "200 Transit Way, Central Hub",
-    fuelType: "Regular Gasoline",
-    scheduledDate: new Date(Date.now() + 259200000).toISOString().split("T")[0],
-    status: "coming",
-    lastUpdated: new Date().toISOString(),
-    latitude: 40.7549,
-    longitude: -73.984,
-  },
-];
+const SHEET_URL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRDnTkwpbgsnY_i60u3ZleNs1DL3vMdG3fYHMrr5rwVDqMb3GpgKH40Y-7WQsEzEAi-wDHwLaimN8NC/pub?gid=1871402380&single=true&output=csv";
+
+// Parse DD/MM/YYYY format to Date
+const parseDateDDMMYYYY = (dateStr: string): Date | null => {
+  if (!dateStr) return null;
+  const parts = dateStr.trim().split("/");
+  if (parts.length !== 3) return null;
+  const day = parseInt(parts[0], 10);
+  const month = parseInt(parts[1], 10);
+  const year = parseInt(parts[2], 10);
+  if (isNaN(day) || isNaN(month) || isNaN(year)) return null;
+  return new Date(year, month - 1, day);
+};
+
+// Determine status based on scheduled date
+const determineStatus = (
+  scheduledDate: Date
+): "today" | "tomorrow" | "coming" | "overdue" => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const threeFromNow = new Date(today);
+  threeFromNow.setDate(threeFromNow.getDate() + 3);
+
+  const scheduled = new Date(scheduledDate);
+  scheduled.setHours(0, 0, 0, 0);
+
+  if (scheduled.getTime() === today.getTime()) return "today";
+  if (scheduled.getTime() === tomorrow.getTime()) return "tomorrow";
+  if (scheduled > today && scheduled <= threeFromNow) return "coming";
+  if (scheduled < today) return "overdue";
+  return "coming";
+};
+
+// Fetch and parse CSV from Google Sheets
+const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
+  try {
+    const response = await fetch(SHEET_URL);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const csv = await response.text();
+
+    const lines = csv.split("\n").filter((line) => line.trim());
+    if (lines.length < 2) return [];
+
+    const sites: FuelingSchedule[] = [];
+
+    for (let i = 1; i < lines.length; i++) {
+      const values = lines[i].split(",").map((v) => v.trim());
+      if (values.length < 14) continue;
+
+      const siteName = values[0];
+      const latStr = values[5];
+      const lonStr = values[6];
+      const dateStr = values[13];
+
+      if (!siteName || !latStr || !lonStr || !dateStr) continue;
+
+      const latitude = parseFloat(latStr);
+      const longitude = parseFloat(lonStr);
+      const parsedDate = parseDateDDMMYYYY(dateStr);
+
+      if (isNaN(latitude) || isNaN(longitude) || !parsedDate) continue;
+
+      const status = determineStatus(parsedDate);
+      const scheduledDateISO = parsedDate.toISOString().split("T")[0];
+
+      sites.push({
+        id: `${siteName.replace(/\s+/g, "_")}_${i}`,
+        siteName,
+        location: siteName,
+        fuelType: "Fuel",
+        scheduledDate: scheduledDateISO,
+        status,
+        lastUpdated: new Date().toISOString(),
+        latitude,
+        longitude,
+      });
+    }
+
+    return sites;
+  } catch (error) {
+    console.error("Error fetching fueling data:", error);
+    return [];
+  }
+};
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -165,38 +175,29 @@ const SiteCard = ({ site }: { site: FuelingSchedule }) => {
     <div
       className={cn(
         "border rounded-lg p-3 md:p-4 hover:shadow-md transition-shadow text-sm md:text-base",
-        getStatusColor(site.status),
+        getStatusColor(site.status)
       )}
     >
       <div className="flex items-start justify-between gap-2 mb-3">
         <div className="min-w-0 flex-1">
-          <h3 className="font-semibold text-sm md:text-base truncate">
-            {site.siteName}
-          </h3>
+          <h3 className="font-semibold text-sm md:text-base truncate">{site.siteName}</h3>
           <p className="text-xs opacity-75 flex items-center gap-1 mt-1 line-clamp-2">
             <MapPin size={12} className="flex-shrink-0" />
             <span>{site.location}</span>
           </p>
         </div>
-        <span
-          className={cn(
-            "text-xs px-2 py-1 rounded-full font-medium whitespace-nowrap flex-shrink-0",
-            getStatusBadgeColor(site.status),
-          )}
-        >
+        <span className={cn("text-xs px-2 py-1 rounded-full font-medium whitespace-nowrap flex-shrink-0", getStatusBadgeColor(site.status))}>
           {getStatusLabel(site.status)}
         </span>
       </div>
       <div className="grid grid-cols-2 gap-2 md:gap-3 text-xs md:text-sm">
         <div>
-          <p className="opacity-75 text-xs">Fuel Type</p>
-          <p className="font-medium text-sm">{site.fuelType}</p>
+          <p className="opacity-75 text-xs">Coordinates</p>
+          <p className="font-medium text-sm">{site.latitude.toFixed(4)}, {site.longitude.toFixed(4)}</p>
         </div>
         <div>
           <p className="opacity-75 text-xs">Scheduled</p>
-          <p className="font-medium text-sm">
-            {new Date(site.scheduledDate).toLocaleDateString()}
-          </p>
+          <p className="font-medium text-sm">{new Date(site.scheduledDate).toLocaleDateString()}</p>
         </div>
       </div>
     </div>
@@ -222,9 +223,7 @@ const KPICard = ({
       </CardTitle>
     </CardHeader>
     <CardContent>
-      <div className="text-2xl md:text-3xl font-bold text-gray-900">
-        {value}
-      </div>
+      <div className="text-2xl md:text-3xl font-bold text-gray-900">{value}</div>
       <p className="text-xs text-gray-500 mt-1">Active sites</p>
     </CardContent>
   </Card>
@@ -233,12 +232,23 @@ const KPICard = ({
 export default function Dashboard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [refreshing, setRefreshing] = useState(false);
-  const [sites, setSites] = useState<FuelingSchedule[]>(mockSites);
+  const [sites, setSites] = useState<FuelingSchedule[]>([]);
+  const [lastUpdateTime, setLastUpdateTime] = useState<Date>(new Date());
+
+  // Load initial data
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await fetchFuelingData();
+      setSites(data);
+      setLastUpdateTime(new Date());
+    };
+    loadData();
+  }, []);
 
   const filteredSites = sites.filter(
     (site) =>
       site.siteName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      site.location.toLowerCase().includes(searchTerm.toLowerCase()),
+      site.location.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const todaySites = filteredSites.filter((s) => s.status === "today");
@@ -248,10 +258,13 @@ export default function Dashboard() {
 
   const handleRefresh = async () => {
     setRefreshing(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const data = await fetchFuelingData();
+    setSites(data);
+    setLastUpdateTime(new Date());
     setRefreshing(false);
   };
 
+  // Auto-refresh every 2 minutes (120000ms)
   useEffect(() => {
     const interval = setInterval(() => {
       handleRefresh();
@@ -270,12 +283,8 @@ export default function Dashboard() {
                 <Fuel className="text-white" size={24} />
               </div>
               <div className="min-w-0">
-                <h1 className="text-lg md:text-2xl font-bold text-gray-900 truncate">
-                  Fuel Dashboard
-                </h1>
-                <p className="text-xs md:text-sm text-gray-500 truncate">
-                  GSM Sites Fueling Management
-                </p>
+                <h1 className="text-lg md:text-2xl font-bold text-gray-900 truncate">Fuel Dashboard</h1>
+                <p className="text-xs md:text-sm text-gray-500 truncate">GSM Sites Fueling Management</p>
               </div>
             </div>
             <div className="flex items-center gap-2 flex-shrink-0">
@@ -286,17 +295,10 @@ export default function Dashboard() {
                 disabled={refreshing}
                 className="gap-2 whitespace-nowrap"
               >
-                <RefreshCw
-                  size={16}
-                  className={refreshing ? "animate-spin" : ""}
-                />
+                <RefreshCw size={16} className={refreshing ? "animate-spin" : ""} />
                 <span className="hidden sm:inline">Refresh</span>
               </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="gap-2 whitespace-nowrap"
-              >
+              <Button variant="outline" size="sm" className="gap-2 whitespace-nowrap">
                 <Download size={16} />
                 <span className="hidden sm:inline">Export</span>
               </Button>
@@ -338,10 +340,7 @@ export default function Dashboard() {
         {/* Search Bar */}
         <div className="mb-8">
           <div className="relative">
-            <Search
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-              size={20}
-            />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
             <Input
               placeholder="Search sites by name or location..."
               value={searchTerm}
@@ -354,45 +353,25 @@ export default function Dashboard() {
         {/* Schedules Tabs */}
         <Tabs defaultValue="today" className="w-full">
           <TabsList className="grid w-full grid-cols-4 mb-6 bg-white border border-gray-200 h-auto p-1 rounded-lg text-xs md:text-sm">
-            <TabsTrigger
-              value="today"
-              className="flex items-center gap-1 md:gap-2 px-1 md:px-2"
-            >
+            <TabsTrigger value="today" className="flex items-center gap-1 md:gap-2 px-1 md:px-2">
               <Clock size={14} className="md:w-4 md:h-4" />
               <span className="hidden md:inline text-xs">Today</span>
-              <span className="inline md:hidden text-xs">
-                {todaySites.length}
-              </span>
+              <span className="inline md:hidden text-xs">{todaySites.length}</span>
             </TabsTrigger>
-            <TabsTrigger
-              value="tomorrow"
-              className="flex items-center gap-1 md:gap-2 px-1 md:px-2"
-            >
+            <TabsTrigger value="tomorrow" className="flex items-center gap-1 md:gap-2 px-1 md:px-2">
               <TrendingUp size={14} className="md:w-4 md:h-4" />
               <span className="hidden md:inline text-xs">Tomorrow</span>
-              <span className="inline md:hidden text-xs">
-                {tomorrowSites.length}
-              </span>
+              <span className="inline md:hidden text-xs">{tomorrowSites.length}</span>
             </TabsTrigger>
-            <TabsTrigger
-              value="coming"
-              className="flex items-center gap-1 md:gap-2 px-1 md:px-2"
-            >
+            <TabsTrigger value="coming" className="flex items-center gap-1 md:gap-2 px-1 md:px-2">
               <CheckCircle2 size={14} className="md:w-4 md:h-4" />
               <span className="hidden md:inline text-xs">Coming</span>
-              <span className="inline md:hidden text-xs">
-                {comingSites.length}
-              </span>
+              <span className="inline md:hidden text-xs">{comingSites.length}</span>
             </TabsTrigger>
-            <TabsTrigger
-              value="overdue"
-              className="flex items-center gap-1 md:gap-2 px-1 md:px-2"
-            >
+            <TabsTrigger value="overdue" className="flex items-center gap-1 md:gap-2 px-1 md:px-2">
               <AlertTriangle size={14} className="md:w-4 md:h-4" />
               <span className="hidden md:inline text-xs">Overdue</span>
-              <span className="inline md:hidden text-xs">
-                {overdueSites.length}
-              </span>
+              <span className="inline md:hidden text-xs">{overdueSites.length}</span>
             </TabsTrigger>
           </TabsList>
 
@@ -401,9 +380,7 @@ export default function Dashboard() {
               {todaySites.length === 0 ? (
                 <Card>
                   <CardContent className="pt-8 text-center">
-                    <p className="text-gray-500">
-                      No deliveries scheduled for today
-                    </p>
+                    <p className="text-gray-500">No deliveries scheduled for today</p>
                   </CardContent>
                 </Card>
               ) : (
@@ -417,15 +394,11 @@ export default function Dashboard() {
               {tomorrowSites.length === 0 ? (
                 <Card>
                   <CardContent className="pt-8 text-center">
-                    <p className="text-gray-500">
-                      No deliveries scheduled for tomorrow
-                    </p>
+                    <p className="text-gray-500">No deliveries scheduled for tomorrow</p>
                   </CardContent>
                 </Card>
               ) : (
-                tomorrowSites.map((site) => (
-                  <SiteCard key={site.id} site={site} />
-                ))
+                tomorrowSites.map((site) => <SiteCard key={site.id} site={site} />)
               )}
             </div>
           </TabsContent>
@@ -441,9 +414,7 @@ export default function Dashboard() {
                   </CardContent>
                 </Card>
               ) : (
-                comingSites.map((site) => (
-                  <SiteCard key={site.id} site={site} />
-                ))
+                comingSites.map((site) => <SiteCard key={site.id} site={site} />)
               )}
             </div>
           </TabsContent>
@@ -457,9 +428,7 @@ export default function Dashboard() {
                   </CardContent>
                 </Card>
               ) : (
-                overdueSites.map((site) => (
-                  <SiteCard key={site.id} site={site} />
-                ))
+                overdueSites.map((site) => <SiteCard key={site.id} site={site} />)
               )}
             </div>
           </TabsContent>
@@ -469,23 +438,17 @@ export default function Dashboard() {
         <div className="mt-12 mb-8">
           <Card className="border-0 shadow-md overflow-hidden">
             <CardHeader className="pb-3 md:pb-4">
-              <CardTitle className="text-base md:text-lg">
-                Interactive Site Map
-              </CardTitle>
+              <CardTitle className="text-base md:text-lg">Interactive Site Map</CardTitle>
               <CardDescription className="text-xs md:text-sm">
-                Visual representation of all fueling sites and their statuses
+                Visual representation of all {sites.length} fueling sites and their statuses
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg h-64 md:h-96 flex items-center justify-center">
                 <div className="text-center px-4">
                   <MapPin className="mx-auto text-gray-400 mb-3" size={40} />
-                  <p className="text-gray-600 font-medium text-sm md:text-base">
-                    Interactive map coming soon
-                  </p>
-                  <p className="text-gray-500 text-xs md:text-sm">
-                    Map visualization of {sites.length} sites
-                  </p>
+                  <p className="text-gray-600 font-medium text-sm md:text-base">Interactive map coming soon</p>
+                  <p className="text-gray-500 text-xs md:text-sm">Map visualization of {sites.length} sites with real-time location tracking</p>
                 </div>
               </div>
             </CardContent>
@@ -494,7 +457,7 @@ export default function Dashboard() {
 
         {/* Footer Info */}
         <div className="text-center text-xs md:text-sm text-gray-500 py-6 md:py-8 border-t">
-          <p>Last updated: {new Date().toLocaleTimeString()}</p>
+          <p>Last updated: {lastUpdateTime.toLocaleTimeString()}</p>
           <p className="mt-1">Dashboard auto-refreshes every 2 minutes</p>
         </div>
       </main>
