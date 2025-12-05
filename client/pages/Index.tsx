@@ -251,13 +251,13 @@ const PerformanceChart = ({ sites }: { sites: FuelingSchedule[] }) => {
 
   return (
     <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 mb-3">
-      <div className="flex items-center justify-center" style={{ height: "140px", position: "relative" }}>
+      <div style={{ height: "150px", position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
               data={data}
               cx="50%"
-              cy="45%"
+              cy="50%"
               innerRadius={40}
               outerRadius={60}
               paddingAngle={2}
@@ -280,10 +280,10 @@ const PerformanceChart = ({ sites }: { sites: FuelingSchedule[] }) => {
             pointerEvents: "none",
           }}
         >
-          <div className="text-2xl font-bold text-blue-600">{performancePercentage}%</div>
+          <div className="text-3xl font-bold text-blue-600">{performancePercentage}%</div>
         </div>
       </div>
-      <div className="text-center mt-2">
+      <div className="text-center mt-3">
         <p className="text-sm font-bold text-gray-900">Overall Performance</p>
       </div>
     </div>
