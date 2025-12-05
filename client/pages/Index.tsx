@@ -404,7 +404,7 @@ export default function Dashboard() {
                 borderColor="border-t-2 border-t-red-500"
                 sites={overdueSites}
                 icon="🔴"
-                gradient="from-red-600 to-red-700"
+                gradient="from-red-100 to-red-200"
               />
 
               {/* Today Panel */}
@@ -413,7 +413,7 @@ export default function Dashboard() {
                 borderColor="border-t-2 border-t-orange-500"
                 sites={todaySites}
                 icon="🟠"
-                gradient="from-orange-600 to-orange-700"
+                gradient="from-orange-100 to-orange-200"
               />
 
               {/* Coming Panel */}
@@ -422,7 +422,7 @@ export default function Dashboard() {
                 borderColor="border-t-2 border-t-yellow-500"
                 sites={comingSites}
                 icon="🟡"
-                gradient="from-yellow-600 to-yellow-700"
+                gradient="from-yellow-100 to-yellow-200"
               />
             </div>
 
