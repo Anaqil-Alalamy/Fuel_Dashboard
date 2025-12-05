@@ -426,12 +426,6 @@ export default function Dashboard() {
                 <Calendar size={16} className="text-blue-600" />
                 <span className="hidden sm:inline">{currentDateTime}</span>
               </div>
-              <div className="hidden md:flex items-center gap-2 pl-4 border-l border-blue-200">
-                <Zap size={16} className="text-orange-500" />
-                <span className="text-xs text-gray-600">
-                  {onSchedulePercentage}% On Schedule
-                </span>
-              </div>
             </div>
           </div>
         </div>
