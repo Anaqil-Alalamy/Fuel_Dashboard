@@ -137,12 +137,6 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
         }
       }
 
-      if (i <= 5) {
-        console.log(
-          `Row ${i}: ${siteName}, DateStr: ${nextFuelingStr}, Parsed: ${scheduledDateISO}, Status: ${status}`,
-        );
-      }
-
       sites.push({
         id: `${siteName.replace(/\s+/g, "_")}_${i}`,
         siteName,
