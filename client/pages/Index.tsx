@@ -173,7 +173,12 @@ const StatusPanel = ({
   icon: string;
 }) => {
   return (
-    <div className={cn("bg-white rounded-lg shadow-sm overflow-hidden flex flex-col", borderColor)}>
+    <div
+      className={cn(
+        "bg-white rounded-lg shadow-sm overflow-hidden flex flex-col",
+        borderColor,
+      )}
+    >
       <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
         <h3 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
           <span>{icon}</span>
@@ -193,13 +198,20 @@ const StatusPanel = ({
           <table className="w-full text-xs">
             <thead className="sticky top-0 bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="text-left px-3 py-2 font-semibold text-gray-700">Site Name</th>
-                <th className="text-left px-3 py-2 font-semibold text-gray-700">Date</th>
+                <th className="text-left px-3 py-2 font-semibold text-gray-700">
+                  Site Name
+                </th>
+                <th className="text-left px-3 py-2 font-semibold text-gray-700">
+                  Date
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {sites.map((site) => (
-                <tr key={site.id} className="hover:bg-gray-50 transition-colors">
+                <tr
+                  key={site.id}
+                  className="hover:bg-gray-50 transition-colors"
+                >
                   <td className="px-3 py-2 text-gray-900 font-medium truncate max-w-[150px]">
                     {site.siteName}
                   </td>
@@ -335,11 +347,7 @@ export default function Dashboard() {
                 />
                 <span className="hidden sm:inline">Refresh</span>
               </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="gap-2"
-              >
+              <Button variant="outline" size="sm" className="gap-2">
                 <Download size={16} />
                 <span className="hidden sm:inline">Download</span>
               </Button>
@@ -361,9 +369,7 @@ export default function Dashboard() {
             />
             <KPICard
               title="Overdue"
-              value={
-                sites.filter((s) => s.status === "overdue").length
-              }
+              value={sites.filter((s) => s.status === "overdue").length}
               icon={AlertCircle}
               color="text-red-600"
             />
@@ -375,7 +381,11 @@ export default function Dashboard() {
             />
             <KPICard
               title="Coming (3D)"
-              value={sites.filter((s) => s.status === "coming" || s.status === "tomorrow").length}
+              value={
+                sites.filter(
+                  (s) => s.status === "coming" || s.status === "tomorrow",
+                ).length
+              }
               icon={TrendingUp}
               color="text-green-600"
             />
