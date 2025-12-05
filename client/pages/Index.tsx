@@ -171,15 +171,11 @@ const StatusCard = ({
       )}
     >
       <div className={cn("px-4 py-4 bg-gradient-to-r", gradient)}>
-        <div className="flex items-center gap-2 mb-3">
+        <div className="flex items-center gap-3">
           <span className="text-2xl">{icon}</span>
-          <h3 className="text-lg font-bold text-gray-900 flex-1">{title}</h3>
-        </div>
-        <div className="flex items-baseline gap-2">
-          <p className="text-3xl font-bold text-gray-900">{sites.length}</p>
-          <p className="text-xs text-gray-600">
-            {sites.length === 1 ? "site" : "sites"}
-          </p>
+          <h3 className="text-lg font-bold text-gray-900">
+            {title} {sites.length} {sites.length === 1 ? "site" : "sites"}
+          </h3>
         </div>
       </div>
     </button>
