@@ -22,7 +22,6 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import FuelingMap from "@/components/FuelingMap";
 
 interface FuelingSchedule {
   id: string;
