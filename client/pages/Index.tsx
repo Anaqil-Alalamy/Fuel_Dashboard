@@ -413,18 +413,18 @@ export default function Dashboard() {
         {/* Map Placeholder Section */}
         <div className="mt-12 mb-8">
           <Card className="border-0 shadow-md overflow-hidden">
-            <CardHeader>
-              <CardTitle>Interactive Site Map</CardTitle>
-              <CardDescription>
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">Interactive Site Map</CardTitle>
+              <CardDescription className="text-xs md:text-sm">
                 Visual representation of all fueling sites and their statuses
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg h-96 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="mx-auto text-gray-400 mb-3" size={48} />
-                  <p className="text-gray-600 font-medium">Interactive map coming soon</p>
-                  <p className="text-gray-500 text-sm">Map visualization of {sites.length} sites</p>
+              <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg h-64 md:h-96 flex items-center justify-center">
+                <div className="text-center px-4">
+                  <MapPin className="mx-auto text-gray-400 mb-3" size={40} />
+                  <p className="text-gray-600 font-medium text-sm md:text-base">Interactive map coming soon</p>
+                  <p className="text-gray-500 text-xs md:text-sm">Map visualization of {sites.length} sites</p>
                 </div>
               </div>
             </CardContent>
@@ -432,7 +432,7 @@ export default function Dashboard() {
         </div>
 
         {/* Footer Info */}
-        <div className="text-center text-sm text-gray-500 py-8 border-t">
+        <div className="text-center text-xs md:text-sm text-gray-500 py-6 md:py-8 border-t">
           <p>Last updated: {new Date().toLocaleTimeString()}</p>
           <p className="mt-1">Dashboard auto-refreshes every 2 minutes</p>
         </div>
