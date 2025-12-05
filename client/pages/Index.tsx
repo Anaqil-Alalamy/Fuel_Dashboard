@@ -499,7 +499,7 @@ export default function Dashboard() {
           </TabsContent>
         </Tabs>
 
-        {/* Map Placeholder Section */}
+        {/* Interactive Map Section */}
         <div className="mt-12 mb-8">
           <Card className="border-0 shadow-md overflow-hidden">
             <CardHeader className="pb-3 md:pb-4">
@@ -507,22 +507,16 @@ export default function Dashboard() {
                 Interactive Site Map
               </CardTitle>
               <CardDescription className="text-xs md:text-sm">
-                Visual representation of all {sites.length} fueling sites and
-                their statuses
+                Visual representation of all {sites.length} fueling sites - 🔴 Red: Overdue, 🟡 Yellow: Today, 🟢 Green: Upcoming, 🔵 Blue: Tomorrow
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg h-64 md:h-96 flex items-center justify-center">
-                <div className="text-center px-4">
-                  <MapPin className="mx-auto text-gray-400 mb-3" size={40} />
-                  <p className="text-gray-600 font-medium text-sm md:text-base">
-                    Interactive map coming soon
-                  </p>
-                  <p className="text-gray-500 text-xs md:text-sm">
-                    Map visualization of {sites.length} sites with real-time
-                    location tracking
-                  </p>
-                </div>
+              <div className="h-96 md:h-[600px] rounded-lg overflow-hidden">
+                <FuelingMap sites={sites} />
+              </div>
+              <div className="mt-4 text-xs text-gray-600">
+                <p className="font-medium mb-2">Map Layers:</p>
+                <p>Use the layer control (top-right corner) to switch between Street, Satellite, Terrain, and Dark mode views.</p>
               </div>
             </CardContent>
           </Card>
