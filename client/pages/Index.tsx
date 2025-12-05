@@ -956,8 +956,8 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Detail Modal */}
-      {modalState.open && modalState.type === "overdue" && (
+      {/* Detail Modals - Only show if explicitly opened */}
+      {modalState?.open === true && modalState?.type === "overdue" && (
         <DetailModal
           title="Due"
           sites={dueSites}
