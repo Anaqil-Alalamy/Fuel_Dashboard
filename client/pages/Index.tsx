@@ -105,7 +105,7 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
   } catch (apiError) {
     console.warn(
       "Local API endpoint failed, falling back to Google Sheets CSV:",
-      apiError
+      apiError,
     );
     try {
       // Fallback to fetching directly from Google Sheets
@@ -124,7 +124,10 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
       csv = await response.text();
       console.log("Successfully fetched from Google Sheets CSV");
     } catch (sheetError) {
-      console.error("Failed to fetch from both API and Google Sheets:", sheetError);
+      console.error(
+        "Failed to fetch from both API and Google Sheets:",
+        sheetError,
+      );
       return [];
     }
   }
@@ -161,9 +164,7 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
 
     // Column N (index 13) is NextfuelingPlan
     const nextFuelingStr = values[13] || "";
-    let parsedDate = nextFuelingStr
-      ? parseDateDDMMYYYY(nextFuelingStr)
-      : null;
+    let parsedDate = nextFuelingStr ? parseDateDDMMYYYY(nextFuelingStr) : null;
     if (!parsedDate) {
       parsedDate = new Date();
     }
