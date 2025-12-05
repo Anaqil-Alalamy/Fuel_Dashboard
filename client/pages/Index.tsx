@@ -90,10 +90,8 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
     }
 
     const csv = await response.text();
-    console.log("CSV fetched, length:", csv.length);
 
     const lines = csv.split("\n").filter((line) => line.trim());
-    console.log("Total lines parsed:", lines.length);
 
     if (lines.length < 2) {
       console.warn("CSV has no data rows");
