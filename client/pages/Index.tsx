@@ -543,35 +543,11 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              {/* Legend and Footer */}
-              <div className="flex flex-col gap-3">
-                <div className="bg-white border border-gray-300 rounded-xl p-3 shadow-lg">
-                  <p className="text-xs font-bold text-gray-900 mb-2 flex items-center gap-2">
-                    <Zap size={12} className="text-orange-500" />
-                    Status Legend
-                  </p>
-                  <div className="space-y-1 text-xs">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                      <span>Overdue: {overdueSites.length}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                      <span>Today: {todaySites.length}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                      <span>Coming: {comingSites.length}</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Info Footer */}
-                <div className="text-xs text-gray-600 text-center py-1 px-3 bg-gradient-to-r from-white to-blue-50 rounded-lg border border-gray-200">
-                  <p className="font-medium">
-                    Last updated: {lastUpdateTime.toLocaleTimeString()}
-                  </p>
-                </div>
+              {/* Info Footer */}
+              <div className="text-xs text-gray-600 text-center py-1 px-3 bg-gradient-to-r from-white to-blue-50 rounded-lg border border-gray-200">
+                <p className="font-medium">
+                  Last updated: {lastUpdateTime.toLocaleTimeString()}
+                </p>
               </div>
             </div>
           </div>
