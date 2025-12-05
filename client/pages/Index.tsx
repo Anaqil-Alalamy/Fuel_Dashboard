@@ -496,11 +496,6 @@ const KPICard = ({
           {value}
         </h3>
       </div>
-      <div className="flex justify-center">
-        <div className={cn("p-1 rounded-lg", color)}>
-          <Icon size={16} className="text-white" />
-        </div>
-      </div>
       {trend !== undefined && (
         <div className="flex items-center gap-0.5 text-green-600 text-[9px] font-semibold">
           <ArrowUpRight size={10} />
