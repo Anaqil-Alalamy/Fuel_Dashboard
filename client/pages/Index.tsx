@@ -233,26 +233,26 @@ const KPICard = ({
 }) => (
   <div
     className={cn(
-      "relative rounded-xl overflow-hidden shadow-md border border-gray-200",
+      "relative rounded-lg overflow-hidden shadow border border-gray-200",
       "bg-gradient-to-br",
       gradient,
     )}
   >
     <div className="absolute inset-0 opacity-10"></div>
-    <div className="relative p-4">
-      <div className="flex items-start justify-between mb-3">
+    <div className="relative p-3">
+      <div className="flex items-start justify-between mb-2">
         <div>
-          <p className="text-gray-600 text-xs font-medium mb-0.5">{title}</p>
-          <h3 className="text-2xl font-bold text-gray-900">{value}</h3>
+          <p className="text-gray-600 text-[10px] font-medium mb-0.5">{title}</p>
+          <h3 className="text-lg font-bold text-gray-900 leading-tight">{value}</h3>
         </div>
-        <div className={cn("p-2 rounded-lg", color)}>
-          <Icon size={18} className="text-white" />
+        <div className={cn("p-1.5 rounded-lg", color)}>
+          <Icon size={16} className="text-white" />
         </div>
       </div>
       {trend !== undefined && (
-        <div className="flex items-center gap-0.5 text-green-600 text-xs font-semibold">
-          <ArrowUpRight size={12} />
-          <span className="text-[10px]">{trend}% from yesterday</span>
+        <div className="flex items-center gap-0.5 text-green-600 text-[9px] font-semibold">
+          <ArrowUpRight size={10} />
+          <span>{trend}% from yesterday</span>
         </div>
       )}
     </div>
