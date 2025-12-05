@@ -81,10 +81,10 @@ export default function FuelingMap({ sites }: FuelingMapProps) {
   // Calculate center based on all sites or use Saudi Arabia center
   const centerLat =
     validSites.reduce((sum, site) => sum + site.latitude, 0) /
-    validSites.length || 24.2;
+      validSites.length || 24.2;
   const centerLon =
     validSites.reduce((sum, site) => sum + site.longitude, 0) /
-    validSites.length || 44.9;
+      validSites.length || 44.9;
 
   return (
     <MapContainer
@@ -117,7 +117,10 @@ export default function FuelingMap({ sites }: FuelingMapProps) {
             <div className="text-sm">
               <p className="font-bold text-gray-900">{site.siteName}</p>
               <p className="text-gray-700">
-                Status: <span className="font-semibold">{getStatusLabel(site.status)}</span>
+                Status:{" "}
+                <span className="font-semibold">
+                  {getStatusLabel(site.status)}
+                </span>
               </p>
               <p className="text-gray-600">
                 Date: {new Date(site.scheduledDate).toLocaleDateString()}

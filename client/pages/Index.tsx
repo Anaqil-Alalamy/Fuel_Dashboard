@@ -146,10 +146,12 @@ const StatusPanel = ({
   gradient: string;
 }) => {
   return (
-    <div className={cn(
-      "bg-white rounded-xl shadow-lg overflow-hidden flex flex-col border border-gray-200",
-      borderColor,
-    )}>
+    <div
+      className={cn(
+        "bg-white rounded-xl shadow-lg overflow-hidden flex flex-col border border-gray-200",
+        borderColor,
+      )}
+    >
       <div className={cn("px-4 py-3 bg-gradient-to-r", gradient)}>
         <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
           <span className="text-lg">{icon}</span>
@@ -169,13 +171,20 @@ const StatusPanel = ({
           <table className="w-full text-xs">
             <thead className="sticky top-0 bg-gray-100 border-b border-gray-200">
               <tr>
-                <th className="text-left px-3 py-2 font-bold text-gray-700">Site Name</th>
-                <th className="text-left px-3 py-2 font-bold text-gray-700">Date</th>
+                <th className="text-left px-3 py-2 font-bold text-gray-700">
+                  Site Name
+                </th>
+                <th className="text-left px-3 py-2 font-bold text-gray-700">
+                  Date
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {sites.map((site) => (
-                <tr key={site.id} className="hover:bg-gray-50 transition-colors">
+                <tr
+                  key={site.id}
+                  className="hover:bg-gray-50 transition-colors"
+                >
                   <td className="px-3 py-2 text-gray-800 font-medium truncate max-w-[150px]">
                     {site.siteName}
                   </td>
@@ -210,11 +219,13 @@ const KPICard = ({
   gradient: string;
   trend?: number;
 }) => (
-  <div className={cn(
-    "relative rounded-2xl overflow-hidden shadow-lg border border-gray-200",
-    "bg-gradient-to-br",
-    gradient,
-  )}>
+  <div
+    className={cn(
+      "relative rounded-2xl overflow-hidden shadow-lg border border-gray-200",
+      "bg-gradient-to-br",
+      gradient,
+    )}
+  >
     <div className="absolute inset-0 opacity-10"></div>
     <div className="relative p-6">
       <div className="flex items-start justify-between mb-4">
@@ -222,10 +233,7 @@ const KPICard = ({
           <p className="text-gray-600 text-sm font-medium mb-1">{title}</p>
           <h3 className="text-4xl font-bold text-gray-900">{value}</h3>
         </div>
-        <div className={cn(
-          "p-3 rounded-xl",
-          color,
-        )}>
+        <div className={cn("p-3 rounded-xl", color)}>
           <Icon size={24} className="text-white" />
         </div>
       </div>
@@ -289,9 +297,13 @@ export default function Dashboard() {
     minute: "2-digit",
   });
 
-  const onSchedulePercentage = sites.length > 0 
-    ? Math.round((sites.filter(s => s.status !== "overdue").length / sites.length) * 100) 
-    : 0;
+  const onSchedulePercentage =
+    sites.length > 0
+      ? Math.round(
+          (sites.filter((s) => s.status !== "overdue").length / sites.length) *
+            100,
+        )
+      : 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
@@ -340,7 +352,9 @@ export default function Dashboard() {
               >
                 <RefreshCw
                   size={16}
-                  className={refreshing ? "animate-spin text-blue-600" : "text-blue-600"}
+                  className={
+                    refreshing ? "animate-spin text-blue-600" : "text-blue-600"
+                  }
                 />
                 <span className="hidden sm:inline">Refresh</span>
               </Button>
@@ -399,7 +413,11 @@ export default function Dashboard() {
             />
             <KPICard
               title="Coming (3D)"
-              value={sites.filter((s) => s.status === "coming" || s.status === "tomorrow").length}
+              value={
+                sites.filter(
+                  (s) => s.status === "coming" || s.status === "tomorrow",
+                ).length
+              }
               icon={TrendingUp}
               color="bg-green-600"
               gradient="from-green-100 to-green-200"
@@ -439,7 +457,10 @@ export default function Dashboard() {
             </div>
 
             {/* Right Column - Map Container (Sticky) */}
-            <div className="sticky top-[140px] flex flex-col gap-4" style={{ height: "calc(100vh - 180px)" }}>
+            <div
+              className="sticky top-[140px] flex flex-col gap-4"
+              style={{ height: "calc(100vh - 180px)" }}
+            >
               {/* Map Container with Double Borders */}
               <div className="border-4 border-blue-600 rounded-2xl shadow-xl p-1 overflow-hidden flex-1 flex flex-col">
                 <div className="border-2 border-red-500 rounded-xl h-full overflow-hidden flex-1">
@@ -472,7 +493,9 @@ export default function Dashboard() {
 
                 {/* Info Footer */}
                 <div className="text-xs text-gray-600 text-center py-1 px-3 bg-gradient-to-r from-white to-blue-50 rounded-lg border border-gray-200">
-                  <p className="font-medium">Last updated: {lastUpdateTime.toLocaleTimeString()}</p>
+                  <p className="font-medium">
+                    Last updated: {lastUpdateTime.toLocaleTimeString()}
+                  </p>
                 </div>
               </div>
             </div>
