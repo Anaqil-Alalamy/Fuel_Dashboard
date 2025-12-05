@@ -667,6 +667,53 @@ export default function Dashboard() {
           </div>
         </div>
       </main>
+
+      {/* Detail Modal */}
+      {modalState.open && modalState.type === "due" && (
+        <DetailModal
+          title="Due"
+          sites={dueSites}
+          icon="🔴"
+          gradient="from-red-100 to-red-200"
+          onClose={closeModal}
+        />
+      )}
+      {modalState.open && modalState.type === "today" && (
+        <DetailModal
+          title="Today"
+          sites={todaySites}
+          icon="🟠"
+          gradient="from-orange-100 to-orange-200"
+          onClose={closeModal}
+        />
+      )}
+      {modalState.open && modalState.type === "tomorrow" && (
+        <DetailModal
+          title="Tomorrow"
+          sites={tomorrowSites}
+          icon="🔵"
+          gradient="from-blue-100 to-blue-200"
+          onClose={closeModal}
+        />
+      )}
+      {modalState.open && modalState.type === "incoming" && (
+        <DetailModal
+          title="Incoming (2-4D)"
+          sites={incomingSites}
+          icon="🟡"
+          gradient="from-yellow-100 to-yellow-200"
+          onClose={closeModal}
+        />
+      )}
+      {modalState.open && modalState.type === "coming" && (
+        <DetailModal
+          title="Coming"
+          sites={comingSites}
+          icon="🟢"
+          gradient="from-green-100 to-green-200"
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 }
