@@ -458,16 +458,10 @@ export default function Dashboard() {
       </header>
 
       {/* Main Content */}
-      <main className="px-4 md:px-6 py-6">
+      <main className="px-4 md:px-6 py-4">
         <div className="max-w-7xl mx-auto">
-          {/* Header Section */}
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-2">
-              <Fuel className="text-blue-600" size={28} />
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-                Fuel Dashboard
-              </h1>
-            </div>
+          {/* Subtitle */}
+          <div className="mb-6">
             <p className="text-gray-600 text-sm">
               Real-time monitoring of {sites.length} GSM fueling sites
             </p>
