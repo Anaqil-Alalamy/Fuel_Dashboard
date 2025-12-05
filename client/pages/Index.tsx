@@ -511,8 +511,14 @@ export default function Dashboard() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-96 md:h-[600px] rounded-lg overflow-hidden">
-                <FuelingMap sites={sites} />
+              <div className="h-96 md:h-[600px] rounded-lg overflow-hidden border border-gray-200">
+                {sites.length > 0 ? (
+                  <FuelingMap sites={sites} />
+                ) : (
+                  <div className="flex items-center justify-center h-full bg-gray-50">
+                    <p className="text-gray-500">Loading map...</p>
+                  </div>
+                )}
               </div>
               <div className="mt-4 text-xs text-gray-600">
                 <p className="font-medium mb-2">Map Layers:</p>
