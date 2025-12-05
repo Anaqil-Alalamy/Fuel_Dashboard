@@ -282,9 +282,10 @@ export default function Dashboard() {
 
   const showSearchPopup = searchTerm.trim().length > 0;
 
-  const overdueSites = filteredSites.filter((s) => s.status === "overdue");
-  const todaySites = filteredSites.filter((s) => s.status === "today");
-  const comingSites = filteredSites.filter(
+  // Always filter by status from the full sites array to show all status panels
+  const overdueSites = sites.filter((s) => s.status === "overdue");
+  const todaySites = sites.filter((s) => s.status === "today");
+  const comingSites = sites.filter(
     (s) => s.status === "coming" || s.status === "tomorrow",
   );
 
