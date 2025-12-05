@@ -907,7 +907,7 @@ export default function Dashboard() {
                     {vvvipSites.map((site) => (
                       <tr
                         key={site.id}
-                        className="hover:bg-gray-50 transition-colors"
+                        className={`transition-colors ${getRowHighlightColor(site.nextFuelingDate)}`}
                       >
                         <td className="px-6 py-3 text-gray-800 font-medium">
                           {site.siteName}
