@@ -199,6 +199,32 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
   return sites;
 };
 
+const getRowHighlightColor = (nextFuelingDate: string): string => {
+  if (!nextFuelingDate) return "bg-gray-50";
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const fuelingDate = new Date(nextFuelingDate);
+  fuelingDate.setHours(0, 0, 0, 0);
+
+  const daysRemaining = Math.floor(
+    (fuelingDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+  );
+
+  if (daysRemaining < 0) {
+    return "bg-red-50 hover:bg-red-100"; // Overdue - Red
+  } else if (daysRemaining === 0) {
+    return "bg-yellow-50 hover:bg-yellow-100"; // Today - Yellow
+  } else if (daysRemaining <= 3) {
+    return "bg-orange-50 hover:bg-orange-100"; // 1-3 days - Orange
+  } else if (daysRemaining <= 7) {
+    return "bg-lime-50 hover:bg-lime-100"; // 4-7 days - Light Green
+  } else {
+    return "bg-green-50 hover:bg-green-100"; // 8+ days - Green
+  }
+};
+
 const StatusCard = ({
   title,
   borderColor,
