@@ -118,7 +118,9 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
 
       // Column N (index 13) is NextfuelingPlan
       const nextFuelingStr = values[13] || "";
-      let parsedDate = nextFuelingStr ? parseDateDDMMYYYY(nextFuelingStr) : null;
+      let parsedDate = nextFuelingStr
+        ? parseDateDDMMYYYY(nextFuelingStr)
+        : null;
       if (!parsedDate) {
         parsedDate = new Date();
       }
@@ -136,7 +138,9 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
       }
 
       if (i <= 5) {
-        console.log(`Row ${i}: ${siteName}, DateStr: ${nextFuelingStr}, Parsed: ${scheduledDateISO}, Status: ${status}`);
+        console.log(
+          `Row ${i}: ${siteName}, DateStr: ${nextFuelingStr}, Parsed: ${scheduledDateISO}, Status: ${status}`,
+        );
       }
 
       sites.push({
