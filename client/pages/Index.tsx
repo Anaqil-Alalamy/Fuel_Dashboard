@@ -147,6 +147,9 @@ const fetchFuelingData = async (): Promise<FuelingSchedule[]> => {
     }
 
     console.log("Sites loaded:", sites.length);
+    const overdueCount = sites.filter((s) => s.status === "overdue").length;
+    console.log("Overdue sites:", overdueCount);
+    console.log("Sample sites:", sites.slice(0, 3));
     return sites;
   } catch (error) {
     console.error("Error fetching fueling data:", error);
