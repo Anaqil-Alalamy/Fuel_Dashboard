@@ -1,16 +1,15 @@
 [build]
-  command = "npm run build"
-  functions = "netlify/functions"
-  publish = "dist/spa"
-
+command = "npm run build"
+functions = "netlify/functions"
+publish = "dist/spa"
 
 [functions]
-  external_node_modules = ["express", "cors", "dotenv"]
-  node_bundler = "esbuild"
-  timeout = 30
+external_node_modules = ["express", "cors", "dotenv"]
+node_bundler = "esbuild"
+timeout = 30
 
 [[redirects]]
-  force = true
-  from = "/api/*"
-  status = 200
-  to = "/.netlify/functions/api/:splat"
+force = true
+from = "/api/*"
+status = 200
+to = "/.netlify/functions/api/:splat"
