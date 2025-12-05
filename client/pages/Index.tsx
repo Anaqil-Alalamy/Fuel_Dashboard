@@ -324,24 +324,26 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
       {/* Top Bar */}
       <header className="sticky top-0 z-50 bg-gradient-to-r from-white to-blue-50 border-b border-blue-200 shadow-lg backdrop-blur-sm bg-opacity-90">
-        {/* First row: Logo, Title, Date/Time */}
+        {/* First row: Logo (left), Title (center), Date/Time (right) */}
         <div className="px-4 md:px-6 py-2 md:py-3 border-b border-blue-200">
-          <div className="flex items-center justify-between gap-4">
-            {/* Logo and Title */}
-            <div className="flex items-center gap-3">
+          <div className="flex items-center justify-center relative">
+            {/* Logo - Left */}
+            <div className="absolute left-0 flex items-center">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2Fbd65b3cd7a86452e803a3d7dc7a3d048%2F5e321b77d52a4d30b523674ca83ee1d4?format=webp&width=800"
                 alt="GSM Fueling Logo"
                 className="h-10 md:h-12 w-auto"
               />
-              <div className="hidden md:flex items-center gap-2">
-                <Fuel className="text-blue-600" size={22} />
-                <h1 className="text-xl font-bold text-gray-900">Fuel Dashboard</h1>
-              </div>
             </div>
 
-            {/* Date/Time and Stats */}
-            <div className="flex items-center gap-2 md:gap-4">
+            {/* Title - Center */}
+            <div className="flex items-center gap-2">
+              <Fuel className="text-blue-600" size={22} />
+              <h1 className="text-xl font-bold text-gray-900">Fuel Dashboard</h1>
+            </div>
+
+            {/* Date/Time and Stats - Right */}
+            <div className="absolute right-0 flex items-center gap-2 md:gap-4">
               <div className="flex items-center gap-2 text-sm text-gray-700 font-medium">
                 <Calendar size={16} className="text-blue-600" />
                 <span className="hidden sm:inline">{currentDateTime}</span>
