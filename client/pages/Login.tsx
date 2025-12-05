@@ -58,7 +58,7 @@ export default function Login() {
         {/* Login Card */}
         <div className="bg-white rounded-2xl shadow-xl p-8 border border-blue-100 mt-4">
           <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">
-            Fuel Dashboard
+            مؤسسة نورة الدوسري للمقاولات العامة
           </h1>
           <p className="text-center text-gray-600 text-sm mb-8">
             Sign in to your account
