@@ -304,20 +304,20 @@ export default function Dashboard() {
     (s) => s.status === "coming" || s.status === "tomorrow",
   );
 
-  const handleRefresh = async () => {
+  const handleRefresh = useCallback(async () => {
     setRefreshing(true);
     const data = await fetchFuelingData();
     setSites(data);
     setLastUpdateTime(new Date());
     setRefreshing(false);
-  };
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       handleRefresh();
     }, 120000);
     return () => clearInterval(interval);
-  }, []);
+  }, [handleRefresh]);
 
   const currentDateTime = new Date().toLocaleString("en-GB", {
     weekday: "short",
