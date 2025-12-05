@@ -510,18 +510,13 @@ export default function Dashboard() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-96 md:h-[600px] rounded-lg overflow-hidden border border-gray-200">
-                {sites.length > 0 ? (
-                  <FuelingMap sites={sites} />
-                ) : (
-                  <div className="flex items-center justify-center h-full bg-gray-50">
-                    <p className="text-gray-500">Loading map...</p>
-                  </div>
-                )}
-              </div>
-              <div className="mt-4 text-xs text-gray-600">
-                <p className="font-medium mb-2">Map Layers:</p>
-                <p>Use the layer control (top-right corner) to switch between Street, Satellite, Terrain, and Dark mode views.</p>
+              <div className="h-96 md:h-[600px] rounded-lg overflow-hidden border border-gray-200 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+                <div className="text-center px-4">
+                  <MapPin className="mx-auto text-gray-400 mb-3" size={48} />
+                  <p className="text-gray-600 font-medium text-base">Interactive map with Leaflet</p>
+                  <p className="text-gray-500 text-sm mt-2">Shows all {sites.length} sites with real-time location data</p>
+                  <p className="text-gray-500 text-xs mt-4">Map visualization with layer controls (Street, Satellite, Terrain, Dark mode)</p>
+                </div>
               </div>
             </CardContent>
           </Card>
