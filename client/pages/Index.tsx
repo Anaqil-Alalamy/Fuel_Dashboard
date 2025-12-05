@@ -553,6 +553,16 @@ export default function Dashboard() {
     loadData();
   }, []);
 
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    };
+    window.addEventListener("keydown", handleEscapeKey);
+    return () => window.removeEventListener("keydown", handleEscapeKey);
+  }, []);
+
   const filteredSites = sites.filter(
     (site) =>
       site.siteName.toLowerCase().includes(searchTerm.toLowerCase()) ||
