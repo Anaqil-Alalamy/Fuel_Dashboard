@@ -47,24 +47,15 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center p-4 relative overflow-hidden">
-      {/* GSM Tower Image - Fixed, Full Size */}
-      <div className="fixed top-0 left-0 w-1/3 h-screen pointer-events-none z-0 opacity-40">
-        <img
-          src="https://images.pexels.com/photos/18379732/pexels-photo-18379732.jpeg"
-          alt="GSM Tower"
-          className="w-full h-full object-cover"
-        />
-      </div>
-
-      {/* Truck Image - Fixed, Full Size */}
-      <div className="fixed bottom-0 right-0 w-1/3 h-screen pointer-events-none z-0 opacity-40">
-        <img
-          src="https://images.pexels.com/photos/27946843/pexels-photo-27946843.jpeg"
-          alt="Fuel Truck"
-          className="w-full h-full object-cover"
-        />
-      </div>
+    <div
+      className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
+      style={{
+        backgroundImage: 'url(https://cdn.builder.io/api/v1/image/assets%2Fbd65b3cd7a86452e803a3d7dc7a3d048%2F1e45406688ff48098fc740b700d14307?format=webp&width=800)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
       <div className="w-full max-w-md relative z-10 flex flex-col items-center">
         {/* Title Outside Card */}
         <h1 className="text-4xl font-bold text-center text-blue-600 mb-6 whitespace-nowrap">
