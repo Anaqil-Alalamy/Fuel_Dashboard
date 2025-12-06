@@ -514,6 +514,7 @@ const KPICard = ({
 );
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [refreshing, setRefreshing] = useState(false);
   const [sites, setSites] = useState<FuelingSchedule[]>([]);
