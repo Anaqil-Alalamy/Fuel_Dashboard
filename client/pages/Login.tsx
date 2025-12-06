@@ -48,43 +48,21 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center p-4 relative overflow-hidden">
-      {/* 3D Background Elements */}
-      <style>{`
-        @keyframes float-truck {
-          0%, 100% { transform: translateX(-100px) rotateY(-15deg) rotateX(5deg); opacity: 0.35; }
-          50% { transform: translateX(50px) rotateY(-15deg) rotateX(5deg); opacity: 0.55; }
-        }
-        @keyframes float-tower {
-          0%, 100% { transform: translateZ(-200px) rotateZ(-10deg); opacity: 0.25; }
-          50% { transform: translateZ(-150px) rotateZ(-10deg); opacity: 0.45; }
-        }
-        .truck-3d {
-          position: absolute;
-          animation: float-truck 8s ease-in-out infinite;
-          filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
-        }
-        .tower-3d {
-          position: absolute;
-          animation: float-tower 10s ease-in-out infinite;
-          filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
-        }
-      `}</style>
-
-      {/* GSM Tower Image */}
-      <div className="tower-3d" style={{ top: '10%', left: '5%', width: '180px', height: '280px' }}>
+      {/* GSM Tower Image - Fixed, Full Size */}
+      <div className="fixed top-0 left-0 w-1/3 h-screen pointer-events-none z-0 opacity-40">
         <img
           src="https://images.pexels.com/photos/18379732/pexels-photo-18379732.jpeg"
           alt="GSM Tower"
-          className="w-full h-full object-cover rounded-lg"
+          className="w-full h-full object-cover"
         />
       </div>
 
-      {/* Truck Image */}
-      <div className="truck-3d" style={{ bottom: '15%', right: '10%', width: '280px', height: '160px' }}>
+      {/* Truck Image - Fixed, Full Size */}
+      <div className="fixed bottom-0 right-0 w-1/3 h-screen pointer-events-none z-0 opacity-40">
         <img
           src="https://images.pexels.com/photos/27946843/pexels-photo-27946843.jpeg"
           alt="Fuel Truck"
-          className="w-full h-full object-cover rounded-lg"
+          className="w-full h-full object-cover"
         />
       </div>
       <div className="w-full max-w-md relative z-10 flex flex-col items-center">
