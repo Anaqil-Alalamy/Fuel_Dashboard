@@ -18,6 +18,7 @@ import {
   ArrowUpRight,
   Zap,
   X,
+  LogOut,
 } from "lucide-react";
 import * as XLSX from "xlsx";
 import { cn } from "@/lib/utils";
