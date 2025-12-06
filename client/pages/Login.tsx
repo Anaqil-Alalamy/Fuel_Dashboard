@@ -58,7 +58,7 @@ export default function Login() {
     >
       <div className="w-full max-w-md relative z-10 flex flex-col items-center">
         {/* Title Outside Card */}
-        <h1 className="text-4xl font-bold text-center text-blue-600 mb-6 whitespace-nowrap">
+        <h1 className="text-4xl font-bold text-center text-white mb-6 whitespace-nowrap">
           مؤسسة نورة الدوسري للمقاولات العامة
         </h1>
 
