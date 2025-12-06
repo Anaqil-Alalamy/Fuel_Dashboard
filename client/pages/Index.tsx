@@ -636,6 +636,16 @@ export default function Dashboard() {
     setRefreshing(false);
   }, []);
 
+  const handleLogout = () => {
+    // Close any open modals first
+    setModalState({ open: false, type: null });
+    // Clear auth tokens
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("user");
+    // Navigate to login
+    navigate("/login");
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       handleRefresh();
