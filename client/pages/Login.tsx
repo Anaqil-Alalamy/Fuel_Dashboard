@@ -47,7 +47,101 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden" style={{
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      perspective: '1000px'
+    }}>
+      {/* 3D Background Elements */}
+      <style>{`
+        @keyframes float-truck {
+          0%, 100% { transform: translateX(-100px) rotateY(-15deg) rotateX(5deg); opacity: 0.3; }
+          50% { transform: translateX(50px) rotateY(-15deg) rotateX(5deg); opacity: 0.5; }
+        }
+        @keyframes float-tower {
+          0%, 100% { transform: translateZ(-200px) rotateZ(-10deg); opacity: 0.2; }
+          50% { transform: translateZ(-150px) rotateZ(-10deg); opacity: 0.4; }
+        }
+        @keyframes subtle-float {
+          0%, 100% { transform: translateY(20px); }
+          50% { transform: translateY(-20px); }
+        }
+        .truck-3d {
+          position: absolute;
+          animation: float-truck 8s ease-in-out infinite;
+          filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+        }
+        .tower-3d {
+          position: absolute;
+          animation: float-tower 10s ease-in-out infinite;
+          filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+        }
+      `}</style>
+
+      {/* GSM Tower */}
+      <div className="tower-3d" style={{ top: '10%', left: '5%', width: '200px', height: '300px' }}>
+        <svg viewBox="0 0 100 150" className="w-full h-full">
+          {/* Main tower pole */}
+          <rect x="45" y="20" width="10" height="100" fill="#888" opacity="0.6" />
+          {/* Cross beams */}
+          <line x1="30" y1="40" x2="70" y2="40" stroke="#999" strokeWidth="2" opacity="0.5" />
+          <line x1="25" y1="70" x2="75" y2="70" stroke="#999" strokeWidth="2" opacity="0.5" />
+          <line x1="30" y1="100" x2="70" y2="100" stroke="#999" strokeWidth="2" opacity="0.5" />
+          {/* Antennas */}
+          <rect x="40" y="10" width="3" height="15" fill="#e74c3c" opacity="0.7" />
+          <rect x="57" y="10" width="3" height="15" fill="#e74c3c" opacity="0.7" />
+          {/* Base */}
+          <circle cx="50" cy="125" r="15" fill="#666" opacity="0.6" />
+          <line x1="35" y1="125" x2="40" y2="140" stroke="#777" strokeWidth="2" opacity="0.5" />
+          <line x1="65" y1="125" x2="60" y2="140" stroke="#777" strokeWidth="2" opacity="0.5" />
+          <line x1="50" y1="125" x2="50" y2="145" stroke="#777" strokeWidth="2" opacity="0.5" />
+        </svg>
+      </div>
+
+      {/* Truck */}
+      <div className="truck-3d" style={{ bottom: '15%', right: '10%', width: '250px', height: '150px' }}>
+        <svg viewBox="0 0 200 120" className="w-full h-full">
+          {/* Cabin */}
+          <rect x="20" y="50" width="50" height="40" fill="#2980b9" opacity="0.7" rx="3" />
+          {/* Windshield */}
+          <rect x="25" y="55" width="20" height="15" fill="#87ceeb" opacity="0.5" rx="2" />
+          {/* Cargo bed */}
+          <rect x="70" y="60" width="100" height="30" fill="#34495e" opacity="0.7" rx="2" />
+          {/* Left wheel */}
+          <circle cx="40" cy="95" r="12" fill="#1a1a1a" opacity="0.8" />
+          <circle cx="40" cy="95" r="8" fill="#555" opacity="0.6" />
+          {/* Right wheel */}
+          <circle cx="160" cy="95" r="12" fill="#1a1a1a" opacity="0.8" />
+          <circle cx="160" cy="95" r="8" fill="#555" opacity="0.6" />
+          {/* Bumper */}
+          <rect x="15" y="88" width="5" height="12" fill="#666" opacity="0.7" />
+          {/* Cargo details */}
+          <line x1="90" y1="65" x2="90" y2="85" stroke="#555" strokeWidth="1" opacity="0.5" />
+          <line x1="110" y1="65" x2="110" y2="85" stroke="#555" strokeWidth="1" opacity="0.5" />
+          <line x1="130" y1="65" x2="130" y2="85" stroke="#555" strokeWidth="1" opacity="0.5" />
+          {/* Headlight */}
+          <circle cx="22" cy="70" r="4" fill="#ffeb3b" opacity="0.6" />
+        </svg>
+      </div>
+
+      {/* Floating fuel droplets */}
+      <div className="absolute" style={{
+        top: '20%',
+        right: '20%',
+        width: '60px',
+        height: '60px',
+        animation: 'subtle-float 5s ease-in-out infinite',
+        opacity: 0.2
+      }}>
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <path d="M50 20 Q65 50 50 80 Q35 50 50 20" fill="#f39c12" opacity="0.8" />
+        </svg>
+      </div>
+
+      {/* Grid overlay for depth */}
+      <div className="absolute inset-0 opacity-5" style={{
+        backgroundImage: 'linear-gradient(0deg, transparent 24%, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.1) 26%, transparent 27%, transparent 74%, rgba(255,255,255,0.1) 75%, rgba(255,255,255,0.1) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.1) 26%, transparent 27%, transparent 74%, rgba(255,255,255,0.1) 75%, rgba(255,255,255,0.1) 76%, transparent 77%, transparent)',
+        backgroundSize: '50px 50px'
+      }}></div>
       <div className="w-full max-w-md relative z-10 flex flex-col items-center">
         {/* Title Outside Card */}
         <h1 className="text-4xl font-bold text-center text-blue-600 mb-6 whitespace-nowrap">
